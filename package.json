@@ -21,7 +21,7 @@
     "prepublish": "npm run build",
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
+    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register",
     "test:watch": "npm t -- --watch"
   },
   "keywords": [
@@ -49,7 +49,6 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.9.0",
     "cross-env": "^1.0.8",
     "enzyme": "^2.3.0",
     "eslint": "^2.10.2",
