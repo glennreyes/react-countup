@@ -37,7 +37,7 @@ render(
     start={160527.0127}
     end={-875}
     duration={2.75}
-    useEasing=true
+    useEasing={true}
     separator=" "
     decimal=","
     prefix="EUR "
