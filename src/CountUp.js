@@ -31,12 +31,13 @@ class CountUp extends React.Component {
   }
 
   render() {
-    return <span></span>;
+    const { className, style } = this.props;
+
+    return <span className={className} style={style}></span>;
   }
 }
 
 CountUp.defaultProps = {
-  className: 'CountUp',
   start: 0,
   end: 100,
   duration: 2.5,
@@ -49,6 +50,8 @@ CountUp.defaultProps = {
 };
 
 CountUp.propTypes = {
+  className: PropTypes.node,
+  style: PropTypes.node,
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
   duration: PropTypes.number,
