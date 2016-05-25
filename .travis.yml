@@ -4,4 +4,7 @@ node_js:
   - "5.0"
   - "6.0"
 script: npm run build
+notifications:
+  email:
+    on_failure: change
 after_success: 'npm run coverage'
