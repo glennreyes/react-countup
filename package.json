@@ -14,10 +14,13 @@
   "homepage": "https://github.com/glennreyes/react-countup#readme",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production babel --out-dir=lib --ignore=__tests__ src",
+    "prebuild": "npm run test && npm run clean",
+    "build": "NODE_ENV=production babel --out-dir=lib --ignore=test src",
+    "coverage": "cat ./coverage/lcov/lcov.info | coveralls",
     "clean": "rimraf lib",
-    "lint": "eslint .",
     "prepublish": "npm run build",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
     "test:watch": "npm test -- --watch"
   },
