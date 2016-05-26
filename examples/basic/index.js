@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import CountUp from '../../lib';
 import 'sanitize.css/lib/sanitize.css';
-import styles from './style.css';
+import styles from './styles.css';
 
 render(
   <div className={styles.Wrapper}>
