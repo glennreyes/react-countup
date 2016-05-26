@@ -51,7 +51,7 @@ CountUp.defaultProps = {
 
 CountUp.propTypes = {
   className: PropTypes.node,
-  style: PropTypes.node,
+  style: PropTypes.object,
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
   decimals: PropTypes.number,
