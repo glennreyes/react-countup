@@ -4,5 +4,5 @@
     "mocha": true,
     "node": true,
   },
-  "extends": "airbnb",
+  "extends": "airbnb"
 }

@@ -1,12 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import CountUp from '../src';
-import 'sanitize.css/lib/sanitize.css';
-import styles from './styles.css';
+import App from './containers/App';
 
 render(
-  <div className={styles.Wrapper}>
-    <CountUp className={styles.CountUp} start={0} end={2016} duration={3} />
-  </div>,
+  <App />,
   document.getElementById('root')
 );

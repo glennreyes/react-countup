@@ -1,15 +1,15 @@
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 
-.Wrapper {
+/*.Wrapper {
   align-items: center;
   background: honeydew;
   display: flex;
   justify-content: center;
   height: 100vh;
-}
+}*/
 
 .CountUp {
   color: lightslategray;
