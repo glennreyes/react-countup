@@ -1,13 +1,3 @@
-html {
-  box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
 *:focus {
   outline: 0;
 }
@@ -75,19 +65,16 @@ p, label {
 
 .Form {
   font-size: 1.25rem;
-}
 
-.Form__groups {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
+  &__groups {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
 
-.Form__group {
-  padding: 1rem;
-}
-
-.TextFieldsFields {
+  &__group {
+    padding: 1rem;
+  }
 }
 
 .Label {
