@@ -6,7 +6,7 @@ import styles from './style.css';
 
 render(
   <div className={styles.Wrapper}>
-    <CountUp className={styles.CountUp} start={0} end={160526} />
+    <CountUp className={styles.CountUp} start={0} end={2016} duration={3} separator="" />
   </div>,
   document.getElementById('root')
 );
