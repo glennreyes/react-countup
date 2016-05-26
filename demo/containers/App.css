@@ -133,8 +133,10 @@ p, label {
   top: 0;
   border: 0;
   right: 0;
-  height: 30vmin;
-  width: 30vmin;
+  height: 20vmin;
+  width: 20vmin;
+  min-height: 6rem;
+  min-width: 6rem;
 
   &__arm {
     transform-origin: 130px 106px;
