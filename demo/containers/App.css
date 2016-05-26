@@ -39,13 +39,6 @@ p, label {
   padding: 2rem 1rem;
 }
 
-.Ribbon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: 0;
-}
-
 .Description {
   font-size: 1.25rem;
 }
@@ -127,4 +120,41 @@ p, label {
 
 .Heart {
   color: firebrick;
+}
+
+
+/**
+ * GitHub Corner
+ */
+.Octo {
+  fill:#fd6c6c;
+  color:#fff;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+  height: 30vmin;
+  width: 30vmin;
+
+  &__arm {
+    transform-origin: 130px 106px;
+  }
+
+  &:hover .Octo__arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+@keyframes octocat-wave {
+  0%,100% {
+    transform: rotate(0);
+  }
+
+  20%,60% {
+    transform: rotate(-25deg);
+  }
+
+  40%,80% {
+    transform: rotate(10deg);
+  }
 }
