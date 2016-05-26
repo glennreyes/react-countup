@@ -50,7 +50,7 @@ render(
     suffix=" left"
     callback={onComplete}
   />,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 ```
 
