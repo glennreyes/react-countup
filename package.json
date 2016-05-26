@@ -16,7 +16,7 @@
   "scripts": {
     "prebuild": "npm t && npm run clean",
     "build": "cross-env NODE_ENV=production babel src -d lib",
-    "build:demo": "npm run clean && npm run build && cross-env NODE_ENV=production webpack -p --config webpack.config.prod",
+    "build:demo": "npm run clean && npm run build && cross-env NODE_ENV=production webpack -p --config webpack.config.prod --progress",
     "clean": "npm run clean:lib && npm run clean:demo",
     "clean:lib": "rimraf lib",
     "clean:demo": "rimraf build",
