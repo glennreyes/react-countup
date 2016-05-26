@@ -68,7 +68,7 @@ import { render } from 'react-dom';
 import CountUp from 'react-countup';
 
 render(
-  <CountUp start={0} end={2016} />,
+  <CountUp start={${start}} end={${end}} duration={${duration}} />,
   document.getElementById('root')
 )`}
           </Highlight>
