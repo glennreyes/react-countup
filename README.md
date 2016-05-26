@@ -1,5 +1,11 @@
 # React CountUp
 
+[![Build Status](https://travis-ci.org/glennreyes/react-countup.svg?branch=master)](https://travis-ci.org/glennreyes/react-countup)
+[![Coverage Status](https://coveralls.io/repos/github/glennreyes/react-countup/badge.svg?branch=master)](https://coveralls.io/github/glennreyes/react-countup?branch=master)
+[![Dependency Status](https://david-dm.org/glennreyes/react-countup/dev-status.svg)](https://david-dm.org/glennreyes/name-this-color#info=devDependencies)
+[![npm version](https://badge.fury.io/js/react-countup.svg)](https://badge.fury.io/js/react-countup)
+
+
 A React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
 This component counts up a number in an animated way.
 
