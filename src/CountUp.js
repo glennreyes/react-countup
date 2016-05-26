@@ -11,12 +11,13 @@ class CountUp extends React.Component {
       useEasing,
       useGrouping,
       separator,
+      decimals,
       decimal,
       prefix,
       suffix,
       callback,
     } = this.props;
-    const countup = new Count(findDOMNode(this), start, end, duration, {
+    const countup = new Count(findDOMNode(this), start, end, decimals, duration, {
       useEasing,
       useGrouping,
       separator,
@@ -37,10 +38,11 @@ class CountUp extends React.Component {
 
 CountUp.defaultProps = {
   start: 0,
-  end: 100,
-  duration: 2.5,
+  end: 2016,
+  decimals: 0,
+  duration: 4,
   useEasing: true,
-  useGrouping: true,
+  useGrouping: false,
   separator: ',',
   decimal: '.',
   prefix: '',
@@ -52,6 +54,7 @@ CountUp.propTypes = {
   style: PropTypes.node,
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
+  decimals: PropTypes.number,
   duration: PropTypes.number,
   useEasing: PropTypes.bool,
   useGrouping: PropTypes.bool,
