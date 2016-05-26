@@ -15,7 +15,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/glennreyes/react-countup"
+    "url": "https://github.com/glennreyes/react-countup.git"
   },
   "bugs": {
     "url": "https://github.com/glennreyes/react-countup/issues"
