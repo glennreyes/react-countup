@@ -40,7 +40,7 @@ module.exports = {
       },
     ],
   },
-  postcss: () => [cssnext(), cssnano()],
+  postcss: () => [cssnext({ warnForDuplicates: false }), cssnano()],
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
