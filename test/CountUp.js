@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import { shallow } from 'enzyme';
 import expect from 'expect';
 import React from 'react';

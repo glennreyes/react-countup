@@ -15,14 +15,15 @@
   "main": "lib/index.js",
   "scripts": {
     "prebuild": "npm t && npm run clean",
-    "build": "NODE_ENV=production babel --out-dir=lib --ignore=test src",
-    "coverage": "cat ./coverage/lcov/lcov.info | coveralls",
+    "build": "cross-env NODE_ENV=production babel --out-dir=lib --ignore=test src",
     "clean": "rimraf lib",
+    "coveralls": "npm run test:coverage && cat ./coverage/lcov.info | coveralls",
     "prepublish": "npm run build",
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register",
-    "test:watch": "npm t -- --watch"
+    "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
+    "test:watch": "npm t -- --watch",
+    "test:coverage": "cross-env NODE_ENV=test istanbul cover _mocha --report lcovonly -- -R spec --opts mocha.opts"
   },
   "keywords": [
     "react",
@@ -58,7 +59,9 @@
     "eslint-plugin-react": "^5.1.1",
     "expect": "^1.20.1",
     "express": "^4.13.4",
+    "istanbul": "^1.0.0-alpha.2",
     "mocha": "^2.5.3",
+    "mocha-lcov-reporter": "^1.2.0",
     "react-addons-test-utils": "^15.1.0",
     "rimraf": "^2.5.2"
   }
