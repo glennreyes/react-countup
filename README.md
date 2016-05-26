@@ -13,7 +13,7 @@ This component counts up a number in an animated way.
 ## Installation
 Make sure you have a compatible version of `React 0.14.x` and `15.x.x` installed in your project.
 ```bash
-npm install react-countup --save-dev
+npm install react-countup --save
 ```
 
 ## Usage
