@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    demo: [path.join(__dirname, 'demo'), 'webpack-hot-middleware/client'],
+    demo: path.join(__dirname, 'demo'),
   },
   output: {
     path: path.join(__dirname, 'build'),
