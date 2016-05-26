@@ -117,7 +117,7 @@ render(
         </section>
 
         <footer className={styles.Footer}>
-          <p>Handcrafted with &#x2764; by <a href="//twitter.com/glnnrys">Glenn Reyes</a></p>
+          <p>Handcrafted with <span className={styles.Heart}>&#x2764;</span> by <a href="//twitter.com/glnnrys">Glenn Reyes</a></p>
         </footer>
       </div>
     );
