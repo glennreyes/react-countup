@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/glennreyes/react-countup.git"
+    "url": "https://github.com/glennreyes/react-countup"
   },
   "bugs": {
     "url": "https://github.com/glennreyes/react-countup/issues"
@@ -32,9 +32,9 @@
     "test:coverage": "cross-env NODE_ENV=test istanbul cover _mocha --report lcovonly -- -R spec --opts mocha.opts"
   },
   "keywords": [
+    "react-component",
     "react",
     "react.js",
-    "react-component",
     "countup",
     "countup.js",
     "counter",
