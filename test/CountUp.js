@@ -53,6 +53,10 @@ describe('<CountUp className="MyClass" style={{ color: "blue" }} start={1000} en
     expect(component.text()).toBe('1000.00');
   });
 
+  it('should render after an update start value 100.00 as node value', () => {
+    expect(component.update().text()).toBe('1000.00');
+  });
+
   it('should have easing disabled', () => {
     expect(component.prop('useEasing')).toBe(false);
   });
