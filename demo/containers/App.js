@@ -65,27 +65,6 @@ class App extends React.Component {
         </header>
 
         <section>
-          <h2>Installation</h2>
-          <Highlight language="bash">
-            npm install react-countup --save
-          </Highlight>
-        </section>
-
-        <section>
-          <h2>Usage</h2>
-          <Highlight language="javascript">
-{`import React from 'react';
-import { render } from 'react-dom';
-import CountUp from 'react-countup';
-
-render(
-  <CountUp start={${start}} end={${end}} duration={${duration}} />,
-  document.getElementById('root')
-)`}
-          </Highlight>
-        </section>
-
-        <section>
           <h2>Demo</h2>
           <div className={styles.Demo}>
             <CountUp className={styles.CountUp} start={start} end={end} duration={duration} />
@@ -125,6 +104,27 @@ render(
             </div>
             <button className={styles.Button} onClick={this.startAnimation}>Start animation</button>
           </form>
+        </section>
+
+        <section>
+          <h2>Installation</h2>
+          <Highlight language="bash">
+            npm install react-countup --save
+          </Highlight>
+        </section>
+
+        <section>
+          <h2>Usage</h2>
+          <Highlight language="javascript">
+{`import React from 'react';
+import { render } from 'react-dom';
+import CountUp from 'react-countup';
+
+render(
+  <CountUp start={${start}} end={${end}} duration={${duration}} />,
+  document.getElementById('root')
+)`}
+          </Highlight>
         </section>
 
         <footer className={styles.Footer}>
