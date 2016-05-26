@@ -1,5 +1,6 @@
 const path = require('path');
 const cssnano = require('cssnano');
+const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -39,7 +40,7 @@ module.exports = {
       },
     ],
   },
-  postcss: () => [cssnano()],
+  postcss: () => [cssnext(), cssnano()],
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
