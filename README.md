@@ -62,7 +62,7 @@ The start number from which the should start from
 ##### `end` *{number}*
 Target number to count up
 
-##### `duration` *{number}*
+##### `duration` *{number}* in s
 Duration of count up animation
 
 ##### `decimals` *{number}*
