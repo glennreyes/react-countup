@@ -16,9 +16,7 @@ class CountUp extends React.Component {
       suffix,
       callback,
     } = this.props;
-
-    const countup = new Count(findDOMNode(this), start, end, {
-      duration,
+    const countup = new Count(findDOMNode(this), start, end, duration, {
       useEasing,
       useGrouping,
       separator,
