@@ -15,7 +15,7 @@
   "main": "lib/index.js",
   "scripts": {
     "prebuild": "npm t && npm run clean",
-    "build": "cross-env NODE_ENV=production babel --out-dir=lib --ignore=test src",
+    "build": "cross-env NODE_ENV=production babel src -d lib",
     "clean": "rimraf lib",
     "coveralls": "npm run test:coverage && cat ./coverage/lcov.info | coveralls",
     "prepublish": "npm run build",
