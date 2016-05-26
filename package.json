@@ -23,7 +23,7 @@
     "pretest": "npm run lint",
     "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
     "test:watch": "npm t -- --watch",
-    "test:coverage": "cross-env NODE_ENV=test istanbul cover _mocha --report lcovonly -- --opts mocha.opts"
+    "test:coverage": "cross-env NODE_ENV=test istanbul cover _mocha --report lcovonly -- -R spec --opts mocha.opts"
   },
   "keywords": [
     "react",
