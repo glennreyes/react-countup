@@ -11,7 +11,7 @@ class App extends React.Component {
 
     this.state = {
       start: 0,
-      end: 2016,
+      end: (new Date()).getFullYear() || 2016,
       duration: 3,
     };
 
