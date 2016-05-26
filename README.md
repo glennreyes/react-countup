@@ -65,6 +65,9 @@ Target number to count up
 ##### `duration` *{number}*
 Duration of count up animation
 
+##### `decimals` *{number}*
+Amount of decimals
+
 ##### `useEasing` *{boolean}*
 use "easeOutExpo" if `true`
 
