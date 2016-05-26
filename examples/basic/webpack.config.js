@@ -1,5 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const cssnano = require('cssnano');
+const webpack = require('webpack');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -12,18 +13,42 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/'
   },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ],
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loaders: [ 'babel' ],
+        loaders: ['babel'],
         exclude: /node_modules/,
         include: __dirname
+      },
+      {
+        // Transform our own .css files with PostCSS and CSS-modules
+        test: /\.css$/,
+        loaders: [
+          'style',
+          'css?modules&sourceMap',
+          'postcss'
+        ],
+        exclude: /node_modules/,
+      },
+      {
+        // Transform our own .css files with PostCSS and CSS-modules
+        test: /\.css$/,
+        loaders: [
+          'style',
+          'css',
+          'postcss'
+        ],
+        include: /node_modules/,
       }
     ]
-  }
+  },
+  postcss: function() {
+    return [
+      cssnano()
+    ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
 };

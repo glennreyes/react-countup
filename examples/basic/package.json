@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "sanitize.css": "^3.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",
@@ -18,10 +19,14 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-register": "^6.9.0",
     "cross-env": "^1.0.8",
+    "css-loader": "^0.23.1",
+    "cssnano": "^3.6.2",
     "enzyme": "^2.3.0",
     "expect": "^1.20.1",
     "express": "^4.13.4",
     "mocha": "^2.5.3",
+    "postcss-loader": "^0.9.1",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
