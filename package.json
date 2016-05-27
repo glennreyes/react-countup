@@ -22,6 +22,10 @@
   },
   "homepage": "https://glennreyes.github.io/react-countup",
   "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
   "scripts": {
     "prebuild": "npm t && npm run clean",
     "build": "cross-env NODE_ENV=production babel src -d lib",
