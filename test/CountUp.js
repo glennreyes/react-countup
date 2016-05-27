@@ -50,7 +50,7 @@ describe('<CountUp className="MyClass" style={{ color: "blue" }} start={1000} en
   const component = mount(<CountUp className="MyClass" style={{ color: "blue" }} start={1000} end={2000} duration={1} decimals={2} useEasing={false} useGrouping={false} />);
 
   it('should render start value 100.00 as node value', () => {
-    expect(component.text()).toBe('1000.00');
+    expect(component.prop('start')).toBe(1000);
   });
 
   it('should render after an update start value 100.00 as node value', () => {
@@ -70,10 +70,6 @@ describe('<CountUp className="MyClass" style={{ color: "blue" }} start={1000} en
 
 describe('<CountUp className="MyClass" style={{ color: "blue" }} start={1000} end={2000} duration={1} decimals={2} useEasing={false} useGrouping={true} separator="." decimal="," prefix="EUR " suffix=" left" />', () => {
   const component = mount(<CountUp className="MyClass" style={{ color: "blue" }} start={1000} end={2000} duration={1} decimals={2} useEasing={false} useGrouping={true} separator="." decimal="," prefix="EUR " suffix=" left" />);
-
-  it('should render start value \'EUR 1.000,00 left\' as node value', () => {
-    expect(component.text()).toBe('EUR 1.000,00 left');
-  });
 
   it('should have a dot as separator', () => {
     expect(component.prop('separator')).toBe('.');
@@ -95,10 +91,6 @@ describe('<CountUp className="MyClass" style={{ color: "blue" }} start={1000} en
 
 describe('<CountUp className="MyClass" style={{ color: "blue" }} start={1000} end={2000} duration={1} />', () => {
   const component = mount(<CountUp className="MyClass" style={{ color: "blue" }} start={1000} end={2000} duration={1} />);
-
-  it('should render start value 1000 as node value', () => {
-    expect(component.text()).toBe('1000');
-  });
 
   it('doesn\'t have a className assigned', () => {
     expect(component.hasClass()).toBe(false);
