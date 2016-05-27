@@ -118,8 +118,9 @@ p, label {
   text-align: center;
 }
 
-.Heart {
-  color: firebrick;
+.Emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  margin-right: .1875em;
 }
 
 
@@ -127,8 +128,8 @@ p, label {
  * GitHub Corner
  */
 .Octo {
-  fill:#fd6c6c;
-  color:#fff;
+  fill: #fd6c6c;
+  color: #fff;
   position: absolute;
   top: 0;
   border: 0;
