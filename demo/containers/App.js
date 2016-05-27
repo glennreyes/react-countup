@@ -123,7 +123,7 @@ import CountUp from 'react-countup';
 render(
   <CountUp start={${start}} end={${end}} duration={${duration}} />,
   document.getElementById('root')
-)`}
+);`}
           </Highlight>
         </section>
 
