@@ -87,7 +87,7 @@
     "react-addons-test-utils": "^15.1.0",
     "react-highlight.js": "^1.0.2",
     "rimraf": "^2.5.2",
-    "sanitize.css": "^3.3.0",
+    "sanitize.css": "^4.0.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
