@@ -2,7 +2,7 @@ import React from 'react';
 import CountUp from '../../src';
 import Highlight from 'react-highlight.js';
 import 'highlight.js/styles/solarized-dark.css';
-import 'sanitize.css/lib/sanitize.css';
+import 'sanitize.css/sanitize.css';
 import styles from './App.css';
 
 class App extends React.Component {
