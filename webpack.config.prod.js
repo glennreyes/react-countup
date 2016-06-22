@@ -1,5 +1,4 @@
 const path = require('path');
-const cssnano = require('cssnano');
 const cssnext = require('postcss-cssnext');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -40,7 +39,7 @@ module.exports = {
       },
     ],
   },
-  postcss: () => [cssnext({ warnForDuplicates: false }), cssnano()],
+  postcss: () => [cssnext({ warnForDuplicates: false })],
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
