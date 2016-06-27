@@ -23,8 +23,7 @@
   "homepage": "https://glennreyes.github.io/react-countup",
   "main": "lib/index.js",
   "files": [
-    "lib",
-    "src"
+    "lib"
   ],
   "scripts": {
     "prebuild": "npm t && npm run clean",
