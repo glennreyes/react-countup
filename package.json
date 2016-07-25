@@ -85,7 +85,7 @@
     "postcss-loader": "^0.9.1",
     "react-addons-test-utils": "^15.2.1",
     "react-highlight.js": "^1.0.4",
-    "rimraf": "^2.5.3",
+    "rimraf": "^2.5.4",
     "sanitize.css": "^4.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
