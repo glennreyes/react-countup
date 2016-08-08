@@ -1,8 +1,9 @@
 import React from 'react';
-import CountUp from '../../src';
 import Highlight from 'react-highlight.js';
 import 'highlight.js/styles/solarized-dark.css';
 import 'sanitize.css/sanitize.css';
+
+import CountUp from '../../src';
 import styles from './App.css';
 
 class App extends React.Component {
@@ -72,8 +73,9 @@ class App extends React.Component {
           <form className={styles.Form}>
             <div className={styles.Form__groups}>
               <div className={styles.Form__group}>
-                <label className={styles.Label}>Start: </label>
+                <label className={styles.Label} htmlFor="start">Start: </label>
                 <input
+                  id="start"
                   className={styles.TextField}
                   type="text"
                   name="start"
@@ -82,8 +84,9 @@ class App extends React.Component {
                 />
               </div>
               <div className={styles.Form__group}>
-                <label className={styles.Label}>End: </label>
+                <label className={styles.Label} htmlFor="end">End: </label>
                 <input
+                  id="end"
                   className={styles.TextField}
                   type="text"
                   name="end"
@@ -92,8 +95,9 @@ class App extends React.Component {
                 />
               </div>
               <div className={styles.Form__group}>
-                <label className={styles.Label}>Duration in seconds: </label>
+                <label className={styles.Label} htmlFor="duration">Duration in seconds: </label>
                 <input
+                  id="duration"
                   className={styles.TextField}
                   type="text"
                   name="duration"
