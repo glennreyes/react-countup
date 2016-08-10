@@ -67,9 +67,9 @@ class CountUp extends React.Component {
   }
 
   render() {
-    const { className, style } = this.props;
+    const { className, start, style } = this.props;
 
-    return <span className={className} style={style} />;
+    return <span className={className} style={style}>{start}</span>;
   }
 }
 
