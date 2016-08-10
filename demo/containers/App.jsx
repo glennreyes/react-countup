@@ -1,6 +1,6 @@
 import React from 'react';
 import Highlight from 'react-highlight.js';
-import 'highlight.js/styles/solarized-dark.css';
+import '!!style!css!highlight.js/styles/solarized-dark.css';
 import 'sanitize.css/sanitize.css';
 
 import CountUp from '../../src';
@@ -112,14 +112,14 @@ class App extends React.Component {
 
         <section>
           <h2>Installation</h2>
-          <Highlight language="bash">
+          <Highlight>
             npm install react-countup --save
           </Highlight>
         </section>
 
         <section>
           <h2>Usage</h2>
-          <Highlight language="javascript">
+          <Highlight>
 {`import React from 'react';
 import { render } from 'react-dom';
 import CountUp from 'react-countup';

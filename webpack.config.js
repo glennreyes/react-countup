@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    demo: [path.join(__dirname, 'demo'), 'webpack-hot-middleware/client'],
+    demo: [path.resolve(__dirname, 'demo'), 'webpack-hot-middleware/client'],
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -16,7 +16,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loaders: ['babel'],
         exclude: /node_modules/,
         include: __dirname,
@@ -54,4 +54,10 @@ module.exports = {
       template: path.resolve(__dirname, 'demo', 'index.html'),
     }),
   ],
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx',
+    ],
+  },
 };
