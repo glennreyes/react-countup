@@ -23,10 +23,10 @@ describe('<CountUp start={0} end={100} />', function() {
 
 
 describe('<CountUp className="MyClass" />', () => {
-  const component = shallow(<CountUp className="MyClass" />);
+  const component = shallow(<CountUp className="MyClass" start={10} end={100} />);
 
-  it('should render an empty span', () => {
-    expect(component.text()).toBe('');
+  it('should render start value inside of span', () => {
+    expect(component.text()).toBe('10');
   });
 
   it('has className "MyClass" assigned', () => {
