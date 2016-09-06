@@ -44,6 +44,7 @@ const onComplete = () => {
 
 render(
   <CountUp
+    className="custom-count"
     start={160527.0127}
     end={-875}
     duration={2.75}
