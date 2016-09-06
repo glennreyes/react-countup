@@ -90,6 +90,9 @@ Static text before the animating value
 ##### `suffix` *{string}*
 Static text after the animating value
 
+##### `className` *{string}*
+CSS class to be applied to the wrapper containing the number.
+
 ##### `callback` *{function}*
 Callback function to be triggered after completed count up
  animation
