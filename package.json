@@ -44,8 +44,8 @@
     "test:coverage": "cross-env NODE_ENV=test istanbul cover _mocha --report lcovonly -- -R spec --opts mocha.opts"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "react": ">=0.14.0",
+    "react-dom": ">=0.14.0"
   },
   "dependencies": {
     "countup.js": "^1.7.1",
