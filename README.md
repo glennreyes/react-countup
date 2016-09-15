@@ -7,8 +7,9 @@
 [![npm version](https://badge.fury.io/js/react-countup.svg)](https://badge.fury.io/js/react-countup)
 
 
-A React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
-This component counts up a number in an animated way.
+A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/) to count up numbers.
+
+![sep -15-2016 10-11-53 pm](https://cloud.githubusercontent.com/assets/5080854/18565869/d23db0e0-7b91-11e6-9ee2-71be5875ca48.gif)
 
 ## [Demo](https://glennreyes.github.io/react-countup)
 Check out the [live demo](https://glennreyes.github.io/react-countup).
@@ -59,7 +60,7 @@ render(
 );
 ```
 
-### Attributes
+### Props
 
 ##### `start` *{number}*
 The start number from which the should start from
