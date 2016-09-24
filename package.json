@@ -62,7 +62,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
     "coveralls": "^2.11.12",
-    "cross-env": "^2.0.1",
+    "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "cssnano": "^3.7.4",
     "enzyme": "^2.4.1",
