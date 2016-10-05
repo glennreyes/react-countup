@@ -27,7 +27,7 @@ module.exports = {
         loaders: [
           'style',
           'css?modules&localIdentName=[local]_[hash:base64:3]&sourceMap',
-          'postcss',
+          //'postcss',
         ],
         exclude: /node_modules/,
       },
@@ -36,13 +36,13 @@ module.exports = {
         loaders: [
           'style',
           'css',
-          'postcss',
+          //'postcss',
         ],
         include: /node_modules/,
       },
     ],
   },
-  postcss: () => [cssnext({ warnForDuplicates: false })],
+  //postcss: () => [cssnext({ warnForDuplicates: false })],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({

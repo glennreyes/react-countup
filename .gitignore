@@ -2,4 +2,5 @@ build
 coverage
 lib
 node_modules
+.idea/
 *.log

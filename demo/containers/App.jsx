@@ -66,7 +66,8 @@ class App extends React.Component {
         </header>
 
         <section>
-          <h2>Demo</h2>
+          <h2>Demo: <CountUp start={3} end={0} duration={10} redraw /></h2>
+          <p><i>This 3,2,1 count-down has an optional redraw prop, making its animation re-run at every render.</i></p>
           <div className={styles.Demo}>
             <CountUp className={styles.CountUp} start={start} end={end} duration={duration} />
           </div>
