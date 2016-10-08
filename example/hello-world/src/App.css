@@ -1,0 +1,163 @@
+*:focus {
+  outline: 0;
+}
+
+body {
+  background: mintcream;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+code {
+  border-radius: 3px;
+  font-family: Inconsolata, monospace;
+}
+
+h1 {
+  color: slategray;
+  font-size: 4rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 1em;
+}
+
+h2 {
+  color: slategray;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 1.5em 0 .5em;
+}
+
+p, label {
+  color: darkslategray;
+}
+
+.Wrapper {
+  margin: 0 auto;
+  max-width: 80vmax;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.Description {
+  font-size: 1.25rem;
+}
+
+.Demo {
+  border-color: slategray;
+  border-style: solid;
+  border-width: 2px 0;
+  text-align: center;
+}
+
+.CountUp {
+  color: lightslategray;
+  font-size: 20vmin;
+  font-weight: 300;
+}
+
+.Form {
+  font-size: 1.25rem;
+
+  &__groups {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  &__group {
+    padding: 1rem;
+  }
+}
+
+.Label {
+  display: block;
+  margin-left: auto;
+  padding: .5em;
+}
+
+.TextField {
+  background: slategray;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 0 dimgray,
+    0 2px 0 0 dimgray,
+    0 3px 0 0 dimgray,
+    0 4px 0 0 dimgray;
+  color: white;
+  display: block;
+  min-width: 10rem;
+  padding: .5em;
+}
+
+.Button {
+  background: dimgray;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 0 darkslategray,
+    0 2px 0 0 darkslategray,
+    0 3px 0 0 darkslategray,
+    0 4px 0 0 darkslategray;
+  color: white;
+  cursor: pointer;
+  display: block;
+  flex-grow: 2;
+  margin: 2em auto;
+  min-width: 10rem;
+  padding: 1em 3em;
+  transition: background .4s;
+
+  &:hover {
+    background: darkslategray;
+  }
+}
+
+.Footer {
+  font-size: 1rem;
+  margin: 4em 0 0;
+  text-align: center;
+}
+
+.Emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  margin-right: .1875em;
+}
+
+
+/**
+ * GitHub Corner
+ */
+.Octo {
+  fill: #fd6c6c;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+  height: 20vmin;
+  width: 20vmin;
+  min-height: 6rem;
+  min-width: 6rem;
+
+  &__arm {
+    transform-origin: 130px 106px;
+  }
+
+  &:hover .Octo__arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+@keyframes octocat-wave {
+  0%,100% {
+    transform: rotate(0);
+  }
+
+  20%,60% {
+    transform: rotate(-25deg);
+  }
+
+  40%,80% {
+    transform: rotate(10deg);
+  }
+}
