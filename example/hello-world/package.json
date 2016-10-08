@@ -1,0 +1,20 @@
+{
+  "name": "hello-world",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "highlight.js": "^9.6.0",
+    "react-highlight.js": "^1.0.5",
+    "sanitize.css": "^4.1.0"
+  },
+  "dependencies": {
+    "countup.js": "^1.7.1",
+    "react": "^15.3.2",
+    "react-countup": "^1.2.0",
+    "react-dom": "^15.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  }
+}
