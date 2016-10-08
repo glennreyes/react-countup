@@ -39,6 +39,15 @@ class CountUp extends React.Component {
     this.startAnimation();
   }
 
+  shouldComponentUpdate(nextProps){
+    const shouldNotUpdate = this.isEquivalent(nextProps,this.props);
+
+    if(nextProps.redraw){
+      return true;
+    }
+    return !shouldNotUpdate;
+  }
+
   startAnimation() {
     const {
       start,
@@ -64,6 +73,23 @@ class CountUp extends React.Component {
     });
 
     countup.start(callback);
+  }
+
+  isEquivalent(a, b) {
+    const aProps = Object.getOwnPropertyNames(a);
+    const bProps = Object.getOwnPropertyNames(b);
+
+    if (aProps.length != bProps.length) {
+      return false;
+    }
+
+    for (var i = 0; i < aProps.length; i++) {
+      const propName = aProps[i];
+      if (a[propName] !== b[propName]) {
+        return false;
+      }
+    }
+    return true;
   }
 
   render() {
@@ -100,6 +126,7 @@ CountUp.propTypes = {
   prefix: PropTypes.string,
   suffix: PropTypes.string,
   callback: PropTypes.func,
+  redraw: PropTypes.bool
 };
 
 export default CountUp;
