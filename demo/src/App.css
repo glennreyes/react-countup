@@ -58,16 +58,16 @@ p, label {
 
 .Form {
   font-size: 1.25rem;
+}
 
-  &__groups {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
+.Form__groups {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
 
-  &__group {
-    padding: 1rem;
-  }
+.Form__group {
+  padding: 1rem;
 }
 
 .Label {
@@ -106,10 +106,10 @@ p, label {
   min-width: 10rem;
   padding: 1em 3em;
   transition: background .4s;
+}
 
-  &:hover {
-    background: darkslategray;
-  }
+.Button:hover {
+  background: darkslategray;
 }
 
 .Footer {
@@ -138,14 +138,14 @@ p, label {
   width: 20vmin;
   min-height: 6rem;
   min-width: 6rem;
+}
 
-  &__arm {
-    transform-origin: 130px 106px;
-  }
+.Octo__arm {
+  transform-origin: 130px 106px;
+}
 
-  &:hover .Octo__arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
+.Octo:hover .Octo__arm {
+  animation: octocat-wave 560ms ease-in-out;
 }
 
 @keyframes octocat-wave {

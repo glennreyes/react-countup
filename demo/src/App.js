@@ -54,7 +54,7 @@ class App extends Component {
       <div className="Wrapper">
         <header>
           <h1>React CountUp</h1>
-          <p className="styles.Description">
+          <p className="Description">
             A React component wrapper around <a
               href="//inorganik.github.io/countUp.js/"
             >CountUp.js</a>.
@@ -105,7 +105,7 @@ class App extends Component {
                 />
               </div>
             </div>
-            <button className="styles.Button" onClick={this.startAnimation}>Start animation</button>
+            <button className="Button" onClick={this.startAnimation}>Start animation</button>
           </form>
         </section>
 
@@ -119,14 +119,16 @@ class App extends Component {
         <section>
           <h2>Usage</h2>
           <Highlight>
-            {`import React from 'react';
-            import { render } from 'react-dom';
-            import CountUp from 'react-countup';
+            {
+`import React from 'react';
+import { render } from 'react-dom';
+import CountUp from 'react-countup';
 
-            render(
-              <CountUp start={${start}} end={${end}} duration={${duration}} />,
-              document.getElementById('root')
-            );`}
+render(
+  <CountUp start={${start}} end={${end}} duration={${duration}} />,
+  document.getElementById('root')
+);`
+            }
           </Highlight>
         </section>
 
