@@ -43,30 +43,30 @@
   },
   "dependencies": {
     "countup.js": "^1.7.1",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1"
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "babel-core": "^6.14.0",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
-    "babel-polyfill": "^6.13.0",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-preset-react": "^6.11.1",
-    "babel-preset-stage-2": "^6.5.0",
-    "coveralls": "^2.11.12",
-    "cross-env": "^3.0.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-2": "^6.17.0",
+    "coveralls": "^2.11.14",
+    "cross-env": "^3.1.2",
     "enzyme": "^2.4.1",
-    "eslint": "^3.4.0",
+    "eslint": "^3.7.1",
     "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^2.0.0",
-    "eslint-plugin-jsx-a11y": "^2.2.1",
-    "eslint-plugin-react": "^6.2.0",
+    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1",
     "expect": "^1.20.2",
     "istanbul": "^1.0.0-alpha.2",
-    "jsdom": "^9.5.0",
-    "mocha": "^3.0.2",
+    "jsdom": "^9.6.0",
+    "mocha": "^3.1.2",
     "mocha-lcov-reporter": "^1.2.0",
-    "react-addons-test-utils": "^15.3.1"
+    "react-addons-test-utils": "^15.3.2"
   }
 }
