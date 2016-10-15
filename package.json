@@ -67,6 +67,7 @@
     "jsdom": "^9.6.0",
     "mocha": "^3.1.2",
     "mocha-lcov-reporter": "^1.2.0",
-    "react-addons-test-utils": "^15.3.2"
+    "react-addons-test-utils": "^15.3.2",
+    "rimraf": "^2.5.4"
   }
 }
