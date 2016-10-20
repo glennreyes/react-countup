@@ -37,9 +37,7 @@ class CountUp extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.redraw
-      ? true
-      : shallowCompare(this, nextProps, nextState);
+    return nextProps.redraw || shallowCompare(this, nextProps, nextState);
   }
 
   componentDidUpdate() {
