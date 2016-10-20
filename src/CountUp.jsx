@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
+import shallowCompare from 'react-addons-shallow-compare';
 import Count from 'countup.js';
 
 class CountUp extends React.Component {
@@ -33,6 +34,12 @@ class CountUp extends React.Component {
     };
 
     this.startAnimation();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.redraw
+      ? true
+      : shallowCompare(this, nextProps, nextState);
   }
 
   componentDidUpdate() {
@@ -84,6 +91,7 @@ CountUp.defaultProps = {
   decimal: '.',
   prefix: '',
   suffix: '',
+  redraw: false,
 };
 
 CountUp.propTypes = {
@@ -100,6 +108,7 @@ CountUp.propTypes = {
   prefix: PropTypes.string,
   suffix: PropTypes.string,
   callback: PropTypes.func,
+  redraw: PropTypes.bool,
 };
 
 export default CountUp;
