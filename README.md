@@ -75,10 +75,10 @@ Duration of count up animation
 Amount of decimals
 
 ##### `useEasing` *{boolean}*
-use "easeOutExpo" if `true`
+Use "easeOutExpo" if `true`
 
 ##### `useGrouping` *{boolean}*
-group thousands by separator character
+Group thousands by separator character
 
 ##### `separator` *{string}*
 Specifies character of thousands separator
@@ -98,6 +98,14 @@ CSS class to be applied to the wrapper containing the number.
 ##### `callback` *{function}*
 Callback function to be triggered after completed count up
  animation
+
+## Advanced Usage
+By default, the count up animation only happens if any of the above props change.
+
+In cases when you require the animation to trigger on ancestor component(s) re-render, you can turn off this optimization by setting the `redraw` prop to `true`.
+ 
+##### `redraw` *{boolean}*
+Animate on every ancestor component render cycle
 
 ## License
 MIT
