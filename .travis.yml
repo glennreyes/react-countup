@@ -1,9 +1,14 @@
 language: node_js
 node_js:
-  - "5"
   - "6"
-script: npm run build
-notifications:
-  email:
-    on_failure: change
-after_success: 'npm run coveralls'
+cache:
+  directories:
+    - $HOME/.npm
+    - $HOME/.yarn-cache
+    - node_modules
+before_install:
+  - time npm i -g yarn --cache-min 999999999
+install:
+  - time yarn
+script: yarn run build
+after_success: 'yarn run coveralls'
