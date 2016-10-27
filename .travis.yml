@@ -7,6 +7,8 @@ cache:
     - $HOME/.npm
     - $HOME/.yarn-cache
     - node_modules
+before_install:
+  - time npm i -g yarn --cache-min 999999999
 install:
   - time yarn
 script: yarn run build
