@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "countup.js": "^1.7.1",
-    "react": "^15.3.2",
+    "react": "^15.4.0",
     "react-addons-shallow-compare": "^15.3.2",
     "react-dom": "^15.3.2"
   },
