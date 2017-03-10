@@ -8,3 +8,12 @@ exports[`renders correctly 1`] = `
   0
 </span>
 `;
+
+exports[`renders correctly with wrong onStart type 1`] = `
+<span
+  className={undefined}
+  style={undefined}
+>
+  0
+</span>
+`;

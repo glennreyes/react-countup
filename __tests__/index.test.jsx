@@ -6,17 +6,50 @@ import CountUp, { startAnimation } from '../index';
 it('renders correctly', () => {
   const createNodeMock = () => ({ startAnimation });
   const tree = renderer.create(
-    <CountUp start={0} end={10} onStart="something wrong" />,
+    <CountUp
+      start={0}
+      end={10}
+      onStart={() => {}}
+    />,
     { createNodeMock },
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('should call componentDidUpdate function', () => {
+it('renders correctly with wrong onStart type', () => {
+  const createNodeMock = () => ({ startAnimation });
+  const tree = renderer.create(
+    <CountUp
+      start={0}
+      end={10}
+      onStart="Something wrong"
+    />,
+    { createNodeMock },
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('should update on new duration', () => {
   const node = document.createElement('div');
-  const instance = render(<CountUp start={0} end={10} />, node);
+  const instance = render(<CountUp duration={1} />, node);
   jest.spyOn(instance, 'componentDidUpdate');
-  render(<CountUp start={0} end={200} />, node);
+  render(<CountUp duration={2} />, node);
+  expect(instance.componentDidUpdate).toHaveBeenCalled();
+});
+
+it('should update on new start', () => {
+  const node = document.createElement('div');
+  const instance = render(<CountUp start={1} />, node);
+  jest.spyOn(instance, 'componentDidUpdate');
+  render(<CountUp start={2} />, node);
+  expect(instance.componentDidUpdate).toHaveBeenCalled();
+});
+
+it('should update on new end', () => {
+  const node = document.createElement('div');
+  const instance = render(<CountUp end={1} />, node);
+  jest.spyOn(instance, 'componentDidUpdate');
+  render(<CountUp end={2} />, node);
   expect(instance.componentDidUpdate).toHaveBeenCalled();
 });
 
