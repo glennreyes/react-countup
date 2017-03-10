@@ -28,10 +28,18 @@
   ],
   "scripts": {
     "build": "babel index.jsx -d build",
-    "flow": "flow",
-    "lint": "eslint index.jsx --ext .js,.jsx --ignore-path .gitignore",
+    "flow": "flow check",
+    "lint": "eslint --ext .js,.jsx index.jsx",
+    "precommit": "lint-staged",
     "prepublish": "yarn run build",
     "test": "jest --coverage"
+  },
+  "lint-staged": {
+    "index.jsx": [
+      "prettier --single-quote --trailing-comma all --parser flow --write",
+      "eslint --ext .js,.jsx",
+      "git add"
+    ]
   },
   "peerDependencies": {
     "react": ">=0.15.0"
@@ -55,7 +63,9 @@
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.0",
     "flow-bin": "0.41.0",
+    "husky": "^0.13.2",
     "jest": "19.0.2",
+    "lint-staged": "^3.3.1",
     "react-dom": "^15.4.2",
     "react-test-renderer": "^15.4.2"
   }

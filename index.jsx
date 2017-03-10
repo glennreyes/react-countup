@@ -38,7 +38,7 @@ export const startAnimation = (component: Component<*, *, *>) => {
       suffix,
       useEasing,
       useGrouping,
-    } : Props = component.props;
+    }: Props = component.props;
 
     const countupInstance = new Count(
       component.spanElement,
@@ -63,7 +63,9 @@ export const startAnimation = (component: Component<*, *, *>) => {
 
     countupInstance.start(onComplete);
   } else {
-    throw new Error('You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);');
+    throw new Error(
+      'You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);',
+    );
   }
 };
 
@@ -88,18 +90,16 @@ export default class CountUp extends Component {
     style: undefined,
     useEasing: true,
     useGrouping: false,
-  }
+  };
 
   componentDidMount() {
     startAnimation(this);
   }
 
   shouldComponentUpdate(nextProps: Props) {
-    const hasCertainPropsChanged = (
-      this.props.duration !== nextProps.duration ||
+    const hasCertainPropsChanged = this.props.duration !== nextProps.duration ||
       this.props.end !== nextProps.end ||
-      this.props.start !== nextProps.start
-    );
+      this.props.start !== nextProps.start;
 
     return nextProps.redraw || hasCertainPropsChanged;
   }
@@ -108,17 +108,21 @@ export default class CountUp extends Component {
     startAnimation(this);
   }
 
-  spanElement = null
+  spanElement = null;
 
   refSpan = (span: Element<*>) => {
     this.spanElement = span;
-  }
+  };
 
-  props: Props
+  props: Props;
 
   render() {
     const { className, start, style } = this.props;
 
-    return <span className={className} style={style} ref={this.refSpan}>{start}</span>;
+    return (
+      <span className={className} style={style} ref={this.refSpan}>
+        {start}
+      </span>
+    );
   }
 }
