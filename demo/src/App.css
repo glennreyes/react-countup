@@ -78,6 +78,7 @@ p, label {
 
 .TextField {
   background: slategray;
+  border: none;
   border-radius: 3px;
   box-shadow:
     0 1px 0 0 dimgray,
@@ -87,11 +88,13 @@ p, label {
   color: white;
   display: block;
   min-width: 10rem;
+  outline: none;
   padding: .5em;
 }
 
 .Button {
   background: dimgray;
+  border: none;
   border-radius: 3px;
   box-shadow:
     0 1px 0 0 darkslategray,
@@ -104,6 +107,7 @@ p, label {
   flex-grow: 2;
   margin: 2em auto;
   min-width: 10rem;
+  outline: none;
   padding: 1em 3em;
   transition: background .4s;
 }

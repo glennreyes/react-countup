@@ -2,23 +2,21 @@
   "name": "react-countup-demo",
   "homepage": "https://glennreyes.github.io/react-countup",
   "version": "0.1.0",
-  "devDependencies": {
-    "gh-pages": "^0.11.0",
-    "highlight.js": "^9.6.0",
-    "react-highlight.js": "^1.0.5",
-    "react-scripts": "0.6.0",
-    "sanitize.css": "^4.1.0"
-  },
-  "dependencies": {
-    "countup.js": "^1.7.1",
-    "react": "^15.3.2",
-    "react-countup": "^1.2.0",
-    "react-dom": "^15.3.2"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
     "predeploy": "react-scripts build"
+  },
+  "devDependencies": {
+    "gh-pages": "0.12.0",
+    "highlight.js": "9.10.0",
+    "react-highlight.js": "1.0.5",
+    "react-scripts": "0.9.5"
+  },
+  "dependencies": {
+    "normalize.css": "^5.0.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
