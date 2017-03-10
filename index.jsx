@@ -52,7 +52,7 @@ export const startAnimation = (component: Component<*, *, *>) => {
 /**
  * Component
  */
-class CountUp extends Component {
+export default class CountUp extends Component {
   static defaultProps = {
     callback: () => {},
     className: undefined,
@@ -71,7 +71,7 @@ class CountUp extends Component {
   }
 
   componentDidMount() {
-    this.startAnimation(this);
+    startAnimation(this);
   }
 
   shouldComponentUpdate(nextProps: Props) {
@@ -85,7 +85,7 @@ class CountUp extends Component {
   }
 
   componentDidUpdate() {
-    this.startAnimation(this);
+    startAnimation(this);
   }
 
   spanElement = null
@@ -96,7 +96,6 @@ class CountUp extends Component {
 
   props: Props
 
-  startAnimation = startAnimation
 
   render() {
     const { className, start, style } = this.props;
@@ -104,5 +103,3 @@ class CountUp extends Component {
     return <span className={className} style={style} ref={this.refSpan}>{start}</span>;
   }
 }
-
-export default CountUp;

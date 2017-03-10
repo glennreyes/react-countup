@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<span
+  className={undefined}
+  style={undefined}
+>
+  0
+</span>
+`;
