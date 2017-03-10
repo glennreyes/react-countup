@@ -140,8 +140,5 @@ const MyComponent = () => (
 export default App;
 ```
 
-##### `redraw` *{boolean}*
-Animate on every ancestor component render cycle
-
 ## License
 MIT
