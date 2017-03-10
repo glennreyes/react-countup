@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Highlight from 'react-highlight.js';
-import { homepage } from '../package.json';
+import { repository } from '../package.json';
 import 'highlight.js/styles/solarized-dark.css';
 import 'normalize.css';
 
 import CountUp, { startAnimation } from 'react-countup';
 import './App.css';
 
-const GitHubCorner = () => (
+const GitHubCorner = ({ homepage }) => (
   <a href={homepage}>
     <svg
       className="Octo"
@@ -51,7 +51,9 @@ export default class App extends Component {
             A React component wrapper around <a href="//inorganik.github.io/countUp.js/">CountUp.js</a>.
             This component counts up a number in an animated way.
           </p>
-          <GitHubCorner />
+          {repository && repository.url && (
+            <GitHubCorner homepage={repository.url} />
+          )}
         </header>
         <section>
           <h2>Demo</h2>

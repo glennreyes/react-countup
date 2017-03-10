@@ -4177,9 +4177,9 @@ rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-countup@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-2.0.1.tgz#af70edb7b06994b0b231a8fac056cec1e5ac661c"
+react-countup@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-2.0.2.tgz#ef2cb4b65730997ec45f7258ab55168e2ed1769a"
   dependencies:
     countup.js "1.8.2"
     react "15.4.2"
