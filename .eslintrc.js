@@ -28,5 +28,6 @@ module.exports = {
     'flowtype/union-intersection-spacing': 'error',
     'flowtype/use-flow-type': 'error',
     'flowtype/valid-syntax': 'error',
+    'react/no-unused-prop-types': 'off',
   },
 };

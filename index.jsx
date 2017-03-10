@@ -34,7 +34,7 @@ export const startAnimation = (component: Component<*, *, *>) => {
       prefix,
       suffix,
       callback,
-    } = component.props;
+    } : Props = component.props;
 
     new Count(component.spanElement, start, end, decimals, duration, {
       useEasing,
@@ -59,7 +59,7 @@ class CountUp extends Component {
     decimal: '.',
     decimals: 0,
     duration: 3,
-    end: 0,
+    end: 100,
     prefix: '',
     separator: ',',
     start: 0,
