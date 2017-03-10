@@ -1,0 +1,7 @@
+{
+  "index.jsx": [
+    "prettier --single-quote --trailing-comma all --parser flow --write",
+    "eslint --ext .js,.jsx",
+    "git add"
+  ]
+}
