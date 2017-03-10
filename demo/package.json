@@ -21,7 +21,7 @@
     "highlight.js": "^9.10.0",
     "normalize.css": "^5.0.0",
     "react": "^15.4.2",
-    "react-countup": "^2.0.2",
+    "react-countup": "^2.0.3",
     "react-dom": "^15.4.2",
     "react-highlight.js": "^1.0.5"
   }

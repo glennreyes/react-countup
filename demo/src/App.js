@@ -4,7 +4,7 @@ import { repository } from '../package.json';
 import 'highlight.js/styles/solarized-dark.css';
 import 'normalize.css';
 
-import CountUp, { startAnimation } from '../..';
+import CountUp, { startAnimation } from 'react-countup';
 import './App.css';
 
 const GitHubCorner = ({ homepage }) => (
