@@ -3,3 +3,7 @@ node_js:
   - "node"
 cache:
   yarn: true
+script:
+  - yarn run lint
+  - yarn run flow
+  - yarn run test
