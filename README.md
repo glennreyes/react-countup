@@ -40,7 +40,11 @@ import { render } from 'react-dom';
 import CountUp from 'react-countup';
 
 const onComplete = () => {
-  // Do something on completion
+  console.log('Completed! 👏');
+};
+
+const onStart = () => {
+  console.log('Started! 💨');
 };
 
 render(
@@ -54,7 +58,8 @@ render(
     decimal=","
     prefix="EUR "
     suffix=" left"
-    callback={onComplete}
+    onComplete={onComplete}
+    onStart={onStart}
   />,
   document.getElementById('root'),
 );
@@ -62,48 +67,79 @@ render(
 
 ### Props
 
-##### `start` *{number}*
+
+##### `start`: number
 The start number from which the should start from
 
-##### `end` *{number}*
+##### `end`: number
 Target number to count up
 
-##### `duration` in s *{number}*
-Duration of count up animation
+##### `duration`: number
+Duration of count up animation in seconds
 
-##### `decimals` *{number}*
+##### `decimals`: number
 Amount of decimals
 
-##### `useEasing` *{boolean}*
+##### `useEasing`: boolean
 Use "easeOutExpo" if `true`
 
-##### `useGrouping` *{boolean}*
+##### `useGrouping`: boolean
 Group thousands by separator character
 
-##### `separator` *{string}*
+##### `separator`: string
 Specifies character of thousands separator
 
-##### `decimal` *{string}*
+##### `decimal`: string
 Specifies decimal character
 
-##### `prefix` *{string}*
+##### `prefix`: string
 Static text before the animating value
 
-##### `suffix` *{string}*
+##### `suffix`: string
 Static text after the animating value
 
-##### `className` *{string}*
-CSS class to be applied to the wrapper containing the number.
+##### `className`: string
+CSS class name of the span element
 
-##### `callback` *{function}*
-Callback function to be triggered after completed count up
- animation
+##### `redraw`: boolean
+If `true`, your component will always animate on every re-render.
+
+##### `onComplete`: function
+
+##### `onStart`: function
+Method called before animation starts
+
+##### `easingFn`: function
+Method to customize easing the function. See also [here](https://github.com/inorganik/countUp.js#custom-easing)
 
 ## Advanced Usage
-By default, the count up animation only happens if any of the above props change.
+By default, the animation triggered if any of the follow props has changed:
+- `duration`
+- `end`
+- `start`
 
-In cases when you require the animation to trigger on ancestor component(s) re-render, you can turn off this optimization by setting the `redraw` prop to `true`.
- 
+You can set `redraw` to `true` If you want your component to always animate on every re-render.
+
+### Start animation manually
+
+```js
+import React, { Component } from 'react';
+import CountUp, { startAnimation } from 'react-countup';
+
+const MyComponent = () => (
+  <div>
+    <CountUp className="CountUp" start={0} end={100} duration={3} ref={(countUp) => {
+      this.myCountUp = countUp;
+    }} />
+    <button className="Button" onClick={(event) => {
+      startAnimation(this.myCountUp);
+    }}>Animate me!</button>
+  </div>
+);
+
+export default App;
+```
+
 ##### `redraw` *{boolean}*
 Animate on every ancestor component render cycle
 

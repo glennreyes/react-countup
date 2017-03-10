@@ -6,7 +6,7 @@ import CountUp, { startAnimation } from '../index';
 it('renders correctly', () => {
   const createNodeMock = () => ({ startAnimation });
   const tree = renderer.create(
-    <CountUp start={0} end={10} />,
+    <CountUp start={0} end={10} onStart="something wrong" />,
     { createNodeMock },
   ).toJSON();
   expect(tree).toMatchSnapshot();
@@ -21,5 +21,5 @@ it('should call componentDidUpdate function', () => {
 });
 
 it('should throw an error if no component specified in startAnimation', () => {
-  expect(() => startAnimation(undefined)).toThrow();
+  expect(() => startAnimation('😍')).toThrow();
 });
