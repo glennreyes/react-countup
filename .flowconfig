@@ -1,0 +1,10 @@
+[ignore]
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/demo/.*
+<PROJECT_ROOT>/eslintrc.*
+
+[include]
+
+[libs]
+
+[options]

@@ -21,54 +21,44 @@
     "url": "https://github.com/glennreyes/react-countup/issues"
   },
   "homepage": "https://glennreyes.github.io/react-countup",
-  "main": "lib/index.js",
+  "main": "build",
   "files": [
-    "lib"
+    "index.js",
+    "build"
   ],
   "scripts": {
-    "prebuild": "yarn test && yarn run clean",
-    "build": "cross-env NODE_ENV=production babel src -d lib",
-    "clean": "rimraf lib",
-    "coveralls": "yarn run test:coverage && cat ./coverage/lcov.info | coveralls",
+    "build": "babel index.jsx -d build",
+    "flow": "flow",
+    "lint": "eslint index.jsx --ext .js,.jsx --ignore-path .gitignore",
     "prepublish": "yarn run build",
-    "lint": "eslint .",
-    "pretest": "yarn run lint",
-    "test": "cross-env NODE_ENV=test mocha --opts mocha.opts",
-    "test:watch": "yarn t -- --watch",
-    "test:coverage": "cross-env NODE_ENV=test istanbul cover _mocha --report lcovonly -- -R spec --opts mocha.opts"
+    "test": "jest --coverage"
   },
   "peerDependencies": {
-    "react": ">=0.14.0",
-    "react-dom": ">=0.14.0"
+    "react": ">=0.15.0",
+    "react-dom": ">=0.15.0"
   },
   "dependencies": {
-    "countup.js": "^1.7.1",
-    "react": "^15.4.0",
-    "react-addons-shallow-compare": "^15.4.0",
-    "react-dom": "^15.4.0"
+    "countup.js": "1.8.2",
+    "react": "15.4.2",
+    "react-dom": "15.4.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.7",
-    "babel-polyfill": "^6.16.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-2": "^6.18.0",
-    "coveralls": "^2.11.15",
-    "cross-env": "^3.1.3",
-    "enzyme": "^2.6.0",
-    "eslint": "^3.10.2",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.7.1",
-    "expect": "^1.20.2",
-    "istanbul": "^1.0.0-alpha.2",
-    "jsdom": "^9.8.3",
-    "mocha": "^3.1.2",
-    "mocha-lcov-reporter": "^1.2.0",
-    "react-addons-test-utils": "^15.4.0",
-    "rimraf": "^2.5.4"
+    "babel": "6.23.0",
+    "babel-cli": "6.23.0",
+    "babel-eslint": "7.1.1",
+    "babel-plugin-transform-flow-strip-types": "6.22.0",
+    "babel-preset-env": "1.2.1",
+    "babel-preset-react": "6.23.0",
+    "babel-preset-stage-2": "6.22.0",
+    "enzyme": "2.7.1",
+    "eslint": "3.17.1",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-flowtype": "2.30.3",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.10.0",
+    "flow-bin": "0.41.0",
+    "jest": "19.0.2",
+    "react-addons-test-utils": "15.4.2"
   }
 }
