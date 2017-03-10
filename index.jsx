@@ -4,20 +4,21 @@ import React, { Component, Element } from 'react';
 import Count from 'countup.js';
 
 type Props = {
-  callback?: () => void,
-  className?: string,
-  decimal?: string,
-  decimals?: number,
-  duration?: number,
+  className: string,
+  decimal: string,
+  decimals: number,
+  duration: number,
   end: number,
-  prefix?: string,
-  redraw?: boolean, // eslint-disable-line react/no-unused-prop-types
-  separator?: string,
-  start?: number,
-  style?: {},
-  suffix?: string,
-  useEasing?: boolean,
-  useGrouping?: boolean,
+  onComplete: () => void,
+  onStart: () => void,
+  prefix: string,
+  redraw: boolean, // eslint-disable-line react/no-unused-prop-types
+  separator: string,
+  start: number,
+  style: {},
+  suffix: string,
+  useEasing: boolean,
+  useGrouping: boolean,
 };
 
 export const startAnimation = (component: Component<*, *, *>) => {
@@ -33,17 +34,28 @@ export const startAnimation = (component: Component<*, *, *>) => {
       decimal,
       prefix,
       suffix,
-      callback,
+      onComplete,
+      onStart,
     } : Props = component.props;
 
-    new Count(component.spanElement, start, end, decimals, duration, {
-      useEasing,
-      useGrouping,
-      separator,
-      decimal,
-      prefix,
-      suffix,
-    }).start(callback);
+    const countupInstance = new Count(
+      component.spanElement,
+      start,
+      end,
+      decimals,
+      duration,
+      {
+        useEasing,
+        useGrouping,
+        separator,
+        decimal,
+        prefix,
+        suffix,
+      },
+    );
+
+    onStart();
+    countupInstance.start(onComplete);
   } else {
     throw new Error('You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);');
   }
@@ -54,12 +66,13 @@ export const startAnimation = (component: Component<*, *, *>) => {
  */
 export default class CountUp extends Component {
   static defaultProps = {
-    callback: () => {},
     className: undefined,
     decimal: '.',
     decimals: 0,
     duration: 3,
     end: 100,
+    onComplete: () => {},
+    onStart: () => {},
     prefix: '',
     separator: ',',
     start: 0,
@@ -95,7 +108,6 @@ export default class CountUp extends Component {
   }
 
   props: Props
-
 
   render() {
     const { className, start, style } = this.props;
