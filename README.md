@@ -16,7 +16,7 @@ Check out the [live demo](https://glennreyes.github.io/react-countup).
 
 
 ## Installation
-Make sure you have a compatible version of `React 0.14.x` and `15.x.x` installed in your project.
+Make sure you have a compatible version of and `15.x.x` installed in your project.
 ```bash
 npm install react-countup --save
 ```
