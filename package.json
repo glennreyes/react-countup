@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "babel": "6.23.0",
-    "babel-cli": "6.23.0",
+    "babel-cli": "^6.24.0",
     "babel-eslint": "7.1.1",
     "babel-plugin-transform-flow-strip-types": "6.22.0",
     "babel-preset-env": "1.2.1",
@@ -58,7 +58,7 @@
     "flow-bin": "0.41.0",
     "husky": "^0.13.2",
     "jest": "19.0.2",
-    "lint-staged": "^3.3.1",
+    "lint-staged": "^3.4.0",
     "react-dom": "^15.4.2",
     "react-test-renderer": "^15.4.2"
   }
