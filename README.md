@@ -1,7 +1,6 @@
 # [React CountUp](https://glennreyes.github.io/react-countup)
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/glennreyes/react-countup.svg)](https://greenkeeper.io/)
-
 [![Build Status](https://travis-ci.org/glennreyes/react-countup.svg?branch=master)](https://travis-ci.org/glennreyes/react-countup)
 [![Coverage Status](https://coveralls.io/repos/github/glennreyes/react-countup/badge.svg?branch=master)](https://coveralls.io/github/glennreyes/react-countup?branch=master)
 [![Dependency Status](https://david-dm.org/glennreyes/react-countup.svg)](https://david-dm.org/glennreyes/react-countup)
