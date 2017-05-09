@@ -106,6 +106,7 @@ CSS class name of the span element
 If `true`, your component will always animate on every re-render.
 
 ##### `onComplete`: function
+Method called after animation has completed
 
 ##### `onStart`: function
 Method called before animation starts
