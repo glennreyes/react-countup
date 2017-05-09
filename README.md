@@ -113,6 +113,9 @@ Method called before animation starts
 ##### `easingFn`: function
 Method to customize easing the function. See also [here](https://github.com/inorganik/countUp.js#custom-easing)
 
+##### `formattingFn`: function
+Method to customize the formatting of the number
+
 ## Advanced Usage
 By default, the animation triggered if any of the follow props has changed:
 - `duration`
