@@ -38,8 +38,7 @@
     "react": ">=0.15.0"
   },
   "dependencies": {
-    "countup.js": "^1.8.5",
-    "react": "^15.5.4"
+    "countup.js": "^1.8.5"
   },
   "devDependencies": {
     "babel": "6.23.0",
@@ -59,6 +58,7 @@
     "husky": "^0.13.2",
     "jest": "^20.0.0",
     "lint-staged": "^3.4.1",
+    "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4"
   }
