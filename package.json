@@ -1,6 +1,6 @@
 {
   "name": "react-countup",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "A React component wrapper around CountUp.js",
   "author": "Glenn Reyes",
   "keywords": [
@@ -38,7 +38,7 @@
     "react": ">=0.15.0"
   },
   "dependencies": {
-    "countup.js": "^1.8.3",
+    "countup.js": "^1.8.5",
     "react": "15.4.2"
   },
   "devDependencies": {

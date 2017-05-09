@@ -10,6 +10,7 @@ type Props = {
   duration?: number,
   easingFn?: () => void,
   end: number,
+  formattingFn?: () => void,
   onComplete?: () => void,
   onStart?: () => void,
   prefix?: string,
@@ -30,6 +31,7 @@ export const startAnimation = (component: Component<*, *, *>) => {
       duration,
       easingFn,
       end,
+      formattingFn,
       onComplete,
       onStart,
       prefix,
@@ -49,6 +51,7 @@ export const startAnimation = (component: Component<*, *, *>) => {
       {
         decimal,
         easingFn,
+        formattingFn,
         separator,
         prefix,
         suffix,
@@ -78,8 +81,9 @@ export default class CountUp extends Component {
     decimal: '.',
     decimals: 0,
     duration: 3,
-    easingFn: undefined,
+    easingFn: null,
     end: 100,
+    formattingFn: null,
     onComplete: undefined,
     onStart: undefined,
     prefix: '',
@@ -97,7 +101,8 @@ export default class CountUp extends Component {
   }
 
   shouldComponentUpdate(nextProps: Props) {
-    const hasCertainPropsChanged = this.props.duration !== nextProps.duration ||
+    const hasCertainPropsChanged =
+      this.props.duration !== nextProps.duration ||
       this.props.end !== nextProps.end ||
       this.props.start !== nextProps.start;
 
