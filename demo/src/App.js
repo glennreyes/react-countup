@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Highlight from 'react-highlight.js';
+import Highlight from 'react-highlight';
 import { repository } from '../package.json';
 import 'highlight.js/styles/solarized-dark.css';
 import 'normalize.css';
