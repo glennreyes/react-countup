@@ -31,7 +31,7 @@
     "flow": "flow check",
     "lint": "eslint --ext .js,.jsx index.jsx",
     "precommit": "lint-staged",
-    "prepublish": "yarn run build",
+    "prepare": "yarn run build",
     "test": "jest --coverage"
   },
   "peerDependencies": {
