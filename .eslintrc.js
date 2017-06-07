@@ -10,6 +10,7 @@ module.exports = {
   parser: 'babel-eslint',
   plugins: ['flowtype'],
   rules: {
+    'react/jsx-filename-extension': 'off',
     'react/no-unused-prop-types': 'off',
   }
 };
