@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Highlight from 'react-highlight';
-import { repository } from '../package.json';
 import 'highlight.js/styles/solarized-dark.css';
 import 'normalize.css';
 
@@ -51,9 +50,7 @@ export default class App extends Component {
             A React component wrapper around <a href="//inorganik.github.io/countUp.js/">CountUp.js</a>.
             This component counts up a number in an animated way.
           </p>
-          {repository && repository.url && (
-            <GitHubCorner homepage={repository.url} />
-          )}
+          <GitHubCorner homepage="https://glennreyes.github.io/react-countup" />
         </header>
         <section>
           <h2>Demo</h2>
@@ -139,7 +136,11 @@ render(
           <p>
             With
             {' '}
-            <span className="Emoji">❤️</span>
+            <span
+              className="Emoji"
+              role="img"
+              aria-label="heart"
+            >❤️</span>
             {' by '}
             <a href="//twitter.com/glnnrys">Glenn Reyes</a>
           </p>

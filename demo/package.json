@@ -15,10 +15,10 @@
   },
   "devDependencies": {
     "gh-pages": "^1.0.0",
-    "react-scripts": "0.9.5"
+    "react-scripts": "^1.0.7"
   },
   "dependencies": {
-    "highlight.js": "^9.11.0",
+    "highlight.js": "^9.12.0",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
     "react-countup": "^2.1.1",
