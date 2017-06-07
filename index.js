@@ -24,57 +24,54 @@ type Props = {
 };
 
 export const startAnimation = (component: Component<*, *, *>) => {
-  if (component && component.spanElement) {
-    const {
-      decimal,
-      decimals,
-      duration,
-      easingFn,
-      end,
-      formattingFn,
-      onComplete,
-      onStart,
-      prefix,
-      separator,
-      start,
-      suffix,
-      useEasing,
-      useGrouping,
-    }: Props = component.props;
-
-    const countupInstance = new Count(
-      component.spanElement,
-      start,
-      end,
-      decimals,
-      duration,
-      {
-        decimal,
-        easingFn,
-        formattingFn,
-        separator,
-        prefix,
-        suffix,
-        useEasing,
-        useGrouping,
-      },
-    );
-
-    if (typeof onStart === 'function') {
-      onStart();
-    }
-
-    countupInstance.start(onComplete);
-  } else {
+  if (!(component && component.spanElement)) {
     throw new Error(
       'You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);',
     );
   }
+
+  const {
+    decimal,
+    decimals,
+    duration,
+    easingFn,
+    end,
+    formattingFn,
+    onComplete,
+    onStart,
+    prefix,
+    separator,
+    start,
+    suffix,
+    useEasing,
+    useGrouping,
+  }: Props = component.props;
+
+  const countupInstance = new Count(
+    component.spanElement,
+    start,
+    end,
+    decimals,
+    duration,
+    {
+      decimal,
+      easingFn,
+      formattingFn,
+      separator,
+      prefix,
+      suffix,
+      useEasing,
+      useGrouping,
+    },
+  );
+
+  if (typeof onStart === 'function') {
+    onStart();
+  }
+
+  countupInstance.start(onComplete);
 };
 
-/**
- * Component
- */
 export default class CountUp extends Component {
   static defaultProps = {
     className: undefined,
