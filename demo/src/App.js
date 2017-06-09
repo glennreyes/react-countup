@@ -50,7 +50,7 @@ export default class App extends Component {
             A React component wrapper around <a href="//inorganik.github.io/countUp.js/">CountUp.js</a>.
             This component counts up a number in an animated way.
           </p>
-          <GitHubCorner homepage="https://glennreyes.github.io/react-countup" />
+          <GitHubCorner homepage="https://github.com/glennreyes/react-countup" />
         </header>
         <section>
           <h2>Demo</h2>
