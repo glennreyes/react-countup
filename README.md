@@ -51,10 +51,12 @@ render(
   <CountUp
     className="custom-count"
     start={160527.0127}
-    end={-875}
+    end={-875.0319}
     duration={2.75}
     useEasing={true}
+    useGrouping={true}
     separator=" "
+    decimals={4}
     decimal=","
     prefix="EUR "
     suffix=" left"
