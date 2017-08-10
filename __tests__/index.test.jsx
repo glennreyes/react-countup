@@ -1,31 +1,25 @@
 import React from 'react';
 import { render } from 'react-dom';
 import renderer from 'react-test-renderer';
-import CountUp, { startAnimation } from '../index';
+import CountUp, { formatNumber, startAnimation } from '../index';
 
 it('renders correctly', () => {
   const createNodeMock = () => ({ startAnimation });
-  const tree = renderer.create(
-    <CountUp
-      start={0}
-      end={10}
-      onStart={() => {}}
-    />,
-    { createNodeMock },
-  ).toJSON();
+  const tree = renderer
+    .create(<CountUp start={0} end={10} onStart={() => {}} />, {
+      createNodeMock,
+    })
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 it('renders correctly with wrong onStart type', () => {
   const createNodeMock = () => ({ startAnimation });
-  const tree = renderer.create(
-    <CountUp
-      start={0}
-      end={10}
-      onStart="Something wrong"
-    />,
-    { createNodeMock },
-  ).toJSON();
+  const tree = renderer
+    .create(<CountUp start={0} end={10} onStart="Something wrong" />, {
+      createNodeMock,
+    })
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -55,4 +49,28 @@ it('should update on new end', () => {
 
 it('should throw an error if no component specified in startAnimation', () => {
   expect(() => startAnimation('😍')).toThrow();
+});
+
+it('formats decimal number correctly', () => {
+  const formattedNumber = formatNumber(123456.789, {
+    decimal: ',',
+    decimals: 2,
+    useGrouping: true,
+    separator: '.',
+    prefix: 'a ',
+    suffix: ' b',
+  });
+  expect(formattedNumber).toBe('a 123.456,79 b');
+});
+
+it('formats arbitrary number correctly', () => {
+  const formattedNumber = formatNumber(123456, {
+    decimal: '',
+    decimals: 2,
+    useGrouping: true,
+    separator: '',
+    prefix: 'a ',
+    suffix: ' b',
+  });
+  expect(formattedNumber).toBe('a 12345600 b');
 });
