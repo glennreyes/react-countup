@@ -7,22 +7,34 @@
 [![npm version](https://badge.fury.io/js/react-countup.svg)](https://badge.fury.io/js/react-countup)
 
 
-A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/) to count up numbers.
+A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
 
 ![sep -15-2016 10-11-53 pm](https://cloud.githubusercontent.com/assets/5080854/18565869/d23db0e0-7b91-11e6-9ee2-71be5875ca48.gif)
 
+
 ## [Demo](https://glennreyes.github.io/react-countup)
-Check out the [live demo](https://glennreyes.github.io/react-countup).
+
+Check out the [demo](https://glennreyes.github.io/react-countup).
 
 
 ## Installation
-Make sure you have a compatible version of and `15.x.x` installed in your project.
+
+Make sure you have a compatible version of React `15.x.x` installed in your project.
+
+```bash
+yarn add react-countup
+```
+
+Alternatively with npm:
 ```bash
 npm install react-countup --save
 ```
 
+
 ## Usage
-#### Basic
+
+#### Simple
+
 ```js
 import React from 'react';
 import { render } from 'react-dom';
@@ -34,6 +46,7 @@ render(
 );
 ```
 #### Advanced
+
 ```js
 import React from 'react';
 import { render } from 'react-dom';
@@ -49,7 +62,7 @@ const onStart = () => {
 
 render(
   <CountUp
-    className="custom-count"
+    className="account-balance"
     start={160527.0127}
     end={-875.0319}
     duration={2.75}
@@ -69,24 +82,23 @@ render(
 
 ### Props
 
-
 ##### `start`: number
-The start number from which the should start from
+Start value
 
 ##### `end`: number
-Target number to count up
+Target value
 
 ##### `duration`: number
-Duration of count up animation in seconds
+Duration in seconds
 
 ##### `decimals`: number
 Amount of decimals
 
 ##### `useEasing`: boolean
-Use "easeOutExpo" if `true`
+Enable easing if set to `true` (default easing: `easeOutExpo`)
 
 ##### `useGrouping`: boolean
-Group thousands by separator character
+Group thousands by [separator character](#separator-string)
 
 ##### `separator`: string
 Specifies character of thousands separator
@@ -104,29 +116,31 @@ Static text after the animating value
 CSS class name of the span element
 
 ##### `redraw`: boolean
-If `true`, your component will always animate on every re-render.
+If set to `true`, the CountUp component will always animate on every re-render.
 
 ##### `onComplete`: function
-Method called after animation has completed
+Function called after animation has completed
 
 ##### `onStart`: function
-Method called before animation starts
+Function called before animation starts
 
 ##### `easingFn`: function
-Method to customize easing the function. See also [here](https://github.com/inorganik/countUp.js#custom-easing)
+Easing function, see [here for instructions](https://github.com/inorganik/countUp.js#custom-easing)
 
 ##### `formattingFn`: function
-Method to customize the formatting of the number
+Function to customize the formatting of the number
 
-## Advanced Usage
-By default, the animation triggered if any of the follow props has changed:
+
+## Protips
+
+By default, the animation is triggered if any of the following props has changed:
 - `duration`
 - `end`
 - `start`
 
 You can set `redraw` to `true` If you want your component to always animate on every re-render.
 
-### Start animation manually
+### Manually start the animation
 
 ```js
 import React, { Component } from 'react';
@@ -139,7 +153,7 @@ const MyComponent = () => (
     }} />
     <button className="Button" onClick={(event) => {
       startAnimation(this.myCountUp);
-    }}>Animate me!</button>
+    }}>Count me up!</button>
   </div>
 );
 

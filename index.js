@@ -23,6 +23,21 @@ type Props = {
   useGrouping?: boolean,
 };
 
+// Adapted from the countup.js format number function
+const formatNumber = (start: number, options: {}) => {
+  const num = `${start.toFixed(options.decimals)}`;
+  const x = num.split('.');
+  let x1 = x[0];
+  const x2 = x.length > 1 ? `${options.decimal}${x[1]}` : '';
+  const rgx = /(\d+)(\d{3})/;
+  if (options.useGrouping) {
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, `$1${options.separator}$2`);
+    }
+  }
+  return `${options.prefix}${x1}${x2}${options.suffix}`;
+};
+
 export const startAnimation = (component: Component<*, *, *>) => {
   if (!(component && component.spanElement)) {
     throw new Error(
@@ -119,11 +134,28 @@ export default class CountUp extends Component {
   props: Props;
 
   render() {
-    const { className, start, style } = this.props;
+    const {
+      className,
+      start,
+      style,
+      decimal,
+      decimals,
+      useGrouping,
+      separator,
+      prefix,
+      suffix,
+    } = this.props;
 
     return (
       <span className={className} style={style} ref={this.refSpan}>
-        {start}
+        {formatNumber(start, {
+          decimal,
+          decimals,
+          useGrouping,
+          separator,
+          prefix,
+          suffix,
+        })}
       </span>
     );
   }

@@ -1,6 +1,6 @@
 {
   "name": "react-countup",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A React component wrapper around CountUp.js",
   "author": "Glenn Reyes <glenn@glennreyes.com> (https://twitter.com/glnnrys)",
   "keywords": [
@@ -42,7 +42,6 @@
     "countup.js": "^1.8.5"
   },
   "devDependencies": {
-    "babel": "6.23.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-flow-strip-types": "6.22.0",
