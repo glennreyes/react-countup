@@ -23,19 +23,33 @@ type Props = {
   useGrouping?: boolean,
 };
 
+type FormatNumberFn = (
+  start: number,
+  options: {
+    decimal?: string,
+    decimals?: number,
+    useGrouping?: boolean,
+    separator?: string,
+    prefix?: string,
+    suffix?: string,
+  },
+) => string;
+
 // Adapted from the countup.js format number function
-const formatNumber = (start: number, options: {}) => {
+// https://github.com/inorganik/countUp.js/blob/master/countUp.js#L46-L60
+const formatNumber: FormatNumberFn = (start, options) => {
   const num = `${start.toFixed(options.decimals)}`;
   const x = num.split('.');
   let x1 = x[0];
-  const x2 = x.length > 1 ? `${options.decimal}${x[1]}` : '';
+  const x2 = x.length > 1 ? `${options.decimal || ''}${x[1]}` : '';
   const rgx = /(\d+)(\d{3})/;
+
   if (options.useGrouping) {
     while (rgx.test(x1)) {
-      x1 = x1.replace(rgx, `$1${options.separator}$2`);
+      x1 = x1.replace(rgx, `$1${options.separator || ''}$2`);
     }
   }
-  return `${options.prefix}${x1}${x2}${options.suffix}`;
+  return `${options.prefix || ''}${x1}${x2}${options.suffix || ''}`;
 };
 
 export const startAnimation = (component: Component<*, *, *>) => {
