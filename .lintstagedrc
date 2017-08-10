@@ -1,7 +1,7 @@
 {
   "index.js": [
     "prettier --single-quote --trailing-comma all --parser flow --write",
-    "eslint --ext .js,.jsx",
+    "eslint --fix",
     "git add",
     "jest --findRelatedTests"
   ]
