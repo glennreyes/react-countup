@@ -1,7 +1,8 @@
 // @flow
 
-import React, { Component, PropTypes } from 'react';
-import Count from 'countup.js';
+// import React, { Component, PropTypes } from 'react';
+const React = require('react');
+const Count = require('countup.js');
 
 // Adapted from the countup.js format number function
 // https://github.com/inorganik/countUp.js/blob/master/countUp.js#L46-L60
@@ -21,12 +22,12 @@ export const formatNumber = (start, options) => {
 };
 
 export const startAnimation = (component) => {
-  if (!(component && component.spanElement)) {
+  // if (!(component && component.spanElement)) {
     // throw new Error(
     //   'You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);'
     // );
-  }
-
+  // }
+  console.log('component', component);
   const { decimals, duration, end, start } = component.props;
 
   const countupInstance = new Count(
@@ -34,13 +35,13 @@ export const startAnimation = (component) => {
     start,
     end,
     decimals,
-    duration,
+    duration
   );
 
   countupInstance.start();
 };
 
-class CountUp extends Component {
+class CountUp extends React.Component {
   componentDidMount() {
     startAnimation(this);
   }
@@ -81,15 +82,15 @@ class CountUp extends Component {
   }
 }
 
-CountUp.propTypes = {
-  className: PropTypes.string,
-  decimal: PropTypes.string,
-  decimals: PropTypes.number,
-  duration: PropTypes.number,
-  easingFn: PropTypes.func,
-  end: PropTypes.number,
-  redraw: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-  start: PropTypes.number,
-};
+// CountUp.propTypes = {
+//   className: PropTypes.string,
+//   decimal: PropTypes.string,
+//   decimals: PropTypes.number,
+//   duration: PropTypes.number,
+//   easingFn: PropTypes.func,
+//   end: PropTypes.number,
+//   redraw: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+//   start: PropTypes.number,
+// };
 
-module.exports = CountUp;
+export default CountUp;
