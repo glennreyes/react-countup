@@ -21,9 +21,9 @@ const formatNumber = (start, options) => {
 };
 
 const startAnimation = (component) => {
-  // if (!(component && component.spanElement)) {
-  //   throw new Error('You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);');
-  // }
+  if (!(component && component.spanElement)) {
+    throw new Error('You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);');
+  }
 
   const countupInstance = new Count(
     component.spanElement,

@@ -40,9 +40,9 @@ var formatNumber = function formatNumber(start, options) {
 };
 
 var startAnimation = function startAnimation(component) {
-  // if (!(component && component.spanElement)) {
-  //   throw new Error('You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);');
-  // }
+  if (!(component && component.spanElement)) {
+    throw new Error('You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);');
+  }
 
   var countupInstance = new _countup2.default(component.spanElement, component.props.start, component.props.end, component.props.decimals, component.props.duration);
 
