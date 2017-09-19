@@ -5,7 +5,7 @@ import Count from 'countup.js';
 
 // Adapted from the countup.js format number function
 // https://github.com/inorganik/countUp.js/blob/master/countUp.js#L46-L60
-export const formatNumber = (start, options) => {
+const formatNumber = (start, options) => {
   const num = `${start.toFixed(options.decimals)}`;
   const x = num.split('.');
   let x1 = x[0];
@@ -20,7 +20,7 @@ export const formatNumber = (start, options) => {
   return `${options.prefix}${x1}${x2}${options.suffix}`;
 };
 
-export const startAnimation = (component) => {
+const startAnimation = (component) => {
   // if (!(component && component.spanElement)) {
   //   throw new Error('You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);');
   // }

@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.startAnimation = exports.formatNumber = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -25,7 +24,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Adapted from the countup.js format number function
 // https://github.com/inorganik/countUp.js/blob/master/countUp.js#L46-L60
-var formatNumber = exports.formatNumber = function formatNumber(start, options) {
+var formatNumber = function formatNumber(start, options) {
   var num = '' + start.toFixed(options.decimals);
   var x = num.split('.');
   var x1 = x[0];
@@ -40,7 +39,7 @@ var formatNumber = exports.formatNumber = function formatNumber(start, options) 
   return '' + options.prefix + x1 + x2 + options.suffix;
 };
 
-var startAnimation = exports.startAnimation = function startAnimation(component) {
+var startAnimation = function startAnimation(component) {
   // if (!(component && component.spanElement)) {
   //   throw new Error('You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);');
   // }
