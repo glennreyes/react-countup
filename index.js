@@ -28,14 +28,13 @@ export const startAnimation = (component) => {
     // );
   // }
   console.log('component', component);
-  const { decimals, duration, end, start } = component.props;
 
   const countupInstance = new Count(
     component.spanElement,
-    start,
-    end,
-    decimals,
-    duration
+    component.props.start,
+    component.props.end,
+    component.props.decimals,
+    component.props.duration
   );
 
   countupInstance.start();
@@ -64,18 +63,17 @@ class CountUp extends React.Component {
   }
 
   render() {
-    const { decimal = '.', decimals = 0, className, start = 0 } = this.props;
 
     return (
       <span
-        className={className}
+        className={this.props.className}
         ref={(span) => {
-          this.refSpan(span);
+          this.refSpan(span)
         }}
       >
-        {formatNumber(start, {
-          decimal,
-          decimals,
+        {formatNumber(this.props.start, {
+          decimal: this.props.decimal,
+          decimals: this.props.decimals,
         })}
       </span>
     );
