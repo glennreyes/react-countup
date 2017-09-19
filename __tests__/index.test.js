@@ -3,10 +3,6 @@ import { render } from 'react-dom';
 import renderer from 'react-test-renderer';
 import CountUp, { formatNumber, startAnimation } from '../index';
 
-it('should work', () => {
-  expect(1).toBe(1);
-});
-
 it('renders correctly', () => {
   const createNodeMock = () => ({ startAnimation });
   const tree = renderer
