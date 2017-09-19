@@ -1,17 +1,7 @@
 {
-  "plugins": ["transform-flow-strip-types"],
+  "plugins": [],
   "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "browsers": ["last 2 versions", "> 1%"],
-          "node": true
-        }
-      }
-    ],
     "es2015",
-    "stage-2",
     "react"
   ]
 }
