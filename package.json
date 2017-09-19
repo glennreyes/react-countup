@@ -23,7 +23,6 @@
   "homepage": "https://glennreyes.github.io/react-countup",
   "main": "build",
   "files": [
-    "index.js",
     "build"
   ],
   "scripts": {
