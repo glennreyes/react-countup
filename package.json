@@ -30,8 +30,8 @@
     "build": "babel index.js -d build",
     "flow": "flow check",
     "lint": "eslint --ext .js,.jsx index.js",
-    "postinstall": "yarn run build",
     "precommit": "lint-staged",
+    "prepare": "yarn run build",
     "prettier": "prettier --single-quote --trailing-comma all --parser flow --write index.js",
     "test": "jest --coverage"
   },
