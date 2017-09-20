@@ -169,24 +169,3 @@ CountUp.defaultProps = {
   useGrouping: false
 };
 exports.default = CountUp;
-
-
-CountUp.propTypes = {
-  className: _react.PropTypes.string,
-  decimal: _react.PropTypes.string,
-  decimals: _react.PropTypes.number,
-  duration: _react.PropTypes.number,
-  easingFn: _react.PropTypes.func,
-  end: _react.PropTypes.number,
-  formattingFn: _react.PropTypes.func,
-  onComplete: _react.PropTypes.func,
-  onStart: _react.PropTypes.func,
-  prefix: _react.PropTypes.string,
-  redraw: _react.PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-  separator: _react.PropTypes.string,
-  start: _react.PropTypes.number,
-  style: _react.PropTypes.object,
-  suffix: _react.PropTypes.string,
-  useEasing: _react.PropTypes.bool,
-  useGrouping: _react.PropTypes.bool
-};
