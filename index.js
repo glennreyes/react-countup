@@ -3,41 +3,9 @@
 import React, { Component, PropTypes } from 'react';
 import Count from 'countup.js';
 
-type Props = {
-  className: string,
-  decimal: string,
-  decimals: number,
-  duration: number,
-  easingFn: () => void,
-  end: number,
-  formattingFn: () => void,
-  onComplete: () => void,
-  onStart: () => void,
-  prefix: string,
-  redraw: boolean, // eslint-disable-line react/no-unused-prop-types
-  separator: string,
-  start: number,
-  style: {},
-  suffix: string,
-  useEasing: boolean,
-  useGrouping: boolean,
-};
-
-type FormatNumberFn = (
-  start: number,
-  options: {
-    decimal: string,
-    decimals: number,
-    useGrouping: boolean,
-    separator: string,
-    prefix: string,
-    suffix: string,
-  },
-) => string;
-
 // Adapted from the countup.js format number function
 // https://github.com/inorganik/countUp.js/blob/master/countUp.js#L46-L60
-export const formatNumber: FormatNumberFn = (start, options) => {
+export const formatNumber = (start, options) => {
   const num = `${start.toFixed(options.decimals)}`;
   const x = num.split('.');
   let x1 = x[0];
@@ -74,7 +42,7 @@ export const startAnimation = (component: Component<*, *, *>) => {
     suffix,
     useEasing,
     useGrouping,
-  }: Props = component.props;
+  } = component.props;
 
   const countupInstance = new Count(
     component.spanElement,
@@ -141,11 +109,9 @@ export default class CountUp extends Component {
 
   spanElement = null;
 
-  refSpan = (span: Element<*>) => {
+  refSpan = (span) => {
     this.spanElement = span;
   };
-
-  props: Props;
 
   render() {
     const {
