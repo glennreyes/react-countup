@@ -27,7 +27,7 @@
     "build"
   ],
   "scripts": {
-    "build": "babel index.js -d build",
+    "build": "./node_modules/.bin/babel index.js -d build",
     "flow": "flow check",
     "lint": "eslint --ext .js,.jsx index.js",
     "precommit": "lint-staged",
