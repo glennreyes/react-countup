@@ -31,7 +31,7 @@
     "flow": "flow check",
     "lint": "eslint --ext .js,.jsx index.js",
     "precommit": "lint-staged",
-    "postinstall": "npm run build",
+    "prepare": "yarn run build",
     "prettier": "prettier --single-quote --trailing-comma all --parser flow --write index.js",
     "test": "jest --coverage"
   },
