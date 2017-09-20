@@ -149,27 +149,6 @@ var CountUp = function (_Component) {
   return CountUp;
 }(_react.Component);
 
-// CountUp.propTypes = {
-//   className: PropTypes.string,
-//   decimal: PropTypes.string,
-//   decimals: PropTypes.number,
-//   duration: PropTypes.number,
-//   easingFn: PropTypes.func,
-//   end: PropTypes.number,
-//   formattingFn: PropTypes.func,
-//   onComplete: PropTypes.func,
-//   onStart: PropTypes.func,
-//   prefix: PropTypes.string,
-//   redraw: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-//   separator: PropTypes.string,
-//   start: PropTypes.number,
-//   style: PropTypes.object,
-//   suffix: PropTypes.string,
-//   useEasing: PropTypes.bool,
-//   useGrouping: PropTypes.bool,
-// }
-
-
 CountUp.defaultProps = {
   className: undefined,
   decimal: '.',
@@ -190,3 +169,24 @@ CountUp.defaultProps = {
   useGrouping: false
 };
 exports.default = CountUp;
+
+
+CountUp.propTypes = {
+  className: _react.PropTypes.string,
+  decimal: _react.PropTypes.string,
+  decimals: _react.PropTypes.number,
+  duration: _react.PropTypes.number,
+  easingFn: _react.PropTypes.func,
+  end: _react.PropTypes.number,
+  formattingFn: _react.PropTypes.func,
+  onComplete: _react.PropTypes.func,
+  onStart: _react.PropTypes.func,
+  prefix: _react.PropTypes.string,
+  redraw: _react.PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+  separator: _react.PropTypes.string,
+  start: _react.PropTypes.number,
+  style: _react.PropTypes.object,
+  suffix: _react.PropTypes.string,
+  useEasing: _react.PropTypes.bool,
+  useGrouping: _react.PropTypes.bool
+};

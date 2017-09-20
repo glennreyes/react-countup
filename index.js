@@ -141,22 +141,22 @@ export default class CountUp extends Component {
   }
 }
 
-// CountUp.propTypes = {
-//   className: PropTypes.string,
-//   decimal: PropTypes.string,
-//   decimals: PropTypes.number,
-//   duration: PropTypes.number,
-//   easingFn: PropTypes.func,
-//   end: PropTypes.number,
-//   formattingFn: PropTypes.func,
-//   onComplete: PropTypes.func,
-//   onStart: PropTypes.func,
-//   prefix: PropTypes.string,
-//   redraw: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-//   separator: PropTypes.string,
-//   start: PropTypes.number,
-//   style: PropTypes.object,
-//   suffix: PropTypes.string,
-//   useEasing: PropTypes.bool,
-//   useGrouping: PropTypes.bool,
-// }
+CountUp.propTypes = {
+  className: PropTypes.string,
+  decimal: PropTypes.string,
+  decimals: PropTypes.number,
+  duration: PropTypes.number,
+  easingFn: PropTypes.func,
+  end: PropTypes.number,
+  formattingFn: PropTypes.func,
+  onComplete: PropTypes.func,
+  onStart: PropTypes.func,
+  prefix: PropTypes.string,
+  redraw: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+  separator: PropTypes.string,
+  start: PropTypes.number,
+  style: PropTypes.object,
+  suffix: PropTypes.string,
+  useEasing: PropTypes.bool,
+  useGrouping: PropTypes.bool,
+}
