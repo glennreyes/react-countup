@@ -52,10 +52,10 @@ export const formatNumber: FormatNumberFn = (start, options) => {
   return `${options.prefix}${x1}${x2}${options.suffix}`;
 };
 
-export const startAnimation = (component: Component<*, *, *>) => {
+export const startAnimation = (component) => {
   if (!(component && component.spanElement)) {
     throw new Error(
-      'You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);'
+      'You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);',
     );
   }
 
