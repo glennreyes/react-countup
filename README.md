@@ -1,4 +1,4 @@
-# [React CountUp](https://glennreyes.github.io/react-countup)
+# Forked from: [React CountUp](https://glennreyes.github.io/react-countup) for React v. 14 compatibility
 
 [![Build Status](https://travis-ci.org/glennreyes/react-countup.svg?branch=master)](https://travis-ci.org/glennreyes/react-countup)
 [![Coverage Status](https://coveralls.io/repos/github/glennreyes/react-countup/badge.svg?branch=master)](https://coveralls.io/github/glennreyes/react-countup?branch=master)
@@ -19,7 +19,8 @@ Check out the [demo](https://glennreyes.github.io/react-countup).
 
 ## Installation
 
-Make sure you have a compatible version of React `15.x.x` installed in your project.
+**Updated to be compatible with React v. 14**
+Make sure you have a compatible version of React `14.x.x` installed in your project.
 
 ```bash
 yarn add react-countup

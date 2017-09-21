@@ -27,7 +27,7 @@
     "build"
   ],
   "scripts": {
-    "build": "babel index.js -d build",
+    "build": "./node_modules/.bin/babel index.js -d build",
     "flow": "flow check",
     "lint": "eslint --ext .js,.jsx index.js",
     "precommit": "lint-staged",
@@ -36,7 +36,7 @@
     "test": "jest --coverage"
   },
   "peerDependencies": {
-    "react": ">=0.15.0"
+    "react": ">=0.14.0"
   },
   "dependencies": {
     "countup.js": "^1.8.5"
@@ -59,8 +59,7 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.3",
     "prettier": "^1.5.3",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.6.1"
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   }
 }
