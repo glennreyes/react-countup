@@ -15,7 +15,7 @@ type Props = {
   onComplete: () => void,
   onStart: () => void,
   prefix: string,
-  redraw: boolean, // eslint-disable-line react/no-unused-prop-types
+  redraw: boolean,
   separator: string,
   start: number,
   style: {},
@@ -53,7 +53,7 @@ export const formatNumber: FormatNumberFn = (start, options) => {
   return `${options.prefix}${x1}${x2}${options.suffix}`;
 };
 
-export const startAnimation = (component: Component<Props>) => {
+export const startAnimation = (component: Component<*, *, *>) => {
   if (!(component && component.spanElement)) {
     throw new Error(
       'You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);',
@@ -102,7 +102,7 @@ export const startAnimation = (component: Component<Props>) => {
   countupInstance.start(onComplete);
 };
 
-export default class CountUp extends React.Component<Props> {
+export default class CountUp extends React.Component<*, *, *> {
   static defaultProps = {
     className: undefined,
     decimal: '.',
@@ -146,23 +146,25 @@ export default class CountUp extends React.Component<Props> {
     this.spanElement = span;
   };
 
+  refSpan: () => void;
+
   props: Props;
 
   render() {
     const {
       className,
       start,
-      style,
       decimal,
       decimals,
       useGrouping,
       separator,
       prefix,
       suffix,
+      style,
     } = this.props;
 
     return (
-      <span className={className} style={style} ref={this.refSpan}>
+      <span className={className} ref={this.refSpan} style={style}>
         {formatNumber(start, {
           decimal,
           decimals,

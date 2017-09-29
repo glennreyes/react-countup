@@ -23,20 +23,20 @@
   "homepage": "https://glennreyes.github.io/react-countup",
   "main": "build",
   "files": [
-    "index.js",
-    "build"
+    "build",
+    "src"
   ],
   "scripts": {
-    "build": "babel index.js -d build",
+    "build": "babel src/index.js -o build/index.js",
     "flow": "flow check",
-    "lint": "eslint --ext .js,.jsx index.js",
+    "lint": "eslint src",
     "precommit": "lint-staged",
     "prepare": "yarn run build",
-    "prettier": "prettier --single-quote --trailing-comma all --parser flow --write index.js",
+    "prettier": "prettier --write src/**/*.js",
     "test": "jest --coverage"
   },
   "peerDependencies": {
-    "react": ">=0.15.0"
+    "react": "^16.0.0"
   },
   "dependencies": {
     "countup.js": "^1.8.5"
@@ -59,6 +59,7 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.3",
     "prettier": "^1.5.3",
+    "raf": "^3.3.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0"
