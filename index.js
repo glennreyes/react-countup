@@ -1,7 +1,8 @@
 // @flow
 
-import React, { Component, Element } from 'react';
+import React from 'react';
 import Count from 'countup.js';
+import type { Component } from 'react';
 
 type Props = {
   className: string,
@@ -52,7 +53,7 @@ export const formatNumber: FormatNumberFn = (start, options) => {
   return `${options.prefix}${x1}${x2}${options.suffix}`;
 };
 
-export const startAnimation = (component: Component<*, *, *>) => {
+export const startAnimation = (component: Component<Props>) => {
   if (!(component && component.spanElement)) {
     throw new Error(
       'You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);',
@@ -101,7 +102,7 @@ export const startAnimation = (component: Component<*, *, *>) => {
   countupInstance.start(onComplete);
 };
 
-export default class CountUp extends Component {
+export default class CountUp extends React.Component<Props> {
   static defaultProps = {
     className: undefined,
     decimal: '.',
