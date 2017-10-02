@@ -27,7 +27,7 @@
     "src"
   ],
   "scripts": {
-    "build": "babel src/index.js -o build/index.js",
+    "build": "babel src -d build --ignore __tests__",
     "flow": "flow check",
     "lint": "eslint src",
     "precommit": "lint-staged",
