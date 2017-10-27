@@ -21,7 +21,6 @@ type Props = {
   style: {},
   suffix: string,
   useEasing: boolean,
-  useGrouping: boolean,
 };
 
 type FormatNumberFn = (
@@ -29,7 +28,6 @@ type FormatNumberFn = (
   options: {
     decimal: string,
     decimals: number,
-    useGrouping: boolean,
     separator: string,
     prefix: string,
     suffix: string,
@@ -45,7 +43,7 @@ export const formatNumber: FormatNumberFn = (start, options) => {
   const x2 = x.length > 1 ? `${options.decimal}${x[1]}` : '';
   const rgx = /(\d+)(\d{3})/;
 
-  if (options.useGrouping && options.separator) {
+  if (options.separator) {
     while (rgx.test(x1)) {
       x1 = x1.replace(rgx, `$1${options.separator}$2`);
     }
@@ -114,13 +112,12 @@ export default class CountUp extends React.Component<*, *, *> {
     onComplete: undefined,
     onStart: undefined,
     prefix: '',
-    separator: ',',
+    separator: '',
     start: 0,
     suffix: '',
     redraw: false,
     style: undefined,
     useEasing: true,
-    useGrouping: false,
   };
 
   componentDidMount() {
@@ -156,12 +153,12 @@ export default class CountUp extends React.Component<*, *, *> {
       start,
       decimal,
       decimals,
-      useGrouping,
       separator,
       prefix,
       suffix,
       style,
     } = this.props;
+    const useGrouping = !!separator;
 
     return (
       <span className={className} ref={this.refSpan} style={style}>
