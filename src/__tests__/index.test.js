@@ -55,7 +55,6 @@ it('formats decimal number correctly', () => {
   const formattedNumber = formatNumber(123456.789, {
     decimal: ',',
     decimals: 2,
-    useGrouping: true,
     separator: '.',
     prefix: 'a ',
     suffix: ' b',
@@ -67,7 +66,6 @@ it('formats arbitrary number correctly', () => {
   const formattedNumber = formatNumber(123456, {
     decimal: '',
     decimals: 2,
-    useGrouping: true,
     separator: '',
     prefix: 'a ',
     suffix: ' b',
