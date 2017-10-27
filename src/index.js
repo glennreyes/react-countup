@@ -72,7 +72,6 @@ export const startAnimation = (component: Component<*, *, *>) => {
     start,
     suffix,
     useEasing,
-    useGrouping,
   }: Props = component.props;
 
   const countupInstance = new Count(
@@ -89,7 +88,7 @@ export const startAnimation = (component: Component<*, *, *>) => {
       prefix,
       suffix,
       useEasing,
-      useGrouping,
+      useGrouping: !!separator,
     },
   );
 
@@ -158,14 +157,12 @@ export default class CountUp extends React.Component<*, *, *> {
       suffix,
       style,
     } = this.props;
-    const useGrouping = !!separator;
 
     return (
       <span className={className} ref={this.refSpan} style={style}>
         {formatNumber(start, {
           decimal,
           decimals,
-          useGrouping,
           separator,
           prefix,
           suffix,
