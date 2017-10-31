@@ -33,7 +33,7 @@
     "precommit": "lint-staged",
     "prepare": "yarn run build",
     "prettier": "prettier --write src/**/*.js",
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "peerDependencies": {
     "react": "^16.0.0"
