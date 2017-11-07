@@ -1,5 +1,4 @@
 {
-  "plugins": ["transform-flow-strip-types"],
   "presets": [
     [
       "env",
