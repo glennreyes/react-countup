@@ -1,6 +1,6 @@
 {
   "name": "react-countup",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A React component wrapper around CountUp.js",
   "author": "Glenn Reyes <glenn@glennreyes.com> (https://twitter.com/glnnrys)",
   "keywords": [
