@@ -72,3 +72,12 @@ it('formats arbitrary number correctly', () => {
   });
   expect(formattedNumber).toBe('a 12345600 b');
 });
+
+it('formats negative number with separator correctly', () => {
+  const formattedNumber = formatNumber(-123456.789, {
+    decimal: '.',
+    decimals: 2,
+    separator: ' ',
+  });
+  expect(formattedNumber).toBe('-123 456.79');
+});

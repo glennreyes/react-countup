@@ -37,7 +37,8 @@ type FormatNumberFn = (
 // Adapted from the countup.js format number function
 // https://github.com/inorganik/countUp.js/blob/master/countUp.js#L46-L60
 export const formatNumber: FormatNumberFn = (start, options) => {
-  const num = `${start.toFixed(options.decimals)}`;
+  const neg = start < 0;
+  const num = `${Math.abs(start).toFixed(options.decimals)}`;
   const x = num.split('.');
   let x1 = x[0];
   const x2 = x.length > 1 ? `${options.decimal}${x[1]}` : '';
@@ -48,7 +49,9 @@ export const formatNumber: FormatNumberFn = (start, options) => {
       x1 = x1.replace(rgx, `$1${options.separator}$2`);
     }
   }
-  return `${options.prefix}${x1}${x2}${options.suffix}`;
+
+  return `${neg ? '-' : ''}${options.prefix || ''}${x1}${x2}${options.suffix ||
+    ''}`;
 };
 
 export const startAnimation = (component: Component<*, *>) => {
