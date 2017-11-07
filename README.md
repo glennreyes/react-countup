@@ -97,9 +97,6 @@ Amount of decimals
 ##### `useEasing`: boolean
 Enable easing if set to `true` (default easing: `easeOutExpo`)
 
-##### `useGrouping`: boolean
-Group thousands by [separator character](#separator-string)
-
 ##### `separator`: string
 Specifies character of thousands separator
 
