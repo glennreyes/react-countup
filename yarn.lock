@@ -1341,9 +1341,9 @@ cosmiconfig@^1.1.0:
     pinkie-promise "^2.0.0"
     require-from-string "^1.1.0"
 
-countup.js@^1.8.5:
-  version "1.9.2"
-  resolved "https://registry.npmjs.org/countup.js/-/countup.js-1.9.2.tgz#a9cd7eb39e96d381ddc19943d3f5b6613f139640"
+countup.js@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.npmjs.org/countup.js/-/countup.js-1.9.3.tgz#ce3e50cd7160441e478f07da31895edcc0f1c9dd"
 
 cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
