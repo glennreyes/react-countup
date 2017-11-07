@@ -20,7 +20,7 @@
   "dependencies": {
     "normalize.css": "^7.0.0",
     "react": "^16.0.0",
-    "react-countup": "^3.0.1",
+    "react-countup": "^3.0.2",
     "react-dom": "^16.0.0",
     "react-syntax-highlighter": "^5.8.0"
   }

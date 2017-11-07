@@ -5333,9 +5333,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-countup@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/react-countup/-/react-countup-3.0.1.tgz#cbca3589da71d40bccae8cce19773c80ab0e15b6"
+react-countup@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/react-countup/-/react-countup-3.0.2.tgz#26b7e27a91cdefc8ec744704ec93b1cbd9e638f0"
   dependencies:
     countup.js "^1.9.3"
 
