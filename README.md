@@ -19,8 +19,6 @@ Check out the [demo](https://glennreyes.github.io/react-countup).
 
 ## Installation
 
-Make sure you have a compatible version of React `15.x.x` installed in your project.
-
 ```bash
 yarn add react-countup
 ```
