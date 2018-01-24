@@ -23,6 +23,16 @@ it('renders correctly with wrong onStart type', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders correctly with formattingFn', () => {
+  const createNodeMock = () => ({ startAnimation });
+  const tree = renderer
+    .create(<CountUp start={0} end={10} formattingFn={v => `formated:${v}`} />, {
+      createNodeMock,
+    })
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
 it('should update on new duration', () => {
   const node = document.createElement('div');
   const instance = render(<CountUp duration={1} />, node);

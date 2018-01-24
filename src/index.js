@@ -159,11 +159,15 @@ export default class CountUp extends React.Component<*, *> {
       prefix,
       suffix,
       style,
+      formattingFn,
     } = this.props;
+
+    const formatFn =
+      typeof formattingFn === 'function' ? formattingFn : formatNumber;
 
     return (
       <span className={className} ref={this.refSpan} style={style}>
-        {formatNumber(start, {
+        {formatFn(start, {
           decimal,
           decimals,
           separator,
