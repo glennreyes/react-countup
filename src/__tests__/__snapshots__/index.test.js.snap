@@ -9,6 +9,15 @@ exports[`renders correctly 1`] = `
 </span>
 `;
 
+exports[`renders correctly with formattingFn 1`] = `
+<span
+  className={undefined}
+  style={undefined}
+>
+  formated:0
+</span>
+`;
+
 exports[`renders correctly with wrong onStart type 1`] = `
 <span
   className={undefined}

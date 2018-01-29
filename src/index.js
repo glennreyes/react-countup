@@ -11,7 +11,7 @@ type Props = {
   duration: number,
   easingFn: () => void,
   end: number,
-  formattingFn: () => void,
+  formattingFn: (start: number) => string,
   onComplete: () => void,
   onStart: () => void,
   prefix: string,
@@ -159,17 +159,20 @@ export default class CountUp extends React.Component<*, *> {
       prefix,
       suffix,
       style,
+      formattingFn,
     } = this.props;
 
     return (
       <span className={className} ref={this.refSpan} style={style}>
-        {formatNumber(start, {
-          decimal,
-          decimals,
-          separator,
-          prefix,
-          suffix,
-        })}
+        {typeof formattingFn === 'function'
+          ? formattingFn(start)
+          : formatNumber(start, {
+              decimal,
+              decimals,
+              separator,
+              prefix,
+              suffix,
+            })}
       </span>
     );
   }
