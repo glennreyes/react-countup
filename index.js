@@ -17,6 +17,7 @@ type Props = {
   redraw: boolean, // eslint-disable-line react/no-unused-prop-types
   separator: string,
   start: number,
+  startManually: boolean, // eslint-disable-line react/no-unused-prop-types
   style: {},
   suffix: string,
   useEasing: boolean,
@@ -115,6 +116,7 @@ export default class CountUp extends Component {
     prefix: '',
     separator: ',',
     start: 0,
+    startManually: false,
     suffix: '',
     redraw: false,
     style: undefined,
@@ -123,7 +125,10 @@ export default class CountUp extends Component {
   };
 
   componentDidMount() {
-    startAnimation(this);
+    const { startManually } = this.props
+    if (!startManually) {
+      startAnimation(this);
+    }
   }
 
   shouldComponentUpdate(nextProps: Props) {
@@ -136,7 +141,10 @@ export default class CountUp extends Component {
   }
 
   componentDidUpdate() {
-    startAnimation(this);
+    const { startManually } = this.props
+    if (!startManually) {
+      startAnimation(this);
+    }
   }
 
   spanElement = null;
