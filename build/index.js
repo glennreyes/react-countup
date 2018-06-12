@@ -102,7 +102,11 @@ var CountUp = function (_Component) {
   _createClass(CountUp, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      startAnimation(this);
+      var startManually = this.props.startManually;
+
+      if (!startManually) {
+        startAnimation(this);
+      }
     }
   }, {
     key: 'shouldComponentUpdate',
@@ -114,7 +118,11 @@ var CountUp = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      startAnimation(this);
+      var startManually = this.props.startManually;
+
+      if (!startManually) {
+        startAnimation(this);
+      }
     }
   }, {
     key: 'render',
@@ -162,6 +170,7 @@ CountUp.defaultProps = {
   prefix: '',
   separator: ',',
   start: 0,
+  startManually: false,
   suffix: '',
   redraw: false,
   style: undefined,
