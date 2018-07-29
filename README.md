@@ -85,7 +85,7 @@ Target value
 
 ##### `duration`: number
 
-Duration in seconds
+Duration in seconds (default `2`)
 
 ##### `decimals`: number
 

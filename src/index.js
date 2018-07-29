@@ -6,6 +6,7 @@ class CountUp extends Component {
   static defaultProps = {
     decimal: '.',
     decimals: 0,
+    duration: null,
     easingFn: null,
     formattingFn: null,
     onEnd: undefined,
@@ -22,7 +23,6 @@ class CountUp extends Component {
   static propTypes = {
     decimal: PropTypes.string,
     decimals: PropTypes.number,
-    duration: PropTypes.number.isRequired,
     easingFn: PropTypes.func,
     end: PropTypes.number.isRequired,
     formattingFn: PropTypes.func,
