@@ -7,6 +7,7 @@ class CountUp extends Component {
   static defaultProps = {
     decimal: '.',
     decimals: 0,
+    delay: null,
     duration: null,
     easingFn: null,
     formattingFn: null,
@@ -27,6 +28,7 @@ class CountUp extends Component {
   static propTypes = {
     decimal: PropTypes.string,
     decimals: PropTypes.number,
+    delay: PropTypes.number,
     easingFn: PropTypes.func,
     end: PropTypes.number.isRequired,
     formattingFn: PropTypes.func,
@@ -42,11 +44,12 @@ class CountUp extends Component {
   };
 
   componentDidMount() {
+    const { autostart, delay } = this.props;
     this.instance = this.createInstance();
 
-    if (this.props.autostart) {
-      this.start();
-    }
+    if (autostart || delay === 0) this.start();
+
+    if (delay) setTimeout(this.start, delay * 1000);
   }
 
   shouldComponentUpdate(nextProps) {
