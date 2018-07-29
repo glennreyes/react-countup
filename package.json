@@ -28,7 +28,6 @@
   ],
   "scripts": {
     "build": "babel src -d build --ignore __tests__",
-    "flow": "flow check",
     "lint": "eslint src",
     "precommit": "lint-staged",
     "prepare": "yarn run build",
@@ -55,7 +54,6 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.10.0",
-    "flow-bin": "^0.77.0",
     "husky": "^0.14.3",
     "jest": "^23.4.2",
     "lint-staged": "^7.2.0",

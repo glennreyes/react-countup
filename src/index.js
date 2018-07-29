@@ -1,42 +1,9 @@
-// @flow
-
 import React from 'react';
 import Count from 'countup.js';
-import type { Component } from 'react';
-
-type Props = {
-  className: string,
-  decimal: string,
-  decimals: number,
-  duration: number,
-  easingFn: () => void,
-  end: number,
-  formattingFn: (start: number) => string,
-  onComplete: () => void,
-  onStart: () => void,
-  prefix: string,
-  redraw: boolean,
-  separator: string,
-  start: number,
-  style: {},
-  suffix: string,
-  useEasing: boolean,
-};
-
-type FormatNumberFn = (
-  start: number,
-  options: {
-    decimal: string,
-    decimals: number,
-    separator: string,
-    prefix: string,
-    suffix: string,
-  },
-) => string;
 
 // Adapted from the countup.js format number function
 // https://github.com/inorganik/countUp.js/blob/master/countUp.js#L46-L60
-export const formatNumber: FormatNumberFn = (start, options) => {
+export const formatNumber = (start, options) => {
   const neg = start < 0;
   const num = `${Math.abs(start).toFixed(options.decimals)}`;
   const x = num.split('.');
@@ -54,7 +21,7 @@ export const formatNumber: FormatNumberFn = (start, options) => {
     ''}`;
 };
 
-export const startAnimation = (component: Component<*, *>) => {
+export const startAnimation = component => {
   if (!(component && component.spanElement)) {
     throw new Error(
       'You need to pass the CountUp component as an argument!\neg. this.myCountUp.startAnimation(this.myCountUp);',
@@ -75,7 +42,7 @@ export const startAnimation = (component: Component<*, *>) => {
     start,
     suffix,
     useEasing,
-  }: Props = component.props;
+  } = component.props;
 
   const countupInstance = new Count(
     component.spanElement,
@@ -102,7 +69,7 @@ export const startAnimation = (component: Component<*, *>) => {
   countupInstance.start(onComplete);
 };
 
-export default class CountUp extends React.Component<*, *> {
+export default class CountUp extends React.Component {
   static defaultProps = {
     className: undefined,
     decimal: '.',
@@ -126,7 +93,7 @@ export default class CountUp extends React.Component<*, *> {
     startAnimation(this);
   }
 
-  shouldComponentUpdate(nextProps: Props) {
+  shouldComponentUpdate(nextProps) {
     const hasCertainPropsChanged =
       this.props.duration !== nextProps.duration ||
       this.props.end !== nextProps.end ||
@@ -141,13 +108,11 @@ export default class CountUp extends React.Component<*, *> {
 
   spanElement = null;
 
-  refSpan = (span: Element<*>) => {
+  refSpan = span => {
     this.spanElement = span;
   };
 
-  refSpan: () => void;
-
-  props: Props;
+  props;
 
   render() {
     const {
