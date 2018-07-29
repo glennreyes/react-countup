@@ -1,6 +1,7 @@
+import Count from 'countup.js';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Count from 'countup.js';
+import warning from 'warning';
 
 class CountUp extends Component {
   static defaultProps = {
@@ -78,6 +79,15 @@ class CountUp extends Component {
   }
 
   createInstance = () => {
+    // Warn when user didn't use containerRef at all
+    warning(
+      !(
+        this.containerRef.current &&
+        this.containerRef.current instanceof HTMLElement
+      ),
+      `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
+    );
+
     const {
       decimal,
       decimals,

@@ -34,7 +34,8 @@
   },
   "dependencies": {
     "countup.js": "^1.9.3",
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.6.2",
+    "warning": "^4.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
