@@ -92,16 +92,23 @@ class CountUp extends Component {
       useEasing,
     } = this.props;
 
-    return new Count(this.spanRef.current, start, end, decimals, duration, {
-      decimal,
-      easingFn,
-      formattingFn,
-      separator,
-      prefix,
-      suffix,
-      useEasing,
-      useGrouping: !!separator,
-    });
+    return new Count(
+      this.containerRef.current,
+      start,
+      end,
+      decimals,
+      duration,
+      {
+        decimal,
+        easingFn,
+        formattingFn,
+        separator,
+        prefix,
+        suffix,
+        useEasing,
+        useGrouping: !!separator,
+      },
+    );
   };
 
   pauseResume = (...args) => {
@@ -136,12 +143,17 @@ class CountUp extends Component {
     if (typeof onUpdate === 'function') onUpdate(this);
   };
 
-  spanRef = React.createRef();
+  containerRef = React.createRef();
 
   render() {
-    const { className, style } = this.props;
+    const { children, className, style } = this.props;
+    const { containerRef, pauseResume, reset, start, update } = this;
 
-    return <span className={className} ref={this.spanRef} style={style} />;
+    if (typeof children === 'function') {
+      return children({ containerRef, pauseResume, reset, start, update });
+    }
+
+    return <span className={className} ref={containerRef} style={style} />;
   }
 }
 
