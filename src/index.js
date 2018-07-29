@@ -8,13 +8,13 @@ class CountUp extends Component {
     decimals: 0,
     easingFn: null,
     formattingFn: null,
-    onComplete: undefined,
-    onStart: undefined,
+    // onEnd: undefined,
+    // onStart: undefined,
     prefix: '',
     separator: '',
     start: 0,
     suffix: '',
-    redraw: false,
+    // redraw: false,
     style: undefined,
     useEasing: true,
   };
@@ -26,9 +26,10 @@ class CountUp extends Component {
     easingFn: PropTypes.func,
     end: PropTypes.number.isRequired,
     formattingFn: PropTypes.func,
-    onComplete: PropTypes.func,
-    onStart: PropTypes.func,
+    // onEnd: PropTypes.func,
+    // onStart: PropTypes.func,
     prefix: PropTypes.string,
+    // redraw: PropTypes.bool,
     separator: PropTypes.string,
     start: PropTypes.number,
     suffix: PropTypes.string,
@@ -37,7 +38,39 @@ class CountUp extends Component {
   };
 
   componentDidMount() {
-    this.countUpInstance = new Count(this.spanRef.current, 0, 200);
+    const {
+      decimal,
+      decimals,
+      duration,
+      easingFn,
+      end,
+      formattingFn,
+      // onStart,
+      // onEnd,
+      prefix,
+      separator,
+      start,
+      suffix,
+      useEasing,
+    } = this.props;
+
+    this.countUpInstance = new Count(
+      this.spanRef.current,
+      start,
+      end,
+      decimals,
+      duration,
+      {
+        decimal,
+        easingFn,
+        formattingFn,
+        separator,
+        prefix,
+        suffix,
+        useEasing,
+        useGrouping: !!separator,
+      },
+    );
 
     this.countUpInstance.start();
   }
@@ -45,7 +78,9 @@ class CountUp extends Component {
   spanRef = React.createRef();
 
   render() {
-    return <span ref={this.spanRef} />;
+    const { className, style } = this.props;
+
+    return <span className={className} ref={this.spanRef} style={style} />;
   }
 }
 
