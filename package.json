@@ -24,7 +24,7 @@
     "src"
   ],
   "scripts": {
-    "build": "babel src -d build --ignore __tests__",
+    "build": "rollup -c",
     "precommit": "lint-staged",
     "prepublishOnly": "yarn build",
     "test": "jest"
@@ -38,8 +38,8 @@
     "warning": "^4.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.6",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -58,6 +58,8 @@
     "raf": "^3.4.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-test-renderer": "^16.4.1"
+    "react-test-renderer": "^16.4.1",
+    "rollup": "^0.63.4",
+    "rollup-plugin-babel": "^3.0.7"
   }
 }
