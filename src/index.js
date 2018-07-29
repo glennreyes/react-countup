@@ -138,13 +138,22 @@ class CountUp extends Component {
     this.instance.reset(...args);
   };
 
+  restart = () => {
+    this.reset();
+    this.start();
+  };
+
   start = () => {
     const { onEnd, onStart } = this.props;
+    const { pauseResume, reset, restart: start, update } = this;
 
     this.instance.start(
-      typeof onEnd === 'function' ? () => onEnd(this) : undefined,
+      typeof onEnd === 'function'
+        ? () => onEnd({ pauseResume, reset, start, update })
+        : undefined,
     );
-    if (typeof onStart === 'function') onStart(this);
+    if (typeof onStart === 'function')
+      onStart({ pauseResume, reset, start, update });
   };
 
   update = (...args) => {
@@ -158,7 +167,7 @@ class CountUp extends Component {
 
   render() {
     const { children, className, style } = this.props;
-    const { containerRef, pauseResume, reset, start, update } = this;
+    const { containerRef, pauseResume, reset, restart: start, update } = this;
 
     if (typeof children === 'function') {
       return children({ containerRef, pauseResume, reset, start, update });
