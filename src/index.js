@@ -15,7 +15,7 @@ class CountUp extends Component {
     separator: '',
     start: 0,
     suffix: '',
-    redraw: false,
+    redraw: true,
     style: undefined,
     useEasing: true,
   };
@@ -38,13 +38,23 @@ class CountUp extends Component {
   };
 
   componentDidMount() {
-    this.createCountUpInstance();
+    this.instance = this.createInstance();
+
+    if (this.props.autostart) {
+      this.start();
+    }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const hasCertainPropsChanged =
+      this.props.duration !== nextProps.duration ||
+      this.props.end !== nextProps.end ||
+      this.props.start !== nextProps.start;
+
+    return this.props.redraw || hasCertainPropsChanged;
   }
 
   componentDidUpdate(prevProps) {
-    // Don't do any re-animation.
-    if (!this.props.redraw) return false;
-
     // If duration or start has changed, there's no way to update the duration
     // or start value. So we need to re-create the CountUp instance in order to
     // restart it.
@@ -52,22 +62,19 @@ class CountUp extends Component {
       this.props.duration !== prevProps.duration ||
       this.props.start !== prevProps.start
     ) {
-      this.createCountUpInstance();
+      this.instance = this.createInstance();
+      this.start();
     }
 
     // Only end value has changed, so reset and and re-animate with the updated
     // end value.
     if (this.props.end !== prevProps.end) {
-      this.countUpInstance.reset();
-      this.countUpInstance.update(this.props.end);
+      this.instance.reset();
+      this.instance.update(this.props.end);
     }
-
-    // Restart the CountUp instance.
-    this.countUpInstance.reset();
-    this.countUpInstance.start();
   }
 
-  createCountUpInstance = () => {
+  createInstance = () => {
     const {
       decimal,
       decimals,
@@ -75,8 +82,6 @@ class CountUp extends Component {
       easingFn,
       end,
       formattingFn,
-      onEnd,
-      onStart,
       prefix,
       separator,
       start,
@@ -84,31 +89,24 @@ class CountUp extends Component {
       useEasing,
     } = this.props;
 
-    this.countUpInstance = new Count(
-      this.spanRef.current,
-      start,
-      end,
-      decimals,
-      duration,
-      {
-        decimal,
-        easingFn,
-        formattingFn,
-        separator,
-        prefix,
-        suffix,
-        useEasing,
-        useGrouping: !!separator,
-      },
-    );
+    return new Count(this.spanRef.current, start, end, decimals, duration, {
+      decimal,
+      easingFn,
+      formattingFn,
+      separator,
+      prefix,
+      suffix,
+      useEasing,
+      useGrouping: !!separator,
+    });
+  };
 
-    if (typeof onStart === 'function') onStart(this.countUpInstance);
+  start = () => {
+    const { onEnd, onStart } = this.props;
 
-    this.countUpInstance.start(
-      typeof onEnd === 'function'
-        ? () => onEnd(this.countUpInstance)
-        : undefined,
-    );
+    if (typeof onStart === 'function') onStart(this);
+
+    this.start(typeof onEnd === 'function' ? () => onEnd(this) : undefined);
   };
 
   spanRef = React.createRef();
