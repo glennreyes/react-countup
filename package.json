@@ -25,10 +25,8 @@
   ],
   "scripts": {
     "build": "babel src -d build --ignore __tests__",
-    "lint": "eslint src",
     "precommit": "lint-staged",
-    "prepare": "yarn run build",
-    "prettier": "prettier --write src/**/*.js",
+    "prepublishOnly": "yarn build",
     "test": "jest"
   },
   "peerDependencies": {
