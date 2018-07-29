@@ -159,7 +159,6 @@ class CountUp extends Component {
   update = (...args) => {
     const { onUpdate } = this.props;
 
-    this.instance.reset(...args);
     if (typeof onUpdate === 'function') onUpdate(this);
   };
 
