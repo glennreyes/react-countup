@@ -15,7 +15,7 @@ class CountUp extends Component {
     separator: '',
     start: 0,
     suffix: '',
-    // redraw: false,
+    redraw: false,
     style: undefined,
     useEasing: true,
   };
@@ -29,7 +29,7 @@ class CountUp extends Component {
     onEnd: PropTypes.func,
     onStart: PropTypes.func,
     prefix: PropTypes.string,
-    // redraw: PropTypes.bool,
+    redraw: PropTypes.bool,
     separator: PropTypes.string,
     start: PropTypes.number,
     suffix: PropTypes.string,
@@ -38,6 +38,36 @@ class CountUp extends Component {
   };
 
   componentDidMount() {
+    this.createCountUpInstance();
+  }
+
+  componentDidUpdate(prevProps) {
+    // Don't do any re-animation.
+    if (!this.props.redraw) return false;
+
+    // If duration or start has changed, there's no way to update the duration
+    // or start value. So we need to re-create the CountUp instance in order to
+    // restart it.
+    if (
+      this.props.duration !== prevProps.duration ||
+      this.props.start !== prevProps.start
+    ) {
+      this.createCountUpInstance();
+    }
+
+    // Only end value has changed, so reset and and re-animate with the updated
+    // end value.
+    if (this.props.end !== prevProps.end) {
+      this.countUpInstance.reset();
+      this.countUpInstance.update(this.props.end);
+    }
+
+    // Restart the CountUp instance.
+    this.countUpInstance.reset();
+    this.countUpInstance.start();
+  }
+
+  createCountUpInstance = () => {
     const {
       decimal,
       decimals,
@@ -79,7 +109,7 @@ class CountUp extends Component {
         ? () => onEnd(this.countUpInstance)
         : undefined,
     );
-  }
+  };
 
   spanRef = React.createRef();
 
