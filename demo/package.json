@@ -14,14 +14,14 @@
     "url": "https://github.com/glennreyes/react-countup.git"
   },
   "devDependencies": {
-    "gh-pages": "^1.0.0",
-    "react-scripts": "^1.0.17"
+    "gh-pages": "^1.2.0",
+    "react-scripts": "^1.1.4"
   },
   "dependencies": {
-    "normalize.css": "^7.0.0",
-    "react": "^16.0.0",
-    "react-countup": "^3.0.2",
-    "react-dom": "^16.0.0",
-    "react-syntax-highlighter": "^5.8.0"
+    "normalize.css": "^8.0.0",
+    "react": "^16.4.1",
+    "react-countup": "^3.0.3",
+    "react-dom": "^16.4.1",
+    "react-syntax-highlighter": "^8.0.1"
   }
 }
