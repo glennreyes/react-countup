@@ -6,16 +6,13 @@
 [![Dependency Status](https://david-dm.org/glennreyes/react-countup/dev-status.svg)](https://david-dm.org/glennreyes/react-countup#info=devDependencies)
 [![npm version](https://badge.fury.io/js/react-countup.svg)](https://badge.fury.io/js/react-countup)
 
-
 A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
 
 ![sep -15-2016 10-11-53 pm](https://cloud.githubusercontent.com/assets/5080854/18565869/d23db0e0-7b91-11e6-9ee2-71be5875ca48.gif)
 
-
 ## [Demo](https://glennreyes.github.io/react-countup)
 
 Check out the [demo](https://glennreyes.github.io/react-countup).
-
 
 ## Installation
 
@@ -24,10 +21,10 @@ yarn add react-countup
 ```
 
 Alternatively with npm:
+
 ```bash
 npm install react-countup --save
 ```
-
 
 ## Usage
 
@@ -38,11 +35,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import CountUp from 'react-countup';
 
-render(
-  <CountUp start={0} end={160526} />,
-  document.getElementById('root')
-);
+render(<CountUp start={0} end={160526} />, document.getElementById('root'));
 ```
+
 #### Advanced
 
 ```js
@@ -81,54 +76,69 @@ render(
 ### Props
 
 ##### `start`: number
+
 Start value
 
 ##### `end`: number
+
 Target value
 
 ##### `duration`: number
+
 Duration in seconds
 
 ##### `decimals`: number
+
 Amount of decimals
 
 ##### `useEasing`: boolean
+
 Enable easing if set to `true` (default easing: `easeOutExpo`)
 
 ##### `separator`: string
+
 Specifies character of thousands separator
 
 ##### `decimal`: string
+
 Specifies decimal character
 
 ##### `prefix`: string
+
 Static text before the animating value
 
 ##### `suffix`: string
+
 Static text after the animating value
 
 ##### `className`: string
+
 CSS class name of the span element
 
 ##### `redraw`: boolean
+
 If set to `true`, the CountUp component will always animate on every re-render.
 
 ##### `onComplete`: function
+
 Function called after animation has completed
 
 ##### `onStart`: function
+
 Function called before animation starts
 
 ##### `easingFn`: function
+
 Easing function, see [here for instructions](https://github.com/inorganik/countUp.js#custom-easing)
 
 ##### `formattingFn`: function
-Function to customize the formatting of the number
 
+Function to customize the formatting of the number
 
 ## Protips
 
 By default, the animation is triggered if any of the following props has changed:
+
 - `duration`
 - `end`
 - `start`
@@ -143,12 +153,23 @@ import CountUp, { startAnimation } from 'react-countup';
 
 const MyComponent = () => (
   <div>
-    <CountUp className="CountUp" start={0} end={100} duration={3} ref={(countUp) => {
-      this.myCountUp = countUp;
-    }} />
-    <button className="Button" onClick={(event) => {
-      startAnimation(this.myCountUp);
-    }}>Count me up!</button>
+    <CountUp
+      className="CountUp"
+      start={0}
+      end={100}
+      duration={3}
+      ref={countUp => {
+        this.myCountUp = countUp;
+      }}
+    />
+    <button
+      className="Button"
+      onClick={event => {
+        startAnimation(this.myCountUp);
+      }}
+    >
+      Count me up!
+    </button>
   </div>
 );
 
@@ -156,4 +177,5 @@ export default App;
 ```
 
 ## License
+
 MIT
