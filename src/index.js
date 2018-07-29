@@ -106,7 +106,9 @@ class CountUp extends Component {
 
     if (typeof onStart === 'function') onStart(this);
 
-    this.start(typeof onEnd === 'function' ? () => onEnd(this) : undefined);
+    this.instance.start(
+      typeof onEnd === 'function' ? () => onEnd(this) : undefined,
+    );
   };
 
   spanRef = React.createRef();
