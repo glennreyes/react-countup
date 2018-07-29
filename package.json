@@ -13,10 +13,7 @@
     "animation"
   ],
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/glennreyes/react-countup.git"
-  },
+  "repository": "glennreyes/react-countup",
   "bugs": {
     "url": "https://github.com/glennreyes/react-countup/issues"
   },
