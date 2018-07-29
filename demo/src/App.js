@@ -70,11 +70,11 @@ export default class App extends Component {
               ref={countUp => {
                 this.myCountUp = countUp;
               }}
-              onComplete={() => {
-                console.log('Completed! 👏');
+              onEnd={instance => {
+                console.log('Completed! 👏', instance);
               }}
-              onStart={() => {
-                console.log('Started! 💨');
+              onStart={instance => {
+                console.log('Started! 💨', instance);
               }}
             />
           </div>

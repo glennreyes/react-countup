@@ -8,8 +8,8 @@ class CountUp extends Component {
     decimals: 0,
     easingFn: null,
     formattingFn: null,
-    // onEnd: undefined,
-    // onStart: undefined,
+    onEnd: undefined,
+    onStart: undefined,
     prefix: '',
     separator: '',
     start: 0,
@@ -26,8 +26,8 @@ class CountUp extends Component {
     easingFn: PropTypes.func,
     end: PropTypes.number.isRequired,
     formattingFn: PropTypes.func,
-    // onEnd: PropTypes.func,
-    // onStart: PropTypes.func,
+    onEnd: PropTypes.func,
+    onStart: PropTypes.func,
     prefix: PropTypes.string,
     // redraw: PropTypes.bool,
     separator: PropTypes.string,
@@ -45,8 +45,8 @@ class CountUp extends Component {
       easingFn,
       end,
       formattingFn,
-      // onStart,
-      // onEnd,
+      onEnd,
+      onStart,
       prefix,
       separator,
       start,
@@ -72,7 +72,13 @@ class CountUp extends Component {
       },
     );
 
-    this.countUpInstance.start();
+    if (typeof onStart === 'function') onStart(this.countUpInstance);
+
+    this.countUpInstance.start(
+      typeof onEnd === 'function'
+        ? () => onEnd(this.countUpInstance)
+        : undefined,
+    );
   }
 
   spanRef = React.createRef();

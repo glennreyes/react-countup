@@ -45,8 +45,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import CountUp from 'react-countup';
 
-const onComplete = () => {
-  console.log('Completed! 👏');
+const onEnd = () => {
+  console.log('Ended! 👏');
 };
 
 const onStart = () => {
@@ -66,7 +66,7 @@ render(
     decimal=","
     prefix="EUR "
     suffix=" left"
-    onComplete={onComplete}
+    onEnd={onEnd}
     onStart={onStart}
   />,
   document.getElementById('root'),
@@ -119,9 +119,9 @@ CSS class name of the span element
 
 If set to `true`, the CountUp component will always animate on every re-render.
 
-##### `onComplete`: function
+##### `onEnd`: function
 
-Function called after animation has completed
+Function called after animation has ended
 
 ##### `onStart`: function
 
