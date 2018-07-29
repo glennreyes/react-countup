@@ -9,8 +9,11 @@ class CountUp extends Component {
     duration: null,
     easingFn: null,
     formattingFn: null,
-    onEnd: undefined,
-    onStart: undefined,
+    onEnd: null,
+    onPauseResume: null,
+    onReset: null,
+    onStart: null,
+    onUpdate: null,
     prefix: '',
     separator: '',
     start: 0,
@@ -101,14 +104,36 @@ class CountUp extends Component {
     });
   };
 
+  pauseResume = (...args) => {
+    const { onPauseResume } = this.props;
+
+    if (typeof onPauseResume === 'function') onPauseResume(this);
+
+    this.instance.pauseResume(...args);
+  };
+
+  reset = (...args) => {
+    const { onReset } = this.props;
+
+    if (typeof onReset === 'function') onReset(this);
+
+    this.instance.reset(...args);
+  };
+
   start = () => {
     const { onEnd, onStart } = this.props;
-
-    if (typeof onStart === 'function') onStart(this);
 
     this.instance.start(
       typeof onEnd === 'function' ? () => onEnd(this) : undefined,
     );
+    if (typeof onStart === 'function') onStart(this);
+  };
+
+  update = (...args) => {
+    const { onUpdate } = this.props;
+
+    this.instance.reset(...args);
+    if (typeof onUpdate === 'function') onUpdate(this);
   };
 
   spanRef = React.createRef();
