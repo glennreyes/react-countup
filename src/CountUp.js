@@ -145,10 +145,16 @@ class CountUp extends Component {
 
   render() {
     const { children, className, style } = this.props;
-    const { containerRef, pauseResume, reset, restart: start, update } = this;
+    const { containerRef, pauseResume, reset, restart, update } = this;
 
     if (typeof children === 'function') {
-      return children({ containerRef, pauseResume, reset, start, update });
+      return children({
+        countUpRef: containerRef,
+        pauseResume,
+        reset,
+        start: restart,
+        update,
+      });
     }
 
     return <span className={className} ref={containerRef} style={style} />;
