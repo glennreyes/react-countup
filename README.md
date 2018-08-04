@@ -13,7 +13,7 @@ A configurable React component wrapper around [CountUp.js](https://inorganik.git
 - [Installation](#installation)
   - [Usage](#usage)
     - [Simple example](#simple-example)
-    - [Advanced example](#advanced-example)
+    - [Advanced example](#render-prop-example)
     - [More examples](#more-examples)
       - [Manually start](#manually-start)
       - [Delay start](#delay-start)
@@ -66,7 +66,7 @@ import CountUp from 'react-countup`;
 <CountUp end={160526} />
 ```
 
-### Advanced example
+### Render prop example
 
 ```js
 <CountUp
@@ -135,7 +135,7 @@ Render start value and start transition:
 
 By default the transition will start automatically.
 
-However, if CountUp is used as a render prop component, the transition will
+However, if this is used as a [render prop component](#render-prop-example), the transition will
 automatically on initial render.
 
 Default: `false`
