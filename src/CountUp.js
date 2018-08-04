@@ -155,11 +155,11 @@ class CountUp extends Component {
     onStart({ pauseResume, reset, update });
   };
 
-  update = (...args) => {
+  update = newEnd => {
     const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 
-    this.instance.update(...args);
+    this.instance.update(newEnd);
 
     onUpdate({ pauseResume, reset, start });
   };
