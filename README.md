@@ -8,8 +8,6 @@
 
 A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
 
-![sep -15-2016 10-11-53 pm](https://cloud.githubusercontent.com/assets/5080854/18565869/d23db0e0-7b91-11e6-9ee2-71be5875ca48.gif)
-
 ## Installation
 
 ```bash
