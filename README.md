@@ -1,11 +1,11 @@
 # React CountUp
 
-[![Build Status][build-badge]][build]
-[![Code Coverage][coverage-badge]][coverage]
-[![version][version-badge]][package]
-[![downloads][downloads-badge]][npmtrends]
-[![MIT License][license-badge]][license]
-[![gzip size](https://img.badgesize.io/https://unpkg.com/react-countup?compression=gzip)](https://img.badgesize.io/https://unpkg.com/react-countup)
+[![GitHub license](https://img.shields.io/npm/l/react-countup.svg?style=flat-square)](https://github.com/glennreyes/react-countup/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/glennreyes/react-countup.svg?style=flat-square)](https://travis-ci.org/glennreyes/react-countup)
+[![Coverage Status](https://img.shields.io/coveralls/glennreyes/react-countup.svg?style=flat-square)](https://coveralls.io/github/glennreyes/react-countup?branch=master)
+[![version](https://img.shields.io/npm/v/react-countup.svg?style=flat-square)](https://www.npmjs.com/package/react-countup)
+[![downloads](https://img.shields.io/npm/dm/react-countup.svg?style=flat-square)](http://www.npmtrends.com/react-countup)
+[![gzip size](https://img.badgesize.io/https://unpkg.com/react-countup?style=flat-square&compression=gzip)](https://img.badgesize.io/https://unpkg.com/react-countup)
 
 A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
 
