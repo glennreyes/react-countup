@@ -26,7 +26,8 @@ class CountUp extends Component {
     const { autostart, delay } = this.props;
     this.instance = this.createInstance();
 
-    if (autostart || delay === 0) this.start();
+    if (typeof children !== 'function' || autostart || delay === 0)
+      this.start();
 
     if (delay) setTimeout(this.start, delay * 1000);
   }
@@ -101,20 +102,22 @@ class CountUp extends Component {
     );
   };
 
-  pauseResume = (...args) => {
+  pauseResume = () => {
+    const { reset, restart: start, update } = this;
     const { onPauseResume } = this.props;
 
-    if (typeof onPauseResume === 'function') onPauseResume(this);
+    this.instance.pauseResume();
 
-    this.instance.pauseResume(...args);
+    onPauseResume({ reset, start, update });
   };
 
-  reset = (...args) => {
+  reset = () => {
+    const { pauseResume, restart: start, update } = this;
     const { onReset } = this.props;
 
-    if (typeof onReset === 'function') onReset(this);
+    this.instance.reset();
 
-    this.instance.reset(...args);
+    onReset({ pauseResume, start, update });
   };
 
   restart = () => {
@@ -123,22 +126,21 @@ class CountUp extends Component {
   };
 
   start = () => {
-    const { onEnd, onStart } = this.props;
     const { pauseResume, reset, restart: start, update } = this;
+    const { onEnd, onStart } = this.props;
 
-    this.instance.start(
-      typeof onEnd === 'function'
-        ? () => onEnd({ pauseResume, reset, start, update })
-        : undefined,
-    );
-    if (typeof onStart === 'function')
-      onStart({ pauseResume, reset, start, update });
+    this.instance.start(() => onEnd({ pauseResume, reset, start, update }));
+
+    onStart({ pauseResume, reset, update });
   };
 
   update = (...args) => {
+    const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 
-    if (typeof onUpdate === 'function') onUpdate(this);
+    this.instance.update(...args);
+
+    onUpdate({ pauseResume, reset, start });
   };
 
   containerRef = React.createRef();
@@ -164,15 +166,15 @@ class CountUp extends Component {
 CountUp.defaultProps = {
   decimal: '.',
   decimals: 0,
-  delay: null,
+  delay: 2,
   duration: null,
   easingFn: null,
   formattingFn: null,
-  onEnd: null,
-  onPauseResume: null,
-  onReset: null,
-  onStart: null,
-  onUpdate: null,
+  onEnd: () => {},
+  onPauseResume: () => {},
+  onReset: () => {},
+  onStart: () => {},
+  onUpdate: () => {},
   prefix: '',
   separator: '',
   start: 0,
