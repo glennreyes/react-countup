@@ -10,130 +10,181 @@ A configurable React component wrapper around [CountUp.js](https://inorganik.git
 
 ![sep -15-2016 10-11-53 pm](https://cloud.githubusercontent.com/assets/5080854/18565869/d23db0e0-7b91-11e6-9ee2-71be5875ca48.gif)
 
-## [Demo](https://glennreyes.github.io/react-countup)
-
-Check out the [demo](https://glennreyes.github.io/react-countup).
-
 ## Installation
 
 ```bash
 yarn add react-countup
 ```
 
-Alternatively with npm:
-
-```bash
-npm install react-countup --save
-```
-
 ## Usage
+
+```js
+import CountUp from 'react-countup`;
+```
 
 #### Simple
 
 ```js
-import React from 'react';
-import { render } from 'react-dom';
-import CountUp from 'react-countup';
-
-render(<CountUp start={0} end={160526} />, document.getElementById('root'));
+<CountUp end={160526} />
 ```
 
 #### Advanced
 
 ```js
-import React from 'react';
-import { render } from 'react-dom';
-import CountUp from 'react-countup';
-
-const onEnd = () => {
-  console.log('Ended! 👏');
-};
-
-const onStart = () => {
-  console.log('Started! 💨');
-};
-
-render(
-  <CountUp
-    className="account-balance"
-    start={160527.0127}
-    end={-875.0319}
-    duration={2.75}
-    useEasing={true}
-    useGrouping={true}
-    separator=" "
-    decimals={4}
-    decimal=","
-    prefix="EUR "
-    suffix=" left"
-    onEnd={onEnd}
-    onStart={onStart}
-  />,
-  document.getElementById('root'),
-);
+<CountUp
+  className="account-balance"
+  start={-875.039}
+  end={160527.012}
+  duration={2.75}
+  separator=" "
+  decimals={4}
+  decimal=","
+  prefix="EUR "
+  suffix=" left"
+  onEnd={() => console.log('Ended! 👏')}
+  onStart={() => console.log('Started! 💨')}
+>
+  {({ countUpRef, start }) => (
+    <div>
+      <div ref={countUpRef} />
+      <button onClick={start} />
+    </div>
+  )}
+</CountUp>
 ```
+
+## API
 
 ### Props
 
-##### `start`: number
+#### `autostart: number`
 
-Start value
+By default the transition will start automatically.
 
-##### `end`: number
+However, if CountUp is used as a render prop component, the transition will
+automatically on initial render.
 
-Target value
+Default: `false`
 
-##### `duration`: number
+> Note: Alternatively, you can also set `delay={0}` instead to automatically start the count up.
 
-Duration in seconds (default `2`)
+#### `className: string`
 
-##### `decimals`: number
+CSS class name of the span element.
 
-Amount of decimals
+> Note: This won't be applied when using CountUp with render props.
 
-##### `useEasing`: boolean
+#### `decimal: string`
 
-Enable easing if set to `true` (default easing: `easeOutExpo`)
+Specifies decimal character.
 
-##### `separator`: string
+Default: `.`
 
-Specifies character of thousands separator
+#### `decimals: number`
 
-##### `decimal`: string
+Amount of decimals to display.
 
-Specifies decimal character
+Default: `0`
 
-##### `prefix`: string
+#### `delay: number`
 
-Static text before the animating value
+Delay in seconds before starting the transition.
 
-##### `suffix`: string
+Default: `null`
 
-Static text after the animating value
+> Note: `delay={0}` will automatically start the count up.
 
-##### `className`: string
+#### `duration: number`
 
-CSS class name of the span element
+Duration in seconds.
 
-##### `redraw`: boolean
+Default: `2`
 
-If set to `true`, the CountUp component will always animate on every re-render.
+#### `end: number`
 
-##### `onEnd`: function
+Target value.
 
-Function called after animation has ended
+#### `prefix: string`
 
-##### `onStart`: function
+Static text before the transitioning value.
 
-Function called before animation starts
+#### `redraw: boolean`
 
-##### `easingFn`: function
+Forces count up transition on every component update.
 
-Easing function, see [here for instructions](https://github.com/inorganik/countUp.js#custom-easing)
+Default: `false`
 
-##### `formattingFn`: function
+#### `separator: string`
+
+Specifies character of thousands separator.
+
+#### `start: number`
+
+Initial value.
+
+Default: `0`
+
+#### `suffix: string`
+
+Static text after the transitioning value.
+
+#### `useEasing: boolean`
+
+Enables easing. Set to `false` for a linear transition.
+
+Default: `true`
+
+#### `easingFn: (t: number, b: number, c: number, d: number) => number`
+
+Easing function. Click [here](http://robertpenner.com/easing) for more details.
+
+Default: [`easeInExpo`](https://github.com/inorganik/countUp.js/blob/master/countUp.js#L103-L106)
+
+#### `formattingFn: (value: number) => string`
 
 Function to customize the formatting of the number
+
+#### `onEnd: ({ pauseResume, reset, start, update }) => void`
+
+Callback function on transition end.
+
+#### `onStart: ({ pauseResume, reset, update }) => void`
+
+Callback function on transition start.
+
+#### `onPauseResume: ({ reset, start, update }) => void`
+
+Callback function on pause or resume.
+
+#### `onReset: ({ pauseResume, start, update }) => void`
+
+Callback function on reset.
+
+#### `onUpdate: ({ pauseResume, reset, start }) => void`
+
+Callback function on update.
+
+### Render props
+
+#### `countUpRef: () => void`
+
+Ref to hook the countUp instance to
+
+#### `pauseResume: () => void`
+
+Pauses or resumes the transition
+
+#### `reset: () => void`
+
+Resets to initial value
+
+#### `start: () => void`
+
+Starts or restarts the transition
+
+#### `update: (newEnd: number?) => void`
+
+Updates transition to the new end value (if given)
 
 ## Protips
 
@@ -143,37 +194,42 @@ By default, the animation is triggered if any of the following props has changed
 - `end`
 - `start`
 
-You can set `redraw` to `true` If you want your component to always animate on every re-render.
+If `redraw` is set to `true` your component will start the transition on every component update.
 
-### Manually start the animation
+## Examples
+
+### Manually start the transition
+
+Render start value but don't initially start transition:
 
 ```js
-import React, { Component } from 'react';
-import CountUp, { startAnimation } from 'react-countup';
+<CountUp end={100}>
+  {({ countUpref, start }) => (
+    <div>
+      <span ref={countUpRef} />
+      <button onClick={start}>Start</button>
+    </div>
+  )}
+</CountUp>
+```
 
-const MyComponent = () => (
-  <div>
-    <CountUp
-      className="CountUp"
-      start={0}
-      end={100}
-      duration={3}
-      ref={countUp => {
-        this.myCountUp = countUp;
-      }}
-    />
-    <button
-      className="Button"
-      onClick={event => {
-        startAnimation(this.myCountUp);
-      }}
-    >
-      Count me up!
-    </button>
-  </div>
-);
+Render start value and start transition:
 
-export default App;
+```js
+<CountUp autostart end={100}>
+  {({ countUpref, start }) => (
+    <div>
+      <span ref={countUpRef} />
+      <button onClick={start}>Start</button>
+    </div>
+  )}
+</CountUp>
+```
+
+### Delay the transition
+
+```js
+<CountUp delay={5} end={100} />
 ```
 
 ## License
