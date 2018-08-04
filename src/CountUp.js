@@ -22,6 +22,27 @@ class CountUp extends Component {
     useEasing: PropTypes.bool,
   };
 
+  static defaultProps = {
+    decimal: '.',
+    decimals: 0,
+    delay: 2,
+    duration: null,
+    easingFn: null,
+    formattingFn: null,
+    onEnd: () => {},
+    onPauseResume: () => {},
+    onReset: () => {},
+    onStart: () => {},
+    onUpdate: () => {},
+    prefix: '',
+    separator: '',
+    start: 0,
+    suffix: '',
+    redraw: true,
+    style: undefined,
+    useEasing: true,
+  };
+
   componentDidMount() {
     const { autostart, delay } = this.props;
     this.instance = this.createInstance();
@@ -162,26 +183,5 @@ class CountUp extends Component {
     return <span className={className} ref={containerRef} style={style} />;
   }
 }
-
-CountUp.defaultProps = {
-  decimal: '.',
-  decimals: 0,
-  delay: 2,
-  duration: null,
-  easingFn: null,
-  formattingFn: null,
-  onEnd: () => {},
-  onPauseResume: () => {},
-  onReset: () => {},
-  onStart: () => {},
-  onUpdate: () => {},
-  prefix: '',
-  separator: '',
-  start: 0,
-  suffix: '',
-  redraw: true,
-  style: undefined,
-  useEasing: true,
-};
 
 export default CountUp;
