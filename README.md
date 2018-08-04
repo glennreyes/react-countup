@@ -1,11 +1,11 @@
 # React CountUp
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/glennreyes/react-countup/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/glennreyes/react-countup.svg?branch=master)](https://travis-ci.org/glennreyes/react-countup)
-[![Coverage Status](https://coveralls.io/repos/github/glennreyes/react-countup/badge.svg?branch=master)](https://coveralls.io/github/glennreyes/react-countup?branch=master)
-[![Dependency Status](https://david-dm.org/glennreyes/react-countup.svg)](https://david-dm.org/glennreyes/react-countup)
-[![Dependency Status](https://david-dm.org/glennreyes/react-countup/dev-status.svg)](https://david-dm.org/glennreyes/react-countup#info=devDependencies)
-[![npm version](https://badge.fury.io/js/react-countup.svg)](https://badge.fury.io/js/react-countup)
+[![Build Status][build-badge]][build]
+[![Code Coverage][coverage-badge]][coverage]
+[![version][version-badge]][package]
+[![downloads][downloads-badge]][npmtrends]
+[![MIT License][license-badge]][license]
+[![gzip size](https://img.badgesize.io/https://unpkg.com/react-countup?compression=gzip)](https://img.badgesize.io/https://unpkg.com/react-countup)
 
 A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
 
