@@ -1,4 +1,4 @@
-# [React CountUp](https://glennreyes.github.io/react-countup)
+# React CountUp
 
 [![Build Status](https://travis-ci.org/glennreyes/react-countup.svg?branch=master)](https://travis-ci.org/glennreyes/react-countup)
 [![Coverage Status](https://coveralls.io/repos/github/glennreyes/react-countup/badge.svg?branch=master)](https://coveralls.io/github/glennreyes/react-countup?branch=master)
@@ -7,6 +7,46 @@
 [![npm version](https://badge.fury.io/js/react-countup.svg)](https://badge.fury.io/js/react-countup)
 
 A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
+
+## Table of Contents
+
+- [Installation](#installation)
+  - [Usage](#usage)
+    - [Simple example](#simple-example)
+    - [Advanced example](#advanced-example)
+    - [More examples](#more-examples)
+      - [Manually start](#manually-start)
+      - [Delay start](#delay-start)
+  - [API](#api)
+    - [Props](#props)
+      - [`autostart: number`](#autostart-number)
+      - [`className: string`](#classname-string)
+      - [`decimal: string`](#decimal-string)
+      - [`decimals: number`](#decimals-number)
+      - [`delay: number`](#delay-number)
+      - [`duration: number`](#duration-number)
+      - [`end: number`](#end-number)
+      - [`prefix: string`](#prefix-string)
+      - [`redraw: boolean`](#redraw-boolean)
+      - [`separator: string`](#separator-string)
+      - [`start: number`](#start-number)
+      - [`suffix: string`](#suffix-string)
+      - [`useEasing: boolean`](#useeasing-boolean)
+      - [`easingFn: (t: number, b: number, c: number, d: number) => number`](#easingfn-t-number-b-number-c-number-d-number--number)
+      - [`formattingFn: (value: number) => string`](#formattingfn-value-number--string)
+      - [`onEnd: ({ pauseResume, reset, start, update }) => void`](#onend--pauseresume-reset-start-update---void)
+      - [`onStart: ({ pauseResume, reset, update }) => void`](#onstart--pauseresume-reset-update---void)
+      - [`onPauseResume: ({ reset, start, update }) => void`](#onpauseresume--reset-start-update---void)
+      - [`onReset: ({ pauseResume, start, update }) => void`](#onreset--pauseresume-start-update---void)
+      - [`onUpdate: ({ pauseResume, reset, start }) => void`](#onupdate--pauseresume-reset-start---void)
+    - [Render props](#render-props)
+      - [`countUpRef: () => void`](#countupref---void)
+      - [`pauseResume: () => void`](#pauseresume---void)
+      - [`reset: () => void`](#reset---void)
+      - [`start: () => void`](#start---void)
+      - [`update: (newEnd: number?) => void`](#update-newend-number--void)
+  - [Protips](#protips)
+  - [License](#license)
 
 ## Installation
 
@@ -20,13 +60,13 @@ yarn add react-countup
 import CountUp from 'react-countup`;
 ```
 
-### Simple
+### Simple example
 
 ```js
 <CountUp end={160526} />
 ```
 
-### Advanced
+### Advanced example
 
 ```js
 <CountUp
@@ -53,7 +93,7 @@ import CountUp from 'react-countup`;
 
 ### More examples
 
-#### Manually start the transition
+#### Manually start
 
 Render start value but don't initially start transition:
 
@@ -81,7 +121,7 @@ Render start value and start transition:
 </CountUp>
 ```
 
-#### Delay the transition
+#### Delay start
 
 ```js
 <CountUp delay={5} end={100} />
