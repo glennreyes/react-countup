@@ -57,7 +57,7 @@ yarn add react-countup
 ## Usage
 
 ```js
-import CountUp from 'react-countup`;
+import CountUp from 'react-countup';
 ```
 
 ### Simple example
