@@ -1,5 +1,6 @@
 # React CountUp
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/glennreyes/react-countup/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/glennreyes/react-countup.svg?branch=master)](https://travis-ci.org/glennreyes/react-countup)
 [![Coverage Status](https://coveralls.io/repos/github/glennreyes/react-countup/badge.svg?branch=master)](https://coveralls.io/github/glennreyes/react-countup?branch=master)
 [![Dependency Status](https://david-dm.org/glennreyes/react-countup.svg)](https://david-dm.org/glennreyes/react-countup)
