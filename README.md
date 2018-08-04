@@ -20,7 +20,6 @@ A configurable React component wrapper around [CountUp.js](https://inorganik.git
       - [Delay start](#delay-start)
   - [API](#api)
     - [Props](#props)
-      - [`autostart: number`](#autostart-number)
       - [`className: string`](#classname-string)
       - [`decimal: string`](#decimal-string)
       - [`decimals: number`](#decimals-number)
@@ -64,8 +63,10 @@ import CountUp from 'react-countup';
 ### Simple example
 
 ```js
-<CountUp end={160526} />
+<CountUp end={100} />
 ```
+
+This will start a count up transition from `0` to `100` on render.
 
 ### Render prop example
 
@@ -92,6 +93,10 @@ import CountUp from 'react-countup';
 </CountUp>
 ```
 
+The transition won't start on initial render as it needs to be triggered manually here.
+
+> Tip: If you need to start the render prop component immediately, you can set delay={0}.
+
 ### More examples
 
 #### Manually start
@@ -99,7 +104,7 @@ import CountUp from 'react-countup';
 Render start value but don't initially start transition:
 
 ```js
-<CountUp end={100}>
+<CountUp start={0} end={100}>
   {({ countUpref, start }) => (
     <div>
       <span ref={countUpRef} />
@@ -112,7 +117,7 @@ Render start value but don't initially start transition:
 Render start value and start transition:
 
 ```js
-<CountUp autostart end={100}>
+<CountUp start={0} end={100}>
   {({ countUpref, start }) => (
     <div>
       <span ref={countUpRef} />
@@ -131,17 +136,6 @@ Render start value and start transition:
 ## API
 
 ### Props
-
-#### `autostart: number`
-
-By default the transition will start automatically.
-
-However, if this is used as a [render prop component](#render-prop-example), the transition will
-automatically on initial render.
-
-Default: `false`
-
-> Note: Alternatively, you can also set `delay={0}` instead to automatically start the count up.
 
 #### `className: string`
 

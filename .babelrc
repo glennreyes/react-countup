@@ -1,4 +1,10 @@
 {
   "plugins": ["transform-class-properties"],
-  "presets": [["env", { "modules": false }], "react"]
+  "presets": [["env", { "modules": false }], "react"],
+  "env": {
+    "test": {
+      "plugins": ["transform-class-properties"],
+      "presets": ["env"]
+    }
+  }
 }

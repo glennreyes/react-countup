@@ -1,96 +1,176 @@
 import React from 'react';
-import { render } from 'react-dom';
-import renderer from 'react-test-renderer';
-import CountUp, { formatNumber, startAnimation } from '../index';
+import { cleanup, fireEvent, render } from 'react-testing-library';
+import CountUp from '../index';
 
-it('renders correctly', () => {
-  const createNodeMock = () => ({ startAnimation });
-  const tree = renderer
-    .create(<CountUp start={0} end={10} onStart={() => {}} />, {
-      createNodeMock,
-    })
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+afterEach(cleanup);
+
+it('renders start value correctly', () => {
+  const { container } = render(<CountUp end={10} />);
+
+  expect(container).toMatchSnapshot();
 });
 
-it('renders correctly with wrong onStart type', () => {
-  const createNodeMock = () => ({ startAnimation });
-  const tree = renderer
-    .create(<CountUp start={0} end={10} onStart="Something wrong" />, {
-      createNodeMock,
-    })
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+it('re-renders change of start value correctly', () => {
+  const { container, rerender } = render(<CountUp end={10} />);
+
+  rerender(<CountUp start={5} end={10} />);
+
+  expect(container).toMatchSnapshot();
 });
 
-it('renders correctly with formattingFn', () => {
-  const createNodeMock = () => ({ startAnimation });
-  const tree = renderer
-    .create(
-      <CountUp start={0} end={10} formattingFn={v => `formated:${v}`} />,
-      {
-        createNodeMock,
-      },
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+it('re-renders change of duration value correctly', () => {
+  const { container, rerender } = render(<CountUp duration={1} end={10} />);
+
+  rerender(<CountUp duration={2} end={10} />);
+
+  expect(container).toMatchSnapshot();
 });
 
-it('should update on new duration', () => {
-  const node = document.createElement('div');
-  const instance = render(<CountUp duration={1} />, node);
-  jest.spyOn(instance, 'componentDidUpdate');
-  render(<CountUp duration={2} />, node);
-  expect(instance.componentDidUpdate).toHaveBeenCalled();
+it('re-renders change of end value correctly', () => {
+  const { container, rerender } = render(<CountUp end={10} />);
+
+  rerender(<CountUp end={5} />);
+
+  expect(container).toMatchSnapshot();
 });
 
-it('should update on new start', () => {
-  const node = document.createElement('div');
-  const instance = render(<CountUp start={1} />, node);
-  jest.spyOn(instance, 'componentDidUpdate');
-  render(<CountUp start={2} />, node);
-  expect(instance.componentDidUpdate).toHaveBeenCalled();
+it('re-renders with redraw={false} correctly', () => {
+  const { container, rerender } = render(<CountUp redraw={false} end={10} />);
+
+  rerender(<CountUp redraw={false} end={10} />);
+
+  expect(container).toMatchSnapshot();
 });
 
-it('should update on new end', () => {
-  const node = document.createElement('div');
-  const instance = render(<CountUp end={1} />, node);
-  jest.spyOn(instance, 'componentDidUpdate');
-  render(<CountUp end={2} />, node);
-  expect(instance.componentDidUpdate).toHaveBeenCalled();
+it('renders with delay correctly', () => {
+  const { container } = render(<CountUp delay={1} end={10} />);
+
+  expect(container).toMatchSnapshot();
 });
 
-it('should throw an error if no component specified in startAnimation', () => {
-  expect(() => startAnimation('😍')).toThrow();
+it('renders with delay as a render prop component correctly', () => {
+  const { container } = render(
+    <CountUp delay={1} end={10}>
+      {({ countUpRef }) => <div ref={countUpRef} />}
+    </CountUp>,
+  );
+
+  expect(container).toMatchSnapshot();
 });
 
-it('formats decimal number correctly', () => {
-  const formattedNumber = formatNumber(123456.789, {
-    decimal: ',',
-    decimals: 2,
-    separator: '.',
-    prefix: 'a ',
-    suffix: ' b',
-  });
-  expect(formattedNumber).toBe('a 123.456,79 b');
+it('renders as a render prop component correctly', () => {
+  const { container } = render(
+    <CountUp end={10}>{({ countUpRef }) => <div ref={countUpRef} />}</CountUp>,
+  );
+
+  expect(container).toMatchSnapshot();
 });
 
-it('formats arbitrary number correctly', () => {
-  const formattedNumber = formatNumber(123456, {
-    decimal: '',
-    decimals: 2,
-    separator: '',
-    prefix: 'a ',
-    suffix: ' b',
-  });
-  expect(formattedNumber).toBe('a 12345600 b');
+it('renders with autostart correctly', () => {
+  const { container } = render(
+    <CountUp autostart end={10}>
+      {({ countUpRef }) => <div ref={countUpRef} />}
+    </CountUp>,
+  );
+
+  expect(container).toMatchSnapshot();
 });
 
-it('formats negative number with separator correctly', () => {
-  const formattedNumber = formatNumber(-123456.789, {
-    decimal: '.',
-    decimals: 2,
-    separator: ' ',
-  });
-  expect(formattedNumber).toBe('-123 456.79');
+it('calls start correctly', () => {
+  const spy = {};
+
+  const { container } = render(
+    <CountUp end={10}>
+      {({ countUpRef, start }) => {
+        spy.start = start;
+        jest.spyOn(spy, 'start');
+        return <button onClick={spy.start} ref={countUpRef} />;
+      }}
+    </CountUp>,
+  );
+
+  fireEvent.click(container.firstElementChild);
+
+  expect(spy.start).toHaveBeenCalled();
+});
+
+it('calls pauseResume correctly', () => {
+  const spy = {};
+
+  const { container } = render(
+    <CountUp end={10}>
+      {({ countUpRef, pauseResume }) => {
+        spy.pauseResume = pauseResume;
+        jest.spyOn(spy, 'pauseResume');
+        return <button onClick={spy.pauseResume} ref={countUpRef} />;
+      }}
+    </CountUp>,
+  );
+
+  fireEvent.click(container.firstElementChild);
+
+  expect(spy.pauseResume).toHaveBeenCalled();
+});
+
+it('calls update correctly', () => {
+  const spy = {};
+
+  const { container } = render(
+    <CountUp end={10}>
+      {({ countUpRef, update }) => {
+        spy.update = update;
+        jest.spyOn(spy, 'update');
+        return <button onClick={spy.update} ref={countUpRef} />;
+      }}
+    </CountUp>,
+  );
+
+  fireEvent.click(container.firstElementChild);
+
+  expect(spy.update).toHaveBeenCalled();
+});
+
+it('calls reset correctly', () => {
+  const spy = {};
+
+  const { container } = render(
+    <CountUp end={10}>
+      {({ countUpRef, reset }) => {
+        spy.reset = reset;
+        jest.spyOn(spy, 'reset');
+        return <button onClick={spy.reset} ref={countUpRef} />;
+      }}
+    </CountUp>,
+  );
+
+  fireEvent.click(container.firstElementChild);
+
+  expect(spy.reset).toHaveBeenCalled();
+});
+
+it('calls pauseResume in onStart callback correctly', () => {
+  const spy = {};
+
+  render(
+    <CountUp
+      end={10}
+      onStart={({ pauseResume }) => {
+        spy.pauseResume = pauseResume;
+        jest.spyOn(spy, 'pauseResume');
+      }}
+    />,
+  );
+
+  spy.pauseResume();
+
+  expect(spy.pauseResume).toHaveBeenCalled();
+});
+
+it('throws warning if ref not attached to a component', () => {
+  console.error = jest.fn();
+  jest.spyOn(console, 'error');
+
+  render(<CountUp end={10}>{({ countUpRef }) => <div />}</CountUp>);
+
+  expect(console.error).toBeCalled();
 });

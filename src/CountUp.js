@@ -25,7 +25,7 @@ class CountUp extends Component {
   static defaultProps = {
     decimal: '.',
     decimals: 0,
-    delay: 2,
+    delay: 0,
     duration: null,
     easingFn: null,
     formattingFn: null,
@@ -35,22 +35,26 @@ class CountUp extends Component {
     onStart: () => {},
     onUpdate: () => {},
     prefix: '',
+    redraw: false,
     separator: '',
     start: 0,
     suffix: '',
-    redraw: true,
     style: undefined,
     useEasing: true,
   };
 
   componentDidMount() {
-    const { autostart, delay } = this.props;
+    const { children, delay } = this.props;
     this.instance = this.createInstance();
 
-    if (typeof children !== 'function' || autostart || delay === 0)
-      this.start();
+    // Delay start if delay prop is properly set
+    if (delay > 0) return setTimeout(this.start, delay * 1000);
 
-    if (delay) setTimeout(this.start, delay * 1000);
+    // Don't invoke start if the component is used as a render prop
+    if (typeof children === 'function') return;
+
+    // Otherwise just start immediately
+    this.start();
   }
 
   shouldComponentUpdate(nextProps) {
@@ -59,7 +63,7 @@ class CountUp extends Component {
       this.props.end !== nextProps.end ||
       this.props.start !== nextProps.start;
 
-    return this.props.redraw || hasCertainPropsChanged;
+    return hasCertainPropsChanged || this.props.redraw;
   }
 
   componentDidUpdate(prevProps) {

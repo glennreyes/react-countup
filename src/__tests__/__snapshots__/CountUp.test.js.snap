@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`re-renders change of duration value correctly 1`] = `
+<div>
+  <span>
+    0
+  </span>
+</div>
+`;
+
+exports[`re-renders change of end value correctly 1`] = `
+<div>
+  <span>
+    0
+  </span>
+</div>
+`;
+
+exports[`re-renders change of start value correctly 1`] = `
+<div>
+  <span>
+    5
+  </span>
+</div>
+`;
+
+exports[`re-renders with redraw={false} correctly 1`] = `
+<div>
+  <span>
+    0
+  </span>
+</div>
+`;
+
+exports[`renders as a render prop component correctly 1`] = `
+<div>
+  <div>
+    0
+  </div>
+</div>
+`;
+
+exports[`renders start value correctly 1`] = `
+<div>
+  <span>
+    0
+  </span>
+</div>
+`;
+
+exports[`renders with autostart correctly 1`] = `
+<div>
+  <div>
+    0
+  </div>
+</div>
+`;
+
+exports[`renders with delay as a render prop component correctly 1`] = `
+<div>
+  <div>
+    0
+  </div>
+</div>
+`;
+
+exports[`renders with delay correctly 1`] = `
+<div>
+  <span>
+    0
+  </span>
+</div>
+`;
