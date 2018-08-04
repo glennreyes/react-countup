@@ -20,13 +20,13 @@ yarn add react-countup
 import CountUp from 'react-countup`;
 ```
 
-#### Simple
+### Simple
 
 ```js
 <CountUp end={160526} />
 ```
 
-#### Advanced
+### Advanced
 
 ```js
 <CountUp
@@ -49,6 +49,42 @@ import CountUp from 'react-countup`;
     </div>
   )}
 </CountUp>
+```
+
+### More examples
+
+#### Manually start the transition
+
+Render start value but don't initially start transition:
+
+```js
+<CountUp end={100}>
+  {({ countUpref, start }) => (
+    <div>
+      <span ref={countUpRef} />
+      <button onClick={start}>Start</button>
+    </div>
+  )}
+</CountUp>
+```
+
+Render start value and start transition:
+
+```js
+<CountUp autostart end={100}>
+  {({ countUpref, start }) => (
+    <div>
+      <span ref={countUpRef} />
+      <button onClick={start}>Start</button>
+    </div>
+  )}
+</CountUp>
+```
+
+#### Delay the transition
+
+```js
+<CountUp delay={5} end={100} />
 ```
 
 ## API
@@ -193,42 +229,6 @@ By default, the animation is triggered if any of the following props has changed
 - `start`
 
 If `redraw` is set to `true` your component will start the transition on every component update.
-
-## Examples
-
-### Manually start the transition
-
-Render start value but don't initially start transition:
-
-```js
-<CountUp end={100}>
-  {({ countUpref, start }) => (
-    <div>
-      <span ref={countUpRef} />
-      <button onClick={start}>Start</button>
-    </div>
-  )}
-</CountUp>
-```
-
-Render start value and start transition:
-
-```js
-<CountUp autostart end={100}>
-  {({ countUpref, start }) => (
-    <div>
-      <span ref={countUpRef} />
-      <button onClick={start}>Start</button>
-    </div>
-  )}
-</CountUp>
-```
-
-### Delay the transition
-
-```js
-<CountUp delay={5} end={100} />
-```
 
 ## License
 
