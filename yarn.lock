@@ -1327,9 +1327,9 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-dom-testing-library@^3.0.1:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/dom-testing-library/-/dom-testing-library-3.0.2.tgz#fe1a857205a02132b978d0e15f208ea40cadc07f"
+dom-testing-library@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/dom-testing-library/-/dom-testing-library-3.1.0.tgz#c9aecc4a6e506f456a03ffa3b344450fa046e6eb"
   dependencies:
     mutationobserver-shim "^0.3.2"
     pretty-format "^22.4.3"
@@ -3598,9 +3598,9 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.13.7:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.0.tgz#847c235522035fd988100f1f43cf20a7d24f9372"
+prettier@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.1.tgz#4ead68e66b5ec9e771de311570c90da822f5a17a"
 
 pretty-format@^22.4.3:
   version "22.4.3"
@@ -3713,11 +3713,11 @@ react-test-renderer@^16.4.2:
     prop-types "^15.6.0"
     react-is "^16.4.2"
 
-react-testing-library@^4.1.6:
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/react-testing-library/-/react-testing-library-4.1.6.tgz#10e15eb18d2dacfd6d7bbba772c782ab47f4d07f"
+react-testing-library@^4.1.7:
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/react-testing-library/-/react-testing-library-4.1.7.tgz#1b13b8e38e2a66beea23d03326b3a143019d1d27"
   dependencies:
-    dom-testing-library "^3.0.1"
+    dom-testing-library "^3.1.0"
     wait-for-expect "^1.0.0"
 
 react@^16.4.1:
@@ -3971,9 +3971,9 @@ rollup-pluginutils@^1.5.0:
     estree-walker "^0.2.1"
     minimatch "^3.0.2"
 
-rollup@^0.63.4:
-  version "0.63.5"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.63.5.tgz#5543eecac9a1b83b7e1be598b5be84c9c0a089db"
+rollup@^0.64.1:
+  version "0.64.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.64.1.tgz#9188ee368e5fcd43ffbc00ec414e72eeb5de87ba"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
