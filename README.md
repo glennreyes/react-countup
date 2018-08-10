@@ -23,7 +23,7 @@ A configurable React component wrapper around [CountUp.js](https://inorganik.git
       - [`className: string`](#classname-string)
       - [`decimal: string`](#decimal-string)
       - [`decimals: number`](#decimals-number)
-      - [`delay: number`](#delay-number)
+      - [`delay: ?number`](#delay-number)
       - [`duration: number`](#duration-number)
       - [`end: number`](#end-number)
       - [`prefix: string`](#prefix-string)
@@ -155,7 +155,7 @@ Amount of decimals to display.
 
 Default: `0`
 
-#### `delay: number`
+#### `delay: ?number`
 
 Delay in seconds before starting the transition.
 

@@ -25,7 +25,7 @@ class CountUp extends Component {
   static defaultProps = {
     decimal: '.',
     decimals: 0,
-    delay: 0,
+    delay: null,
     duration: null,
     easingFn: null,
     formattingFn: null,
@@ -53,7 +53,7 @@ class CountUp extends Component {
     // Don't invoke start if:
     // - component is used as a render prop
     // - and has a delay set
-    if (typeof children === 'function' && delay > 0) return;
+    if (typeof children === 'function' && delay === null) return;
 
     // Otherwise just start immediately
     this.start();
