@@ -40,7 +40,7 @@ class Example extends Component {
   refresh = () => this.forceUpdate();
 
   render() {
-    const { children, code, title, withRefresh, ...rest } = this.props;
+    const { children, code, title, ...rest } = this.props;
 
     return (
       <Fragment>
@@ -48,11 +48,9 @@ class Example extends Component {
           <Subtitle>{title}</Subtitle>
           <Provider scope={{ CountUp }} code={code.trim()} {...rest}>
             <Editor />
-            {withRefresh && (
-              <RefreshButton onClick={this.refresh} title="Re-render">
-                <RotateCw size={16} />
-              </RefreshButton>
-            )}
+            <RefreshButton onClick={this.refresh} title="Re-render">
+              <RotateCw size={16} />
+            </RefreshButton>
             <Preview />
             <Error />
           </Provider>
@@ -179,12 +177,12 @@ const App = () => (
       {' · '}
       <a href={`${repo}#installation`}>API</a>
     </Text>
-    <Example code={simple} title="Simple" withRefresh>
+    <Example code={simple} title="Simple">
       <Text>Edit the code to see live changes.</Text>
     </Example>
     <Example code={renderProp} title="Render prop" />
     <Example code={autoStart} title="Autostart with render prop" />
-    <Example code={delayStart} title="Delay start" withRefresh />
+    <Example code={delayStart} title="Delay start" />
     <GithubCorner bannerColor="palevioletred" href={repo} />
   </Main>
 );
