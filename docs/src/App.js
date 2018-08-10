@@ -30,7 +30,7 @@ const Editor = styled(LiveEditor).attrs({ style: { padding: 16 } })`
 `;
 
 const Error = styled(LiveError)`
-  background: tomato;
+  background: palevioletred;
   color: white;
   grid-column: span 2;
   padding: 16px;
