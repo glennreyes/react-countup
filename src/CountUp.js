@@ -50,8 +50,10 @@ class CountUp extends Component {
     // Delay start if delay prop is properly set
     if (delay > 0) return setTimeout(this.start, delay * 1000);
 
-    // Don't invoke start if the component is used as a render prop
-    if (typeof children === 'function') return;
+    // Don't invoke start if:
+    // - component is used as a render prop
+    // - and has a delay set
+    if (typeof children === 'function' && delay > 0) return;
 
     // Otherwise just start immediately
     this.start();
