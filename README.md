@@ -86,8 +86,8 @@ This will start a count up transition from `0` to `100` on render.
 >
   {({ countUpRef, start }) => (
     <div>
-      <div ref={countUpRef} />
-      <button onClick={start} />
+      <span ref={countUpRef} />
+      <button onClick={start}>Start</button>
     </div>
   )}
 </CountUp>
@@ -99,13 +99,13 @@ The transition won't start on initial render as it needs to be triggered manuall
 
 ### More examples
 
-#### Manually start
+#### Autostart with render prop
 
-Render start value but don't initially start transition:
+Render start value but start transition on first render:
 
 ```js
-<CountUp start={0} end={100}>
-  {({ countUpref, start }) => (
+<CountUp start={0} end={100} delay={0}>
+  {({ countUpRef, start }) => (
     <div>
       <span ref={countUpRef} />
       <button onClick={start}>Start</button>
@@ -130,7 +130,7 @@ Render start value and start transition:
 #### Delay start
 
 ```js
-<CountUp delay={5} end={100} />
+<CountUp delay={2} end={100} />
 ```
 
 ## API
