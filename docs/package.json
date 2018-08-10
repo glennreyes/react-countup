@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.4.2",
+    "react-countup": "^4.0.0-alpha.0",
     "react-dom": "^16.4.2",
     "react-feather": "^1.1.1",
     "react-github-corner": "^2.3.0",
