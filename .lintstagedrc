@@ -1,8 +1,0 @@
-{
-  "index.js": [
-    "prettier --write",
-    "eslint --fix",
-    "git add",
-    "jest --findRelatedTests"
-  ]
-}

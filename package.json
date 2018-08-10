@@ -1,6 +1,6 @@
 {
   "name": "react-countup",
-  "version": "3.0.3",
+  "version": "4.0.0-alpha.1",
   "description": "A React component wrapper around CountUp.js",
   "author": "Glenn Reyes <glenn@glennreyes.com> (https://twitter.com/glnnrys)",
   "keywords": [
@@ -13,55 +13,54 @@
     "animation"
   ],
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/glennreyes/react-countup.git"
-  },
+  "repository": "glennreyes/react-countup",
   "bugs": {
     "url": "https://github.com/glennreyes/react-countup/issues"
   },
-  "homepage": "https://glennreyes.github.io/react-countup",
+  "homepage": "https://react-countup.now.sh",
   "main": "build",
   "files": [
     "build",
     "src"
   ],
   "scripts": {
-    "build": "babel src -d build --ignore __tests__",
-    "flow": "flow check",
-    "lint": "eslint src",
+    "build": "rollup -c",
     "precommit": "lint-staged",
-    "prepare": "yarn run build",
-    "prettier": "prettier --write src/**/*.js",
+    "prepublishOnly": "yarn build",
     "test": "jest"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": ">= 16.3.0"
   },
   "dependencies": {
-    "countup.js": "^1.9.3"
+    "countup.js": "^1.9.3",
+    "prop-types": "^15.6.2",
+    "warning": "^4.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.2",
-    "babel-preset-env": "^1.6.1",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^4.11.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.7.0",
-    "eslint-plugin-flowtype": "^2.39.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
-    "flow-bin": "^0.59.0",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.10.0",
     "husky": "^0.14.3",
-    "jest": "^21.2.1",
-    "lint-staged": "^5.0.0",
-    "prettier": "^1.8.2",
+    "jest": "^23.4.2",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.14.1",
     "raf": "^3.4.0",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
-    "react-test-renderer": "^16.1.1"
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-test-renderer": "^16.4.2",
+    "react-testing-library": "^4.1.7",
+    "rollup": "^0.64.1",
+    "rollup-plugin-babel": "^3.0.7"
   }
 }

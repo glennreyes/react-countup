@@ -1,10 +1,12 @@
 language: node_js
 node_js:
   - "node"
-cache:
-  yarn: true
-script:
-  - yarn run lint
-  - yarn run flow
-  - yarn run test
-  - yarn run build
+cache: yarn
+jobs:
+  include:
+    - stage: test & coverage
+      script:
+        - yarn test --coverage && cat ./coverage/lcov.info | npx coveralls
+    - stage: build
+      script:
+        - yarn build
