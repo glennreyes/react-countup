@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/glennreyes/react-countup/issues"
   },
-  "homepage": "https://glennreyes.github.io/react-countup",
+  "homepage": "https://react-countup.now.sh",
   "main": "build",
   "files": [
     "build",
