@@ -61,6 +61,12 @@ class Example extends Component {
   }
 }
 
+const Footer = styled.footer`
+  border-top: 2px solid whitesmoke;
+  margin-top: 64px;
+  padding-top: 16px;
+`;
+
 const Main = styled.main`
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -184,6 +190,12 @@ const App = () => (
     <Example code={autoStart} title="Autostart with render prop" />
     <Example code={delayStart} title="Delay start" />
     <GithubCorner bannerColor="palevioletred" href={repo} />
+    <Footer>
+      <Text>
+        MIT · <a href={repo}>GitHub</a> ·{' '}
+        <a href="https://twitter.com/glnnrys">@glnnrys</a>
+      </Text>
+    </Footer>
   </Main>
 );
 
