@@ -5690,9 +5690,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-countup@^4.0.0-alpha.0:
-  version "4.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-4.0.0-alpha.0.tgz#4a8d8e6602b57248d0ba3480a1d5eed75e3f858e"
+react-countup@^4.0.0-alpha.1:
+  version "4.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-4.0.0-alpha.1.tgz#0917c5c9ccfe0ca985796953a7c73fa84d38575c"
   dependencies:
     countup.js "^1.9.3"
     prop-types "^15.6.2"
