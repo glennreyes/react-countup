@@ -11,5 +11,5 @@ export default {
       exclude: 'node_modules/**',
     }),
   ],
-  external: ['react', 'react-dom'],
+  external: ['countup.js', 'prop-types', 'react', 'react-dom', 'warning'],
 };
