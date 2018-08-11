@@ -9,7 +9,7 @@
 
 A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
 
-![react-countup](https://user-images.githubusercontent.com/5080854/43985208-e45e5b20-9d05-11e8-9752-da2675da1e44.gif)
+![react-countup](https://user-images.githubusercontent.com/5080854/43985960-0a7fb776-9d0c-11e8-8082-975b1e8bf51c.gif)
 
 ## Table of Contents
 
