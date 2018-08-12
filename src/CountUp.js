@@ -47,13 +47,8 @@ class CountUp extends Component {
     const { children, delay } = this.props;
     this.instance = this.createInstance();
 
-    // Delay start if delay prop is properly set
-    if (delay > 0) return setTimeout(this.start, delay * 1000);
-
-    // Don't invoke start if:
-    // - component is used as a render prop
-    // - and has a delay set
-    if (typeof children === 'function' && delay === null) return;
+    // Don't invoke start if component is used as a render prop
+    if (typeof children === 'function') return;
 
     // Otherwise just start immediately
     this.start();
@@ -154,9 +149,16 @@ class CountUp extends Component {
 
   start = () => {
     const { pauseResume, reset, restart: start, update } = this;
-    const { onEnd, onStart } = this.props;
+    const { delay, onEnd, onStart } = this.props;
+    const run = () =>
+      this.instance.start(() => onEnd({ pauseResume, reset, start, update }));
 
-    this.instance.start(() => onEnd({ pauseResume, reset, start, update }));
+    // Delay start if delay prop is properly set
+    if (delay > 0) {
+      setTimeout(run, delay * 1000);
+    } else {
+      run();
+    }
 
     onStart({ pauseResume, reset, update });
   };
