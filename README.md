@@ -120,7 +120,7 @@ The transition won't start on initial render as it needs to be triggered manuall
 Render start value but start transition on first render:
 
 ```js
-<CountUp start={0} end={100} delay={0}>
+<CountUp start={0} end={100} delay={2}>
   {({ countUpRef, start }) => (
     <div>
       <span ref={countUpRef} />
