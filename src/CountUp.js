@@ -44,7 +44,7 @@ class CountUp extends Component {
   };
 
   componentDidMount() {
-    const { children, delay } = this.props;
+    const { children } = this.props;
     this.instance = this.createInstance();
 
     // Don't invoke start if component is used as a render prop
