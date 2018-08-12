@@ -16,7 +16,7 @@ A configurable React component wrapper around [CountUp.js](https://inorganik.git
 - [Installation](#installation)
   - [Usage](#usage)
     - [Simple example](#simple-example)
-    - [Advanced example](#render-prop-example)
+    - [Render prop example](#render-prop-example)
     - [More examples](#more-examples)
       - [Manually start with render prop](#manually-start-with-render-prop)
       - [Autostart with render prop](#autostart-with-render-prop)
@@ -75,7 +75,6 @@ This will start a count up transition from `0` to `100` on render.
 
 ```js
 <CountUp
-  className="account-balance"
   start={-875.039}
   end={160527.012}
   duration={2.75}
