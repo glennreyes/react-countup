@@ -18,7 +18,8 @@ A configurable React component wrapper around [CountUp.js](https://inorganik.git
     - [Simple example](#simple-example)
     - [Advanced example](#render-prop-example)
     - [More examples](#more-examples)
-      - [Manually start](#manually-start)
+      - [Manually start with render prop](#manually-start-with-render-prop)
+      - [Autostart with render prop](#autostart-with-render-prop)
       - [Delay start](#delay-start)
   - [API](#api)
     - [Props](#props)
@@ -100,6 +101,19 @@ The transition won't start on initial render as it needs to be triggered manuall
 > Tip: If you need to start the render prop component immediately, you can set delay={0}.
 
 ### More examples
+
+#### Manually start with render prop
+
+```js
+<CountUp start={0} end={100}>
+  {({ countUpRef, start }) => (
+    <div>
+      <span ref={countUpRef} />
+      <button onClick={start}>Start</button>
+    </div>
+  )}
+</CountUp>
+```
 
 #### Autostart with render prop
 

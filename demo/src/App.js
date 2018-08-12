@@ -157,8 +157,19 @@ const renderProp = `
 </CountUp>
 `;
 
+const manualStart = `
+<CountUp start={0} end={100}>
+  {({ countUpRef, start }) => (
+    <div>
+      <span ref={countUpRef} />
+      <button onClick={start}>Start</button>
+    </div>
+  )}
+</CountUp>
+`;
+
 const autoStart = `
-<CountUp start={0} end={100} delay={0}>
+<CountUp start={0} end={100} delay={2}>
   {({ countUpRef, start }) => (
     <div>
       <span ref={countUpRef} />
@@ -187,6 +198,7 @@ const App = () => (
       <Text>Edit the code to see live changes.</Text>
     </Example>
     <Example code={renderProp} title="Render prop" />
+    <Example code={manualStart} title="Manually start with render prop" />
     <Example code={autoStart} title="Autostart with render prop" />
     <Example code={delayStart} title="Delay start" />
     <GithubCorner bannerColor="palevioletred" href={repo} />
