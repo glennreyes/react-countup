@@ -169,7 +169,7 @@ const manualStart = `
 `;
 
 const autoStart = `
-<CountUp start={0} end={100} delay={2}>
+<CountUp start={0} end={100} delay={0}>
   {({ countUpRef, start }) => (
     <div>
       <span ref={countUpRef} />
