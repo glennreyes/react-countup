@@ -120,10 +120,9 @@ Render start value but start transition on first render:
 
 ```js
 <CountUp start={0} end={100} delay={0}>
-  {({ countUpRef, start }) => (
+  {({ countUpRef }) => (
     <div>
       <span ref={countUpRef} />
-      <button onClick={start}>Start</button>
     </div>
   )}
 </CountUp>
