@@ -48,7 +48,6 @@ class CountUp extends Component {
     this.instance = this.createInstance();
 
     // Don't invoke start if component is used as a render prop
-    console.log(typeof children === 'function', !delay);
     if (typeof children === 'function' && delay !== 0) return;
 
     // Otherwise just start immediately
