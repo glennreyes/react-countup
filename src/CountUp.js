@@ -84,12 +84,14 @@ class CountUp extends Component {
   }
 
   createInstance = () => {
-    // Warn when user didn't use containerRef at all
-    warning(
-      this.containerRef.current &&
-        this.containerRef.current instanceof HTMLElement,
-      `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
-    );
+    if (typeof this.props.children === 'function') {
+      // Warn when user didn't use containerRef at all
+      warning(
+        this.containerRef.current &&
+          this.containerRef.current instanceof HTMLElement,
+        `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
+      );
+    }
 
     const {
       decimal,
