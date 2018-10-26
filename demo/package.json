@@ -5,7 +5,7 @@
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
-    "react-countup": "^4.0.0-alpha.6",
+    "react-countup": "^4.0.0",
     "react-dom": "^16.6.0",
     "react-feather": "^1.1.4",
     "react-github-corner": "^2.3.0",
