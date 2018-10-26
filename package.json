@@ -25,8 +25,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "precommit": "lint-staged",
-    "prepublishOnly": "yarn build",
+    "prepublish": "yarn build",
     "test": "jest"
   },
   "peerDependencies": {
@@ -35,31 +34,22 @@
   "dependencies": {
     "countup.js": "^1.9.3",
     "prop-types": "^15.6.2",
-    "warning": "^4.0.1"
+    "warning": "^4.0.2"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^7.2.3",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-react-app": "^2.1.0",
-    "eslint-plugin-flowtype": "^2.50.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.10.0",
-    "husky": "^0.14.3",
-    "jest": "^23.5.0",
-    "lint-staged": "^7.2.0",
-    "prettier": "^1.14.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "husky": "^1.1.2",
+    "jest": "^23.6.0",
+    "prettier": "^1.14.3",
+    "pretty-quick": "^1.8.0",
     "raf": "^3.4.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-testing-library": "^5.0.0",
-    "rollup": "^0.64.1",
-    "rollup-plugin-babel": "^3.0.7"
+    "react-testing-library": "^5.2.3",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3"
   }
 }
