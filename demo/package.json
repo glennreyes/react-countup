@@ -19,5 +19,11 @@
     "build": "react-scripts build",
     "now-start": "serve -s build",
     "test": "react-scripts test --env=jsdom"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
