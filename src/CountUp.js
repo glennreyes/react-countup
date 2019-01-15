@@ -83,6 +83,12 @@ class CountUp extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+  }
+
   createInstance = () => {
     if (typeof this.props.children === 'function') {
       // Warn when user didn't use containerRef at all
@@ -157,7 +163,7 @@ class CountUp extends Component {
 
     // Delay start if delay prop is properly set
     if (delay > 0) {
-      setTimeout(run, delay * 1000);
+      this.timeoutId = setTimeout(run, delay * 1000);
     } else {
       run();
     }
