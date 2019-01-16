@@ -94,7 +94,8 @@ class CountUp extends Component {
       // Warn when user didn't use containerRef at all
       warning(
         this.containerRef.current &&
-          this.containerRef.current instanceof HTMLElement,
+          (this.containerRef.current instanceof HTMLElement ||
+            React.isValidElement(this.containerRef.current)),
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }
