@@ -1,4 +1,12 @@
 {
   "name": "react-countup",
-  "alias": "react-countup"
+  "alias": "react-countup",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
+  "version": 2
 }

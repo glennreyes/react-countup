@@ -17,7 +17,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "now-start": "serve -s build",
+    "deploy": "now --public && now alias",
+    "now-build": "npm run build",
     "test": "react-scripts test --env=jsdom"
   },
   "browserslist": [
