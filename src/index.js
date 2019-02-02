@@ -1,1 +1,1 @@
-export { default } from './CountUp';
+export { default, useCountUp } from './CountUp';

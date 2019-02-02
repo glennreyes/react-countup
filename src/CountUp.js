@@ -1,7 +1,33 @@
 import Count from 'countup.js';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 import warning from 'warning';
+
+const createCountUpInstance = (el, props) => {
+  const {
+    decimal,
+    decimals,
+    duration,
+    easingFn,
+    end,
+    formattingFn,
+    prefix,
+    separator,
+    start,
+    suffix,
+    useEasing,
+  } = props;
+  return new Count(el, start, end, decimals, duration, {
+    decimal,
+    easingFn,
+    formattingFn,
+    separator,
+    prefix,
+    suffix,
+    useEasing,
+    useGrouping: !!separator,
+  });
+};
 
 class CountUp extends Component {
   static propTypes = {
@@ -98,38 +124,7 @@ class CountUp extends Component {
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }
-
-    const {
-      decimal,
-      decimals,
-      duration,
-      easingFn,
-      end,
-      formattingFn,
-      prefix,
-      separator,
-      start,
-      suffix,
-      useEasing,
-    } = this.props;
-
-    return new Count(
-      this.containerRef.current,
-      start,
-      end,
-      decimals,
-      duration,
-      {
-        decimal,
-        easingFn,
-        formattingFn,
-        separator,
-        prefix,
-        suffix,
-        useEasing,
-        useGrouping: !!separator,
-      },
-    );
+    return createCountUpInstance(this.containerRef.current, this.props);
   };
 
   pauseResume = () => {
@@ -199,5 +194,84 @@ class CountUp extends Component {
     return <span className={className} ref={containerRef} style={style} />;
   }
 }
+
+const NO_ELEMENT = -1;
+
+const decorator = (f, action) => (...args) => {
+  const result = f(...args);
+  action(result);
+  return result;
+};
+
+const isFunction = f => typeof f === 'function';
+
+export const useCountUp = props => {
+  const _props = { ...CountUp.defaultProps, ...props };
+  const { start, formattingFn } = _props;
+  const [count, setCount] = useState(
+    isFunction(formattingFn) ? formattingFn(start) : start,
+  );
+  const countUpRef = useRef(null);
+
+  const createInstance = () => {
+    const countUp = createCountUpInstance(NO_ELEMENT, _props);
+    countUp.options.formattingFn = decorator(
+      countUp.options.formattingFn,
+      setCount,
+    );
+    return countUp;
+  };
+
+  const getCountUp = () => {
+    const { delay, onStart, onEnd } = _props;
+    const countUp = countUpRef.current;
+    if (countUp !== null) {
+      return countUp;
+    }
+    const newCountUp = createInstance();
+    countUpRef.current = newCountUp;
+    const timeout = setTimeout(() => {
+      onStart({ pauseResume, reset, update });
+      newCountUp.start(() => {
+        clearTimeout(timeout);
+        onEnd({ pauseResume, reset, start: restart, update });
+      });
+    }, delay * 1000);
+    return newCountUp;
+  };
+
+  const reset = () => {
+    const { onReset } = _props;
+    getCountUp().reset();
+    onReset({ pauseResume, start: restart, update });
+  };
+
+  const restart = () => {
+    const { onStart, onEnd } = _props;
+    getCountUp().reset();
+    getCountUp().start(() => {
+      onEnd({ pauseResume, reset, start: restart, update });
+    });
+    onStart({ pauseResume, reset, update });
+  };
+
+  const pauseResume = () => {
+    const { onPauseResume } = _props;
+    getCountUp().pauseResume();
+    onPauseResume({ reset, start: restart, update });
+  };
+
+  const update = val => {
+    const { onUpdate } = _props;
+    getCountUp().update(val);
+    onUpdate({ pauseResume, reset, start: restart });
+  };
+
+  useEffect(() => {
+    getCountUp();
+  });
+
+  return { countUp: count, start: restart, pauseResume, reset, update };
+};
 
 export default CountUp;

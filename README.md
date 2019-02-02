@@ -25,6 +25,7 @@ Click [here](https://github.com/glennreyes/react-countup/tree/d0002932dac8a274f9
       - [Manually start with render prop](#manually-start-with-render-prop)
       - [Autostart with render prop](#autostart-with-render-prop)
       - [Delay start](#delay-start)
+      - [Hook](#hook)
   - [API](#api)
     - [Props](#props)
       - [`className: string`](#classname-string)
@@ -138,6 +139,33 @@ Note that `delay={0}` will automatically start the count up.
 
 ```js
 <CountUp delay={2} end={100} />
+```
+
+#### Hook
+
+```js
+() => {
+  const { countUp, start, pauseResume, reset, update } = useCountUp({
+    start: 0,
+    end: 1234567,
+    delay: 1000,
+    duration: 5,
+    onReset: () => console.log('Resetted!'),
+    onUpdate: () => console.log('Updated!'),
+    onPauseResume: () => console.log('Paused or resumed!'),
+    onStart: ({ pauseResume }) => console.log(pauseResume),
+    onEnd: ({ pauseResume }) => console.log(pauseResume),
+  });
+  return (
+    <div>
+      <div>{countUp}</div>
+      <button onClick={start}>Start</button>
+      <button onClick={reset}>Reset</button>
+      <button onClick={pauseResume}>Pause/Resume</button>
+      <button onClick={() => update(2000)}>Update to 2000</button>
+    </div>
+  );
+};
 ```
 
 ## API

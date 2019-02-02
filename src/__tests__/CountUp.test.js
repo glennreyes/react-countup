@@ -1,6 +1,6 @@
 import React from 'react';
 import { cleanup, fireEvent, render } from 'react-testing-library';
-import CountUp from '../index';
+import CountUp, { useCountUp } from '../index';
 
 afterEach(cleanup);
 
@@ -173,4 +173,25 @@ it('throws warning if ref not attached to a component', () => {
   render(<CountUp end={10}>{({ countUpRef }) => <div />}</CountUp>);
 
   expect(console.error).toBeCalled();
+});
+
+// hook tests
+
+const CountUpWithHook = ({ start, end, delay, onStart }) => {
+  const { countUp } = useCountUp({ start, end, delay, onStart });
+  return <div>{countUp}</div>;
+};
+
+it('renders start value correctly with hook', () => {
+  const { container } = render(<CountUpWithHook end={10} />);
+
+  expect(container).toMatchSnapshot();
+});
+
+it('re-renders change of start value correctly with hook', () => {
+  const { container, rerender } = render(<CountUpWithHook end={10} />);
+
+  rerender(<CountUpWithHook start={5} end={10} />);
+
+  expect(container).toMatchSnapshot();
 });
