@@ -205,8 +205,21 @@ const decorator = (f, action) => (...args) => {
 
 const isFunction = f => typeof f === 'function';
 
+const isValid = prop => prop !== undefined && prop !== null;
+
+const removeInvalidProps = obj =>
+  Object.keys(obj).reduce(
+    (acc, curr) => (isValid(obj[curr]) ? { ...acc, [curr]: obj[curr] } : acc),
+    {},
+  );
+
+const mergeValidProps = (obj1, obj2) => ({
+  ...obj1,
+  ...removeInvalidProps(obj2),
+});
+
 export const useCountUp = props => {
-  const _props = { ...CountUp.defaultProps, ...props };
+  const _props = mergeValidProps(CountUp.defaultProps, props);
   const { start, formattingFn } = _props;
   const [count, setCount] = useState(
     isFunction(formattingFn) ? formattingFn(start) : start,
@@ -223,20 +236,12 @@ export const useCountUp = props => {
   };
 
   const getCountUp = () => {
-    const { delay, onStart, onEnd } = _props;
     const countUp = countUpRef.current;
     if (countUp !== null) {
       return countUp;
     }
     const newCountUp = createInstance();
     countUpRef.current = newCountUp;
-    const timeout = setTimeout(() => {
-      onStart({ pauseResume, reset, update });
-      newCountUp.start(() => {
-        clearTimeout(timeout);
-        onEnd({ pauseResume, reset, start: restart, update });
-      });
-    }, delay * 1000);
     return newCountUp;
   };
 
@@ -261,15 +266,22 @@ export const useCountUp = props => {
     onPauseResume({ reset, start: restart, update });
   };
 
-  const update = val => {
+  const update = newEnd => {
     const { onUpdate } = _props;
-    getCountUp().update(val);
+    getCountUp().update(newEnd);
     onUpdate({ pauseResume, reset, start: restart });
   };
 
   useEffect(() => {
-    getCountUp();
-  });
+    const { delay, onStart, onEnd } = _props;
+    const timeout = setTimeout(() => {
+      onStart({ pauseResume, reset, update });
+      getCountUp().start(() => {
+        clearTimeout(timeout);
+        onEnd({ pauseResume, reset, start: restart, update });
+      });
+    }, delay * 1000);
+  }, []);
 
   return { countUp: count, start: restart, pauseResume, reset, update };
 };

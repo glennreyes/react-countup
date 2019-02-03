@@ -229,7 +229,6 @@ const App = () => (
       {' · '}
       <a href={`${repo}#api`}>API</a>
     </Text>
-
     <Example code={simple} title="Simple">
       <Text>Edit the code to see live changes.</Text>
     </Example>

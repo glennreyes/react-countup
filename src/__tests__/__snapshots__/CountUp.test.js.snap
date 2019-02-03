@@ -24,12 +24,6 @@ exports[`re-renders change of start value correctly 1`] = `
 </div>
 `;
 
-exports[`re-renders change of start value correctly with hook 1`] = `
-<div>
-  <div />
-</div>
-`;
-
 exports[`re-renders with redraw={false} correctly 1`] = `
 <div>
   <span>
@@ -51,12 +45,6 @@ exports[`renders start value correctly 1`] = `
   <span>
     0
   </span>
-</div>
-`;
-
-exports[`renders start value correctly with hook 1`] = `
-<div>
-  <div />
 </div>
 `;
 
