@@ -194,16 +194,9 @@ class CountUp extends Component {
     return <span className={className} ref={containerRef} style={style} />;
   }
 }
-
+// CountUp.js requires an element to execute it's animation,
+// since it only checks for truthy values -1 is enough to mock an element.
 const NO_ELEMENT = -1;
-
-const decorator = (f, action) => (...args) => {
-  const result = f(...args);
-  action(result);
-  return result;
-};
-
-const isFunction = f => typeof f === 'function';
 
 const isValid = prop => prop !== undefined && prop !== null;
 
@@ -222,16 +215,17 @@ export const useCountUp = props => {
   const _props = mergeValidProps(CountUp.defaultProps, props);
   const { start, formattingFn } = _props;
   const [count, setCount] = useState(
-    isFunction(formattingFn) ? formattingFn(start) : start,
+    typeof formattingFn === 'function' ? formattingFn(start) : start,
   );
   const countUpRef = useRef(null);
 
   const createInstance = () => {
     const countUp = createCountUpInstance(NO_ELEMENT, _props);
-    countUp.options.formattingFn = decorator(
-      countUp.options.formattingFn,
-      setCount,
-    );
+    let formattingFnRef = countUp.options.formattingFn;
+    countUp.options.formattingFn = (...args) => {
+      const result = formattingFnRef(...args);
+      setCount(result);
+    };
     return countUp;
   };
 
