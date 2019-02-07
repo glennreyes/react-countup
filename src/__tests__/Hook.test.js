@@ -12,13 +12,13 @@ import { useCountUp } from '../index';
 jest.useFakeTimers();
 afterEach(cleanup);
 
-const CountUpWithHook = ({ start, end, delay }) => {
-  const { countUp } = useCountUp({ start, end, delay });
-  return <span>{countUp}</span>;
-};
-
 it('renders start value correctly with hook', () => {
-  const { container } = render(<CountUpWithHook end={10} />);
+  const Hook = () => {
+    const { countUp } = useCountUp({ end: 10 });
+    return <span>{countUp}</span>;
+  };
+
+  const { container } = render(<Hook />);
   const span = container.firstChild;
   flushEffects();
   jest.runAllTimers();
@@ -26,7 +26,12 @@ it('renders start value correctly with hook', () => {
 });
 
 it('renders with delay correctly with hook', () => {
-  const { container } = render(<CountUpWithHook delay={1} end={10} />);
+  const Hook = () => {
+    const { countUp } = useCountUp({ delay: 1, end: 10 });
+    return <span>{countUp}</span>;
+  };
+
+  const { container } = render(<Hook />);
   const span = container.firstChild;
   flushEffects();
   jest.runAllTimers();

@@ -198,21 +198,8 @@ class CountUp extends Component {
 // since it only checks for truthy values -1 is enough to mock an element.
 const NO_ELEMENT = -1;
 
-const isValid = prop => prop !== undefined && prop !== null;
-
-const removeInvalidProps = obj =>
-  Object.keys(obj).reduce(
-    (acc, curr) => (isValid(obj[curr]) ? { ...acc, [curr]: obj[curr] } : acc),
-    {},
-  );
-
-const mergeValidProps = (obj1, obj2) => ({
-  ...obj1,
-  ...removeInvalidProps(obj2),
-});
-
 export const useCountUp = props => {
-  const _props = mergeValidProps(CountUp.defaultProps, props);
+  const _props = { ...CountUp.defaultProps, ...props };
   const { start, formattingFn } = _props;
   const [count, setCount] = useState(
     typeof formattingFn === 'function' ? formattingFn(start) : start,
