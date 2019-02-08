@@ -47,8 +47,8 @@
     "prettier": "^1.14.3",
     "pretty-quick": "^1.8.0",
     "raf": "^3.4.0",
-    "react": "^16.8.0-alpha.1",
-    "react-dom": "^16.8.0-alpha.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "react-testing-library": "^5.4.4",
     "rollup": "^0.66.6",
     "rollup-plugin-babel": "^4.0.3"
