@@ -141,10 +141,25 @@ Note that `delay={0}` will automatically start the count up.
 <CountUp delay={2} end={100} />
 ```
 
-#### Hook
+### Hook
+
+#### Simple example
 
 ```js
-() => {
+import { useCountUp } from 'react-countup';
+
+const SimpleHook = () => {
+  const { countUp } = useCountUp({ end: 1234567 });
+  return <div>{countUp}</div>;
+};
+```
+
+#### Complete example
+
+```js
+import { useCountUp } from 'react-countup';
+
+const CompleteHook = () => {
   const { countUp, start, pauseResume, reset, update } = useCountUp({
     start: 0,
     end: 1234567,
