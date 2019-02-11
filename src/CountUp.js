@@ -1,33 +1,7 @@
-import Count from 'countup.js';
 import PropTypes from 'prop-types';
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, { Component } from 'react';
 import warning from 'warning';
-
-const createCountUpInstance = (el, props) => {
-  const {
-    decimal,
-    decimals,
-    duration,
-    easingFn,
-    end,
-    formattingFn,
-    prefix,
-    separator,
-    start,
-    suffix,
-    useEasing,
-  } = props;
-  return new Count(el, start, end, decimals, duration, {
-    decimal,
-    easingFn,
-    formattingFn,
-    separator,
-    prefix,
-    suffix,
-    useEasing,
-    useGrouping: !!separator,
-  });
-};
+import { createCountUpInstance } from './common';
 
 class CountUp extends Component {
   static propTypes = {
@@ -194,77 +168,5 @@ class CountUp extends Component {
     return <span className={className} ref={containerRef} style={style} />;
   }
 }
-// CountUp.js requires an element to execute it's animation,
-// since it only checks for truthy values -1 is enough to mock an element.
-const NO_ELEMENT = -1;
-
-export const useCountUp = props => {
-  const _props = { ...CountUp.defaultProps, ...props };
-  const { start, formattingFn } = _props;
-  const [count, setCount] = useState(
-    typeof formattingFn === 'function' ? formattingFn(start) : start,
-  );
-  const countUpRef = useRef(null);
-
-  const createInstance = () => {
-    const countUp = createCountUpInstance(NO_ELEMENT, _props);
-    let formattingFnRef = countUp.options.formattingFn;
-    countUp.options.formattingFn = (...args) => {
-      const result = formattingFnRef(...args);
-      setCount(result);
-    };
-    return countUp;
-  };
-
-  const getCountUp = () => {
-    const countUp = countUpRef.current;
-    if (countUp !== null) {
-      return countUp;
-    }
-    const newCountUp = createInstance();
-    countUpRef.current = newCountUp;
-    return newCountUp;
-  };
-
-  const reset = () => {
-    const { onReset } = _props;
-    getCountUp().reset();
-    onReset({ pauseResume, start: restart, update });
-  };
-
-  const restart = () => {
-    const { onStart, onEnd } = _props;
-    getCountUp().reset();
-    getCountUp().start(() => {
-      onEnd({ pauseResume, reset, start: restart, update });
-    });
-    onStart({ pauseResume, reset, update });
-  };
-
-  const pauseResume = () => {
-    const { onPauseResume } = _props;
-    getCountUp().pauseResume();
-    onPauseResume({ reset, start: restart, update });
-  };
-
-  const update = newEnd => {
-    const { onUpdate } = _props;
-    getCountUp().update(newEnd);
-    onUpdate({ pauseResume, reset, start: restart });
-  };
-
-  useEffect(() => {
-    const { delay, onStart, onEnd } = _props;
-    const timeout = setTimeout(() => {
-      onStart({ pauseResume, reset, update });
-      getCountUp().start(() => {
-        clearTimeout(timeout);
-        onEnd({ pauseResume, reset, start: restart, update });
-      });
-    }, delay * 1000);
-  }, []);
-
-  return { countUp: count, start: restart, pauseResume, reset, update };
-};
 
 export default CountUp;
