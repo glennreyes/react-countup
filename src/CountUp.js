@@ -1,7 +1,7 @@
-import Count from 'countup.js';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import warning from 'warning';
+import { createCountUpInstance } from './common';
 
 class CountUp extends Component {
   static propTypes = {
@@ -98,38 +98,7 @@ class CountUp extends Component {
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }
-
-    const {
-      decimal,
-      decimals,
-      duration,
-      easingFn,
-      end,
-      formattingFn,
-      prefix,
-      separator,
-      start,
-      suffix,
-      useEasing,
-    } = this.props;
-
-    return new Count(
-      this.containerRef.current,
-      start,
-      end,
-      decimals,
-      duration,
-      {
-        decimal,
-        easingFn,
-        formattingFn,
-        separator,
-        prefix,
-        suffix,
-        useEasing,
-        useGrouping: !!separator,
-      },
-    );
+    return createCountUpInstance(this.containerRef.current, this.props);
   };
 
   pauseResume = () => {

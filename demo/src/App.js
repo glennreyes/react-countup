@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import CountUp from 'react-countup';
+import React, { Component, Fragment, useEffect, useState, useRef } from 'react';
+import CountUp, { useCountUp } from 'react-countup';
 import { description, repository } from 'react-countup/package';
 import { RotateCw } from 'react-feather';
 import GithubCorner from 'react-github-corner';
@@ -46,7 +46,11 @@ class Example extends Component {
       <Fragment>
         <Fragment>
           <Subtitle>{title}</Subtitle>
-          <Provider scope={{ CountUp }} code={code.trim()} {...rest}>
+          <Provider
+            scope={{ CountUp, useCountUp, useState, useRef, useEffect }}
+            code={code.trim()}
+            {...rest}
+          >
             <Editor />
             <RefreshButton onClick={this.refresh} title="Re-render">
               <RotateCw size={16} />
@@ -127,11 +131,12 @@ const Provider = styled(LiveProvider)`
 const Subtitle = styled.h2`
   margin-top: 2em;
 `;
+
 const Text = styled.p``;
 const Title = styled.h1``;
 
 const simple = `
-<CountUp end={123456} />
+<CountUp end={123457} />
 `;
 
 const renderProp = `
@@ -182,6 +187,37 @@ const delayStart = `
 <CountUp delay={2} end={100} />
 `;
 
+const hook = `
+() => {
+  const {
+    countUp,
+    start,
+    pauseResume,
+    reset,
+    update
+  } = useCountUp({
+    start: 0,
+    end: 1234567,
+    delay: 2,
+    duration: 5,
+    onReset: () => console.log('Resetted!'),
+    onUpdate: () => console.log('Updated!'),
+    onPauseResume: () => console.log('Paused or resumed!'),
+    onStart: () => console.log('Started! 💨'),
+    onEnd: () => console.log('Ended! 👏')
+  });
+  return (
+    <div>
+      <div>{countUp}</div>
+      <button onClick={start}>Start</button>
+      <button onClick={reset}>Reset</button>
+      <button onClick={pauseResume}>Pause/Resume</button>
+      <button onClick={() => update(2000)}>Update to 2000</button>
+    </div>
+  );
+};
+`;
+
 const repo = `https://github.com/${repository}`;
 
 const App = () => (
@@ -200,6 +236,7 @@ const App = () => (
     <Example code={manualStart} title="Manually start with render prop" />
     <Example code={autoStart} title="Autostart with render prop" />
     <Example code={delayStart} title="Delay start" />
+    <Example code={hook} title="Useage as hook" />
     <GithubCorner bannerColor="palevioletred" href={repo} />
     <Footer>
       <Text>

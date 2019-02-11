@@ -1,6 +1,8 @@
+'use strict';
+
 import React from 'react';
 import { cleanup, fireEvent, render } from 'react-testing-library';
-import CountUp from '../index';
+import CountUp, { useCountUp } from '../index';
 
 afterEach(cleanup);
 
