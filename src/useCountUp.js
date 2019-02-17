@@ -70,6 +70,7 @@ const useCountUp = props => {
         onEnd({ pauseResume, reset, start: restart, update });
       });
     }, delay * 1000);
+    return reset;
   }, []);
 
   return { countUp: count, start: restart, pauseResume, reset, update };
