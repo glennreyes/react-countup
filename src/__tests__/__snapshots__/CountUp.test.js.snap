@@ -19,7 +19,7 @@ exports[`re-renders change of end value correctly 1`] = `
 exports[`re-renders change of start value correctly 1`] = `
 <div>
   <span>
-    5
+    0
   </span>
 </div>
 `;
@@ -34,40 +34,30 @@ exports[`re-renders with redraw={false} correctly 1`] = `
 
 exports[`renders as a render prop component correctly 1`] = `
 <div>
-  <div>
-    0
-  </div>
+  <div />
 </div>
 `;
 
 exports[`renders start value correctly 1`] = `
 <div>
-  <span>
-    0
-  </span>
+  <span />
 </div>
 `;
 
 exports[`renders with autostart correctly 1`] = `
 <div>
-  <div>
-    0
-  </div>
+  <div />
 </div>
 `;
 
 exports[`renders with delay as a render prop component correctly 1`] = `
 <div>
-  <div>
-    0
-  </div>
+  <div />
 </div>
 `;
 
 exports[`renders with delay correctly 1`] = `
 <div>
-  <span>
-    0
-  </span>
+  <span />
 </div>
 `;

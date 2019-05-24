@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { cleanup, fireEvent, render } from 'react-testing-library';
-import CountUp, { useCountUp } from '../index';
+import CountUp from '../index';
 
+jest.useFakeTimers();
 afterEach(cleanup);
 
 it('renders start value correctly', () => {
@@ -163,8 +164,8 @@ it('calls pauseResume in onStart callback correctly', () => {
     />,
   );
 
+  jest.runAllTimers();
   spy.pauseResume();
-
   expect(spy.pauseResume).toHaveBeenCalled();
 });
 
@@ -174,5 +175,6 @@ it('throws warning if ref not attached to a component', () => {
 
   render(<CountUp end={10}>{({ countUpRef }) => <div />}</CountUp>);
 
+  jest.runAllTimers();
   expect(console.error).toBeCalled();
 });
