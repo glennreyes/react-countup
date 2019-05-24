@@ -33,24 +33,23 @@
   "dependencies": {
     "countup.js": "^1.9.3",
     "prop-types": "^15.6.2",
-    "warning": "^4.0.2"
+    "warning": "^4.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
-    "husky": "^1.1.2",
-    "jest": "^23.6.0",
-    "prettier": "^1.14.3",
-    "pretty-quick": "^1.8.0",
-    "raf": "^3.4.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
+    "babel-jest": "^24.8.0",
+    "husky": "^2.3.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1",
+    "pretty-quick": "^1.11.0",
+    "raf": "^3.4.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-testing-library": "^5.4.4",
-    "rollup": "^0.66.6",
-    "rollup-plugin-babel": "^4.0.3"
+    "rollup": "^1.12.3",
+    "rollup-plugin-babel": "^4.3.2"
   }
 }
