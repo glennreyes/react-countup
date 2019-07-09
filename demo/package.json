@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.8.1",
-    "react-countup": "^4.0.0",
-    "react-dom": "^16.8.1",
-    "react-feather": "^1.1.4",
-    "react-github-corner": "^2.3.0",
-    "react-live": "^1.12.0",
+    "prop-types": "15.6.2",
+    "react": "16.8.1",
+    "react-countup": "4.0.0",
+    "react-dom": "16.8.1",
+    "react-feather": "1.1.4",
+    "react-github-corner": "2.3.0",
+    "react-live": "1.12.0",
     "react-scripts": "2.0.5",
-    "serve": "^10.0.2",
-    "styled-components": "^4.0.2"
+    "serve": "10.0.2",
+    "styled-components": "4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
