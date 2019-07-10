@@ -51,6 +51,6 @@
     "react-dom": "16.8.6",
     "react-testing-library": "5.4.4",
     "rollup": "0.68.2",
-    "rollup-plugin-babel": "4.0.3"
+    "rollup-plugin-babel": "4.3.3"
   }
 }
