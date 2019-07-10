@@ -36,6 +36,7 @@ Click [here](https://github.com/glennreyes/react-countup/tree/d0002932dac8a274f9
       - [`end: number`](#end-number)
       - [`prefix: string`](#prefix-string)
       - [`redraw: boolean`](#redraw-boolean)
+      - [`preserveValue: boolean`](#preservevalue-boolean)
       - [`separator: string`](#separator-string)
       - [`start: number`](#start-number)
       - [`suffix: string`](#suffix-string)
@@ -230,6 +231,12 @@ Static text before the transitioning value.
 #### `redraw: boolean`
 
 Forces count up transition on every component update.
+
+Default: `false`
+
+#### `preserveValue: boolean`
+
+Save previously ended number to start every new animation from it.
 
 Default: `false`
 
