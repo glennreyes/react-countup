@@ -20,6 +20,7 @@ class CountUp extends Component {
     suffix: PropTypes.string,
     style: PropTypes.object,
     useEasing: PropTypes.bool,
+    preserveValue: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -41,6 +42,7 @@ class CountUp extends Component {
     suffix: '',
     style: undefined,
     useEasing: true,
+    preserveValue: false,
   };
 
   componentDidMount() {
@@ -78,7 +80,9 @@ class CountUp extends Component {
     // Only end value has changed, so reset and and re-animate with the updated
     // end value.
     if (this.props.end !== prevProps.end) {
-      this.instance.reset();
+      if (!this.props.preserveValue) {
+        this.instance.reset();
+      }
       this.instance.update(this.props.end);
     }
   }
@@ -96,7 +100,7 @@ class CountUp extends Component {
       warning(
         this.containerRef.current &&
           (this.containerRef.current instanceof HTMLElement ||
-          this.containerRef.current instanceof SVGTextElement),
+            this.containerRef.current instanceof SVGTextElement),
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }

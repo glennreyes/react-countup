@@ -78,6 +78,14 @@ it('renders with autostart correctly', () => {
   expect(container).toMatchSnapshot();
 });
 
+it('does not reset if preserveValue is true', () => {
+  const { container, rerender } = render(<CountUp end={10} preserveValue />);
+
+  rerender(<CountUp end={20} preserveValue />);
+
+  expect(container).toMatchSnapshot();
+});
+
 it('calls start correctly', () => {
   const spy = {};
 
