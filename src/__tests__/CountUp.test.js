@@ -72,6 +72,18 @@ it('renders with delay as a render prop component correctly', () => {
   expect(container).toMatchSnapshot();
 });
 
+it('renders with delay as a render prop component correctly', () => {
+  console.error = jest.fn();
+
+  const { container } = render(
+    <CountUp delay={1} end={10}>
+      {({ countUpRef }) => <rect ref={countUpRef} />}
+    </CountUp>,
+  );
+
+  expect(console.error).toHaveBeenCalled();
+});
+
 it('renders as a render prop component correctly', () => {
   const { container } = render(
     <CountUp end={10}>{({ countUpRef }) => <div ref={countUpRef} />}</CountUp>,

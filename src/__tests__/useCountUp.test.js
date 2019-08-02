@@ -76,10 +76,10 @@ it('calls update correctly with hook', () => {
   const spy = {};
 
   const Hook = () => {
-    const { countUp, update } = useCountUp({ end: 10 });
-    spy.update = update;
-    spyOn(spy, 'update');
-    return <span onClick={spy.update}>{countUp}</span>;
+    const onUpdate = jest.fn();
+    const { countUp, update } = useCountUp({ end: 10, onUpdate });
+    spy.onUpdate = onUpdate;
+    return <span onClick={update}>{countUp}</span>;
   };
 
   const { container } = render(<Hook />);
@@ -87,17 +87,17 @@ it('calls update correctly with hook', () => {
   jest.runAllTimers();
   fireEvent.click(container.firstChild);
   jest.runAllTimers();
-  expect(spy.update).toHaveBeenCalled();
+  expect(spy.onUpdate).toHaveBeenCalled();
 });
 
 it('calls pauseResume correctly with hook', () => {
   const spy = {};
 
   const Hook = () => {
-    const { countUp, pauseResume } = useCountUp({ end: 10 });
-    spy.pauseResume = pauseResume;
-    spyOn(spy, 'pauseResume');
-    return <span onClick={spy.pauseResume}>{countUp}</span>;
+    const onPauseResume = jest.fn();
+    const { countUp, pauseResume } = useCountUp({ end: 10, onPauseResume });
+    spy.onPauseResume = onPauseResume;
+    return <span onClick={pauseResume}>{countUp}</span>;
   };
 
   const { container } = render(<Hook />);
@@ -105,5 +105,5 @@ it('calls pauseResume correctly with hook', () => {
   jest.runAllTimers();
   fireEvent.click(container.firstChild);
   jest.runAllTimers();
-  expect(spy.pauseResume).toHaveBeenCalled();
+  expect(spy.onPauseResume).toHaveBeenCalled();
 });
