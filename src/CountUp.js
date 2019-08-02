@@ -73,6 +73,7 @@ class CountUp extends Component {
       this.props.duration !== prevProps.duration ||
       this.props.start !== prevProps.start
     ) {
+      this.instance.reset();
       this.instance = this.createInstance();
       this.start();
     }

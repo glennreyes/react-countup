@@ -28,6 +28,18 @@ it('re-renders change of duration value correctly', () => {
   expect(container).toMatchSnapshot();
 });
 
+it('clear previous counter when duration changed', done => {
+  const { container, rerender } = render(<CountUp duration={1} end={100} />);
+
+  rerender(<CountUp duration={0.5} end={10} />);
+
+  setTimeout(() => {
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('10');
+    done();
+  }, 1200);
+});
+
 it('re-renders change of end value correctly', () => {
   const { container, rerender } = render(<CountUp end={10} />);
 
