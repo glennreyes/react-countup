@@ -57,21 +57,48 @@ class CountUp extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const hasCertainPropsChanged =
-      this.props.duration !== nextProps.duration ||
-      this.props.end !== nextProps.end ||
-      this.props.start !== nextProps.start;
+    const {
+      end,
+      start,
+      suffix,
+      prefix,
+      redraw,
+      duration,
+      separator,
+    } = this.props;
 
-    return hasCertainPropsChanged || this.props.redraw;
+    const hasCertainPropsChanged =
+      duration !== nextProps.duration ||
+      end !== nextProps.end ||
+      start !== nextProps.start ||
+      suffix !== nextProps.suffix ||
+      prefix !== nextProps.prefix ||
+      separator !== nextProps.separator;
+
+    return hasCertainPropsChanged || redraw;
   }
 
   componentDidUpdate(prevProps) {
-    // If duration or start has changed, there's no way to update the duration
-    // or start value. So we need to re-create the CountUp instance in order to
+    // If duration, suffix, prefix, separator or start has changed
+    // there's no way to update the values.
+    // So we need to re-create the CountUp instance in order to
     // restart it.
+    const {
+      end,
+      start,
+      suffix,
+      prefix,
+      duration,
+      separator,
+      preserveValue,
+    } = this.props;
+
     if (
-      this.props.duration !== prevProps.duration ||
-      this.props.start !== prevProps.start
+      duration !== prevProps.duration ||
+      start !== prevProps.start ||
+      suffix !== prevProps.suffix ||
+      prefix !== prevProps.suffix ||
+      separator !== prevProps.separator
     ) {
       this.instance.reset();
       this.instance = this.createInstance();
@@ -80,11 +107,11 @@ class CountUp extends Component {
 
     // Only end value has changed, so reset and and re-animate with the updated
     // end value.
-    if (this.props.end !== prevProps.end) {
-      if (!this.props.preserveValue) {
+    if (end !== prevProps.end) {
+      if (!preserveValue) {
         this.instance.reset();
       }
-      this.instance.update(this.props.end);
+      this.instance.update(end);
     }
   }
 
