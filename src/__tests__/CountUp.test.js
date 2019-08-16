@@ -51,7 +51,7 @@ it('re-renders when suffix changes', done => {
     const span = container.firstChild;
     expect(span.textContent).toEqual('30 seconds');
     done();
-  }, 1000);
+  }, 1200);
 });
 
 it('re-renders when the separator changes', done => {
@@ -59,13 +59,13 @@ it('re-renders when the separator changes', done => {
     <CountUp duration={1} end={1} separator="" />,
   );
 
-  rerender(<CountUp duration={1} end={30} separator=" " />);
+  rerender(<CountUp duration={1} end={3000} separator=" " />);
 
   setTimeout(() => {
     const span = container.firstChild;
-    expect(span.textContent).toEqual('30');
+    expect(span.textContent).toEqual('3 000');
     done();
-  }, 1000);
+  }, 1200);
 });
 
 it('re-renders when the prefix changes', done => {
@@ -79,7 +79,7 @@ it('re-renders when the prefix changes', done => {
     const span = container.firstChild;
     expect(span.textContent).toEqual('->30');
     done();
-  }, 1000);
+  }, 1200);
 });
 
 it('re-renders change of end value correctly', () => {
