@@ -57,7 +57,15 @@ class CountUp extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { end, start, suffix, prefix, redraw, duration } = this.props;
+    const {
+      end,
+      start,
+      suffix,
+      prefix,
+      redraw,
+      duration,
+      separator,
+    } = this.props;
 
     const hasCertainPropsChanged =
       duration !== nextProps.duration ||

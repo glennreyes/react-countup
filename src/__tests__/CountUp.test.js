@@ -40,6 +40,48 @@ it('clear previous counter when duration changed', done => {
   }, 1200);
 });
 
+it('re-renders when suffix changes', done => {
+  const { container, rerender } = render(
+    <CountUp duration={1} end={1} suffix="second" />,
+  );
+
+  rerender(<CountUp duration={1} end={30} suffix=" seconds" />);
+
+  setTimeout(() => {
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('30 seconds');
+    done();
+  }, 1000);
+});
+
+it('re-renders when the separator changes', done => {
+  const { container, rerender } = render(
+    <CountUp duration={1} end={1} separator="" />,
+  );
+
+  rerender(<CountUp duration={1} end={30} separator=" " />);
+
+  setTimeout(() => {
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('30');
+    done();
+  }, 1000);
+});
+
+it('re-renders when the prefix changes', done => {
+  const { container, rerender } = render(
+    <CountUp duration={1} end={1} prefix="" />,
+  );
+
+  rerender(<CountUp duration={1} end={30} prefix="->" />);
+
+  setTimeout(() => {
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('->30');
+    done();
+  }, 1000);
+});
+
 it('re-renders change of end value correctly', () => {
   const { container, rerender } = render(<CountUp end={10} />);
 
