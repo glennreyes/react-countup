@@ -128,7 +128,8 @@ class CountUp extends Component {
       warning(
         this.containerRef.current &&
           (this.containerRef.current instanceof HTMLElement ||
-            this.containerRef.current instanceof SVGTextElement),
+            this.containerRef.current instanceof SVGTextElement ||
+            this.containerRef.current instanceof SVGTSpanElement),
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }
