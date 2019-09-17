@@ -1,13 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`does not reset if preserveValue is true 1`] = `
-<div>
-  <span>
-    0
-  </span>
-</div>
-`;
-
 exports[`re-renders change of duration value correctly 1`] = `
 <div>
   <span>
