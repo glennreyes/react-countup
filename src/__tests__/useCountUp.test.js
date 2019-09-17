@@ -1,12 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {
-  cleanup,
-  flushEffects,
-  render,
-  fireEvent,
-} from 'react-testing-library';
+import { cleanup, fireEvent, render } from '@testing-library/react';
 import { useCountUp } from '../index';
 
 jest.useFakeTimers();
@@ -20,7 +15,6 @@ it('renders start value correctly with hook', () => {
 
   const { container } = render(<Hook />);
   const span = container.firstChild;
-  flushEffects();
   jest.runAllTimers();
   expect(span.textContent).toEqual('0');
 });
@@ -33,7 +27,6 @@ it('renders with delay correctly with hook', () => {
 
   const { container } = render(<Hook />);
   const span = container.firstChild;
-  flushEffects();
   jest.runAllTimers();
   expect(span.textContent).toEqual('0');
 });
@@ -48,7 +41,6 @@ it('calls start correctly with hook', () => {
   };
 
   const { container } = render(<Hook />);
-  flushEffects();
   jest.runAllTimers();
   fireEvent.click(container.firstChild);
   jest.runAllTimers();
@@ -65,7 +57,6 @@ it('calls reset correctly with hook', () => {
   };
 
   const { container } = render(<Hook />);
-  flushEffects();
   jest.runAllTimers();
   fireEvent.click(container.firstChild);
   jest.runAllTimers();
@@ -83,7 +74,6 @@ it('calls update correctly with hook', () => {
   };
 
   const { container } = render(<Hook />);
-  flushEffects();
   jest.runAllTimers();
   fireEvent.click(container.firstChild);
   jest.runAllTimers();
@@ -101,7 +91,6 @@ it('calls pauseResume correctly with hook', () => {
   };
 
   const { container } = render(<Hook />);
-  flushEffects();
   jest.runAllTimers();
   fireEvent.click(container.firstChild);
   jest.runAllTimers();
