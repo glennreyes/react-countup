@@ -97,7 +97,7 @@ class CountUp extends Component {
       duration !== prevProps.duration ||
       start !== prevProps.start ||
       suffix !== prevProps.suffix ||
-      prefix !== prevProps.suffix ||
+      prefix !== prevProps.prefix ||
       separator !== prevProps.separator
     ) {
       this.instance.reset();
