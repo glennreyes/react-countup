@@ -144,12 +144,43 @@ it('renders with autostart correctly', () => {
   expect(container).toMatchSnapshot();
 });
 
-it('does not reset if preserveValue is true', () => {
-  const { container, rerender } = render(<CountUp end={10} preserveValue />);
+it('does not reset if preserveValue is true', done => {
+  const { container, rerender } = render(
+    <CountUp duration={1} end={10} preserveValue />,
+  );
 
-  rerender(<CountUp end={20} preserveValue />);
+  setTimeout(() => {
+    rerender(<CountUp duration={1} end={20} preserveValue />);
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('10');
+    done();
+  }, 1000);
+});
 
-  expect(container).toMatchSnapshot();
+it('does not reset if preserveValue is true and suffix is set', done => {
+  const { container, rerender } = render(
+    <CountUp duration={1} end={10} suffix="%" preserveValue />,
+  );
+
+  setTimeout(() => {
+    rerender(<CountUp duration={1} end={20} suffix="%" preserveValue />);
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('10%');
+    done();
+  }, 1000);
+});
+
+it('does not reset if preserveValue is true and prefix is set', done => {
+  const { container, rerender } = render(
+    <CountUp duration={1} end={10} prefix="->" preserveValue />,
+  );
+
+  setTimeout(() => {
+    rerender(<CountUp duration={1} end={20} prefix="->" preserveValue />);
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('->10');
+    done();
+  }, 1000);
 });
 
 it('calls start correctly', () => {
