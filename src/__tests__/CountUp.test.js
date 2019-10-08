@@ -68,6 +68,32 @@ it('re-renders when the separator changes', done => {
   }, 1200);
 });
 
+it('re-renders when the decimals changes', done => {
+  const { container, rerender } = render(
+    <CountUp duration={1} end={1} decimals={0} />,
+  );
+
+  rerender(<CountUp duration={1} end={10.5} decimals={1} />);
+
+  setTimeout(() => {
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('10.5');
+    done();
+  }, 1200);
+});
+
+it('re-renders when the decimal changes', done => {
+  const { container, rerender } = render(<CountUp duration={1} end={1} />);
+
+  rerender(<CountUp duration={1} end={10.5} decimals={1} decimal="." />);
+
+  setTimeout(() => {
+    const span = container.firstChild;
+    expect(span.textContent).toEqual('10.5');
+    done();
+  }, 1200);
+});
+
 it('re-renders when the prefix changes', done => {
   const { container, rerender } = render(
     <CountUp duration={1} end={1} prefix="" />,
