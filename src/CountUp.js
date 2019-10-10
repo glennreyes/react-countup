@@ -65,6 +65,8 @@ class CountUp extends Component {
       redraw,
       duration,
       separator,
+      decimals,
+      decimal,
     } = this.props;
 
     const hasCertainPropsChanged =
@@ -73,7 +75,9 @@ class CountUp extends Component {
       start !== nextProps.start ||
       suffix !== nextProps.suffix ||
       prefix !== nextProps.prefix ||
-      separator !== nextProps.separator;
+      separator !== nextProps.separator ||
+      decimals !== nextProps.decimals ||
+      decimal !== nextProps.decimal;
 
     return hasCertainPropsChanged || redraw;
   }
@@ -90,6 +94,8 @@ class CountUp extends Component {
       prefix,
       duration,
       separator,
+      decimals,
+      decimal,
       preserveValue,
     } = this.props;
 
@@ -98,7 +104,9 @@ class CountUp extends Component {
       start !== prevProps.start ||
       suffix !== prevProps.suffix ||
       prefix !== prevProps.prefix ||
-      separator !== prevProps.separator
+      separator !== prevProps.separator ||
+      decimals !== prevProps.decimals ||
+      decimal !== prevProps.decimal
     ) {
       this.instance.reset();
       this.instance = this.createInstance();
