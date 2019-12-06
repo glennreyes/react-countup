@@ -37,9 +37,9 @@
     "warning": "^4.0.3"
   },
   "devDependencies": {
-    "@babel/core": "7.7.4",
+    "@babel/core": "7.7.5",
     "@babel/plugin-proposal-class-properties": "7.7.4",
-    "@babel/preset-env": "7.7.4",
+    "@babel/preset-env": "7.7.5",
     "@babel/preset-react": "7.7.4",
     "@testing-library/react": "9.3.2",
     "babel-jest": "24.9.0",
