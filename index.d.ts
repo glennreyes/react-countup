@@ -24,3 +24,30 @@ export interface CountUpProps {
 }
 
 declare class CountUp extends React.Component<CountUpProps, any> {}
+
+export interface useCountUpProps {
+  start?: number;
+  end: number;
+  delay?: number;
+  duration?: number;
+  onReset?: ({ pauseResume, start, update }) => void;
+  onUpdate?: ({ pauseResume, reset, start }) => void;
+  onPauseResume?: ({ reset, start, update }) => void;
+  onStart?: ({ pauseResume, reset, start, update }) => void;
+  onEnd?: ({ pauseResume, reset, start, update }) => void;
+}
+
+type countUpHook = (
+  useCountUpProps,
+) => {
+  countUp: number | string;
+  onReset: () => void;
+  nUpdate: () => void;
+  onPauseResume: () => void;
+  onStart: ({ pauseResume }) => void;
+  onEnd: ({ pauseResume }) => void;
+};
+
+export const useCountUp: countUpHook;
+
+export default CountUp;
