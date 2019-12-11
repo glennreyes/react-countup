@@ -41,11 +41,10 @@ type countUpHook = (
   useCountUpProps,
 ) => {
   countUp: number | string;
-  onReset: () => void;
-  nUpdate: () => void;
-  onPauseResume: () => void;
-  onStart: ({ pauseResume }) => void;
-  onEnd: ({ pauseResume }) => void;
+  start: () => void;
+  pauseResume: () => void;
+  reset: () => void;
+  update: () => void;
 };
 
 export const useCountUp: countUpHook;
