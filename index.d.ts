@@ -1,5 +1,13 @@
 import * as React from 'react';
 
+export interface RenderCounterProps {
+  countUpRef: React.RefObject<any>;
+  start?: () => void;
+  pauseResume?: () => void;
+  reset?: () => void;
+  update?: (newEnd?: number) => void;
+}
+
 export interface CountUpProps {
   className?: string;
   decimal?: string;
@@ -21,6 +29,7 @@ export interface CountUpProps {
   onPauseResume?: ({ reset, start, update }) => void;
   onReset?: ({ pauseResume, start, update }) => void;
   onUpdate?: ({ pauseResume, reset, start }) => void;
+  children?: (props: RenderCounterProps) => JSX.Element;
 }
 
 declare class CountUp extends React.Component<CountUpProps, any> {}
@@ -44,7 +53,7 @@ type countUpHook = (
   start: () => void;
   pauseResume: () => void;
   reset: () => void;
-  update: () => void;
+  update: (newEnd?: number) => void;
 };
 
 export const useCountUp: countUpHook;
