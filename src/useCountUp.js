@@ -62,14 +62,16 @@ const useCountUp = props => {
   };
 
   useEffect(() => {
-    const { delay, onStart, onEnd } = _props;
-    const timeout = setTimeout(() => {
-      onStart({ pauseResume, reset, update });
-      getCountUp().start(() => {
-        clearTimeout(timeout);
-        onEnd({ pauseResume, reset, start: restart, update });
-      });
-    }, delay * 1000);
+    const { delay, onStart, onEnd, startOnMount } = _props;
+    if (startOnMount) {
+      const timeout = setTimeout(() => {
+        onStart({ pauseResume, reset, update });
+        getCountUp().start(() => {
+          clearTimeout(timeout);
+          onEnd({ pauseResume, reset, start: restart, update });
+        });
+      }, delay * 1000);
+    }
     return reset;
   }, []);
 
