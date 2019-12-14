@@ -35,6 +35,7 @@ export interface CountUpProps {
 declare class CountUp extends React.Component<CountUpProps, any> {}
 
 export interface useCountUpProps {
+  startOnMount?: boolean;
   start?: number;
   end: number;
   delay?: number;
