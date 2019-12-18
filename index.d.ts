@@ -24,11 +24,11 @@ export interface CountUpProps {
   useEasing?: boolean;
   easingFn?: (t: number, b: number, c: number, d: number) => number;
   formattingFn?: (n: number) => string;
-  onEnd?: ({ pauseResume, reset, start, update }) => void;
-  onStart?: ({ pauseResume, reset, start, update }) => void;
-  onPauseResume?: ({ reset, start, update }) => void;
-  onReset?: ({ pauseResume, start, update }) => void;
-  onUpdate?: ({ pauseResume, reset, start }) => void;
+  onEnd?: ({ pauseResume: () => void, reset: () => void, start: () => void, update: () => void }) => void;
+  onStart?: ({ pauseResume: () => void, reset: () => void, start: () => void, update: () => void }) => void;
+  onPauseResume?: ({ reset: () => void, start: () => void, update: () => void }) => void;
+  onReset?: ({ pauseResume: () => void, start: () => void, update: () => void }) => void;
+  onUpdate?: ({ pauseResume: () => void, reset: () => void, start: () => void }) => void;
   children?: (props: RenderCounterProps) => JSX.Element;
 }
 
@@ -40,11 +40,11 @@ export interface useCountUpProps {
   end: number;
   delay?: number;
   duration?: number;
-  onReset?: ({ pauseResume, start, update }) => void;
-  onUpdate?: ({ pauseResume, reset, start }) => void;
-  onPauseResume?: ({ reset, start, update }) => void;
-  onStart?: ({ pauseResume, reset, start, update }) => void;
-  onEnd?: ({ pauseResume, reset, start, update }) => void;
+  onReset?: ({ pauseResume: () => void, start: () => void, update: () => void }) => void;
+  onUpdate?: ({ pauseResume: () => void, reset: () => void, start: () => void }) => void;
+  onPauseResume?: ({ reset: () => void, start: () => void, update: () => void }) => void;
+  onStart?: ({ pauseResume: () => void, reset: () => void, start: () => void, update: () => void }) => void;
+  onEnd?: ({ pauseResume: () => void, reset: () => void, start: () => void, update: () => void }) => void;
 }
 
 type countUpHook = (
