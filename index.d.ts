@@ -1,14 +1,46 @@
 import * as React from 'react';
 
+type Function = () => void;
+
+interface CallbackProps {
+  onEnd?: (providedFn: {
+    pauseResume: Function;
+    reset: Function;
+    start: Function;
+    update: Function;
+  }) => void;
+  onStart?: (providedFn: {
+    pauseResume: Function;
+    reset: Function;
+    start: Function;
+    update: Function;
+  }) => void;
+  onPauseResume?: (providedFn: {
+    reset: Function;
+    start: Function;
+    update: Function;
+  }) => void;
+  onReset?: (providedFn: {
+    pauseResume: Function;
+    start: Function;
+    update: Function;
+  }) => void;
+  onUpdate?: (providedFn: {
+    pauseResume: Function;
+    reset: Function;
+    start: Function;
+  }) => void;
+}
+
 export interface RenderCounterProps {
   countUpRef: React.RefObject<any>;
-  start?: () => void;
-  pauseResume?: () => void;
-  reset?: () => void;
+  start?: Function;
+  pauseResume?: Function;
+  reset?: Function;
   update?: (newEnd?: number) => void;
 }
 
-export interface CountUpProps {
+export interface CountUpProps extends CallbackProps {
   className?: string;
   decimal?: string;
   decimals?: number;
@@ -24,35 +56,25 @@ export interface CountUpProps {
   useEasing?: boolean;
   easingFn?: (t: number, b: number, c: number, d: number) => number;
   formattingFn?: (n: number) => string;
-  onEnd?: ({ pauseResume, reset, start, update }) => void;
-  onStart?: ({ pauseResume, reset, start, update }) => void;
-  onPauseResume?: ({ reset, start, update }) => void;
-  onReset?: ({ pauseResume, start, update }) => void;
-  onUpdate?: ({ pauseResume, reset, start }) => void;
   children?: (props: RenderCounterProps) => JSX.Element;
 }
 
 declare class CountUp extends React.Component<CountUpProps, any> {}
 
-export interface useCountUpProps {
+export interface useCountUpProps extends CallbackProps {
   start?: number;
   end: number;
   delay?: number;
   duration?: number;
-  onReset?: ({ pauseResume, start, update }) => void;
-  onUpdate?: ({ pauseResume, reset, start }) => void;
-  onPauseResume?: ({ reset, start, update }) => void;
-  onStart?: ({ pauseResume, reset, start, update }) => void;
-  onEnd?: ({ pauseResume, reset, start, update }) => void;
 }
 
 type countUpHook = (
   useCountUpProps,
 ) => {
   countUp: number | string;
-  start: () => void;
-  pauseResume: () => void;
-  reset: () => void;
+  start: Function;
+  pauseResume: Function;
+  reset: Function;
   update: (newEnd?: number) => void;
 };
 
