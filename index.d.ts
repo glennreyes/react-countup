@@ -62,6 +62,7 @@ export interface CountUpProps extends CallbackProps {
 declare class CountUp extends React.Component<CountUpProps, any> {}
 
 export interface useCountUpProps extends CallbackProps {
+  startOnMount?: boolean;
   start?: number;
   end: number;
   delay?: number;
