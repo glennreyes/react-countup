@@ -40,6 +40,8 @@ export interface RenderCounterProps {
   update?: (newEnd?: number) => void;
 }
 
+type EasingFn = (t: number, b: number, c: number, d: number) => number;
+
 export interface CountUpProps extends CallbackProps {
   className?: string;
   decimal?: string;
@@ -54,7 +56,7 @@ export interface CountUpProps extends CallbackProps {
   start?: number;
   suffix?: string;
   useEasing?: boolean;
-  easingFn?: (t: number, b: number, c: number, d: number) => number;
+  easingFn?: EasingFn;
   formattingFn?: (n: number) => string;
   children?: (props: RenderCounterProps) => JSX.Element;
 }
@@ -67,10 +69,12 @@ export interface useCountUpProps extends CallbackProps {
   end: number;
   delay?: number;
   duration?: number;
+  easingFn?: EasingFn;
+  separator?: string;
 }
 
 type countUpHook = (
-  useCountUpProps,
+  arg: useCountUpProps,
 ) => {
   countUp: number | string;
   start: Function;
