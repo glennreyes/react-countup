@@ -1,9 +1,7 @@
 import { CountUp } from 'countup.js';
+import { CountUpProps } from '../index';
 
-export const createCountUpInstance = (
-  el: HTMLElement | HTMLInputElement,
-  props,
-) => {
+export const createCountUpInstance = (el: HTMLElement, props: CountUpProps) => {
   const {
     decimal,
     decimals,
@@ -20,12 +18,12 @@ export const createCountUpInstance = (
   } = props;
   return new CountUp(el, end, {
     startVal: start,
-    // duration,
+    duration,
     decimal,
     decimalPlaces: decimals,
-    // easingFn,
-    // formattingFn,
-    // numerals,
+    easingFn,
+    formattingFn,
+    numerals,
     separator,
     prefix,
     suffix,
