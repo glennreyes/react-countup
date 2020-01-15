@@ -42,35 +42,33 @@ export interface RenderCounterProps {
 
 type EasingFn = (t: number, b: number, c: number, d: number) => number;
 
-export interface CountUpProps extends CallbackProps {
-  className?: string;
+interface CommonProps {
   decimal?: string;
   decimals?: number;
-  delay?: number;
   duration?: number;
+  easingFn?: EasingFn;
   end: number;
+  formattingFn?: (n: number) => string;
   prefix?: string;
-  redraw?: boolean;
-  preserveValue?: boolean;
   separator?: string;
   start?: number;
   suffix?: string;
   useEasing?: boolean;
-  easingFn?: EasingFn;
-  formattingFn?: (n: number) => string;
+}
+
+export interface CountUpProps extends CommonProps, CallbackProps {
+  className?: string;
+  delay?: number;
+  redraw?: boolean;
+  preserveValue?: boolean;
   children?: (props: RenderCounterProps) => JSX.Element;
 }
 
 declare class CountUp extends React.Component<CountUpProps, any> {}
 
-export interface useCountUpProps extends CallbackProps {
+export interface useCountUpProps extends CommonProps, CallbackProps {
   startOnMount?: boolean;
-  start?: number;
-  end: number;
   delay?: number;
-  duration?: number;
-  easingFn?: EasingFn;
-  separator?: string;
 }
 
 type countUpHook = (
