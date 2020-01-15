@@ -59,9 +59,10 @@ export interface CountUpProps extends CallbackProps {
   easingFn?: EasingFn;
   formattingFn?: (n: number) => string;
   children?: (props: RenderCounterProps) => JSX.Element;
+  style?: React.CSSProperties;
 }
 
-declare class CountUp extends React.Component<CountUpProps, any> {}
+declare class CountUp extends React.Component<CountUpProps> {}
 
 export interface useCountUpProps extends CallbackProps {
   startOnMount?: boolean;
