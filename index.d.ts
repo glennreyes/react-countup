@@ -1,29 +1,29 @@
 import * as React from 'react';
 
 type Function = () => void;
+type UpdateFunction = (newEnd?: number) => void;
 
 interface CallbackProps {
   onEnd?: (providedFn: {
     pauseResume: Function;
     reset: Function;
     start: Function;
-    update: Function;
+    update: UpdateFunction;
   }) => void;
   onStart?: (providedFn: {
     pauseResume: Function;
     reset: Function;
-    start: Function;
-    update: Function;
+    update: UpdateFunction;
   }) => void;
   onPauseResume?: (providedFn: {
     reset: Function;
     start: Function;
-    update: Function;
+    update: UpdateFunction;
   }) => void;
   onReset?: (providedFn: {
     pauseResume: Function;
     start: Function;
-    update: Function;
+    update: UpdateFunction;
   }) => void;
   onUpdate?: (providedFn: {
     pauseResume: Function;
@@ -37,7 +37,7 @@ export interface RenderCounterProps {
   start?: Function;
   pauseResume?: Function;
   reset?: Function;
-  update?: (newEnd?: number) => void;
+  update?: UpdateFunction;
 }
 
 type EasingFn = (t: number, b: number, c: number, d: number) => number;
