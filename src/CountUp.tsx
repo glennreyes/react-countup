@@ -3,7 +3,7 @@ import { CountUp } from 'countup.js';
 import React, { Component } from 'react';
 import warning from 'warning';
 import { createCountUpInstance } from './common';
-import { RenderCounterProps, CountUpProps } from '../index';
+import { CountUpProps } from '../index';
 
 class ReactCountUp extends Component<CountUpProps> {
   static propTypes = {
@@ -27,25 +27,18 @@ class ReactCountUp extends Component<CountUpProps> {
   };
 
   static defaultProps: Partial<CountUpProps> = {
-    decimal: '.',
-    decimals: 0,
-    onEnd: () => {},
-    onPauseResume: () => {},
-    onReset: () => {},
-    onStart: () => {},
-    onUpdate: () => {},
-    prefix: '',
     redraw: false,
-    separator: '',
-    start: 0,
-    // startOnMount: true,
-    suffix: '',
-    style: undefined,
-    useEasing: true,
+    startOnMount: true,
     preserveValue: false,
   };
 
-  containerRef = React.createRef();
+  containerRef: React.RefObject<
+    | HTMLElement
+    | HTMLInputElement
+    | HTMLSpanElement
+    | SVGTextElement
+    | SVGTSpanElement
+  > = React.createRef();
 
   private instance: CountUp | null = null;
   private timeoutId: number | null = null;
@@ -84,7 +77,7 @@ class ReactCountUp extends Component<CountUpProps> {
       decimals !== nextProps.decimals ||
       decimal !== nextProps.decimal;
 
-    return hasCertainPropsChanged || redraw;
+    return hasCertainPropsChanged || !!redraw;
   }
 
   componentDidUpdate(prevProps: CountUpProps) {
@@ -146,7 +139,10 @@ class ReactCountUp extends Component<CountUpProps> {
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }
-    return createCountUpInstance(this.containerRef.current, this.props);
+    return createCountUpInstance(
+      this.containerRef.current as HTMLElement,
+      this.props,
+    );
   };
 
   pauseResume = () => {
@@ -155,7 +151,9 @@ class ReactCountUp extends Component<CountUpProps> {
 
     this.instance!.pauseResume();
 
-    onPauseResume({ reset, start, update });
+    if (onPauseResume !== undefined) {
+      onPauseResume({ reset, start, update });
+    }
   };
 
   reset = () => {
@@ -164,7 +162,9 @@ class ReactCountUp extends Component<CountUpProps> {
 
     this.instance!.reset();
 
-    onReset({ pauseResume, start, update });
+    if (onReset !== undefined) {
+      onReset({ pauseResume, start, update });
+    }
   };
 
   restart = () => {
@@ -176,7 +176,11 @@ class ReactCountUp extends Component<CountUpProps> {
     const { pauseResume, reset, restart: start, update } = this;
     const { delay, onEnd, onStart } = this.props;
     const run = () =>
-      this.instance!.start(() => onEnd({ pauseResume, reset, start, update }));
+      this.instance!.start(() => {
+        if (onEnd !== undefined) {
+          onEnd({ pauseResume, reset, start, update });
+        }
+      });
 
     // Delay start if delay prop is properly set
     if (delay && delay > 0) {
@@ -185,16 +189,20 @@ class ReactCountUp extends Component<CountUpProps> {
       run();
     }
 
-    onStart({ pauseResume, reset, update });
+    if (onStart !== undefined) {
+      onStart({ pauseResume, reset, update });
+    }
   };
 
-  update = (newEnd: number) => {
+  update = (newEnd?: number) => {
     const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 
     this.instance!.update(newEnd);
 
-    onUpdate({ pauseResume, reset, start });
+    if (onUpdate !== undefined) {
+      onUpdate({ pauseResume, reset, start });
+    }
   };
 
   render() {
