@@ -32,13 +32,7 @@ class ReactCountUp extends Component<CountUpProps> {
     preserveValue: false,
   };
 
-  containerRef: React.RefObject<
-    | HTMLElement
-    | HTMLInputElement
-    | HTMLSpanElement
-    | SVGTextElement
-    | SVGTSpanElement
-  > = React.createRef();
+  containerRef: React.RefObject<HTMLElement> = React.createRef();
 
   private instance: CountUp | null = null;
   private timeoutId: number | null = null;
@@ -132,10 +126,12 @@ class ReactCountUp extends Component<CountUpProps> {
     if (typeof this.props.children === 'function') {
       // Warn when user didn't use containerRef at all
       warning(
-        this.containerRef.current &&
-          (this.containerRef.current instanceof HTMLElement ||
+        !!(
+          this.containerRef.current &&
+          (this.containerRef.current instanceof HTMLInputElement ||
             this.containerRef.current instanceof SVGTextElement ||
-            this.containerRef.current instanceof SVGTSpanElement),
+            this.containerRef.current instanceof SVGTSpanElement)
+        ),
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }
