@@ -5,6 +5,8 @@ import warning from 'warning';
 import { createCountUpInstance } from './common';
 import { CountUpProps } from '../index';
 
+const AVAILABLE_TAGS = ['input', 'text', 'span', 'div'];
+
 class ReactCountUp extends Component<CountUpProps> {
   static propTypes = {
     decimal: PropTypes.string,
@@ -44,7 +46,9 @@ class ReactCountUp extends Component<CountUpProps> {
     preserveValue: false,
   };
 
-  containerRef: React.RefObject<any> = React.createRef();
+  private containerRef: React.RefObject<
+    HTMLElement & SVGTextElement & SVGTSpanElement
+  > = React.createRef();
 
   private instance: CountUp | null = null;
   private timeoutId: number | null = null;
@@ -140,9 +144,9 @@ class ReactCountUp extends Component<CountUpProps> {
       warning(
         !!(
           this.containerRef.current &&
-          (this.containerRef.current instanceof HTMLElement ||
-            this.containerRef.current instanceof SVGTextElement ||
-            this.containerRef.current instanceof SVGTSpanElement)
+          AVAILABLE_TAGS.includes(
+            this.containerRef.current.tagName.toLowerCase(),
+          )
         ),
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
