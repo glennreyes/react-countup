@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": ["es2017", "dom"],
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "dist",
+    "target": "es5",
+    "jsx": "react",
+    "pretty": true,
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "compileOnSave": true,
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
