@@ -27,12 +27,24 @@ class ReactCountUp extends Component<CountUpProps> {
   };
 
   static defaultProps: Partial<CountUpProps> = {
+    decimal: '.',
+    decimals: 0,
+    duration: 2,
+    onEnd: () => {},
+    onPauseResume: () => {},
+    onReset: () => {},
+    onStart: () => {},
+    onUpdate: () => {},
+    prefix: '',
     redraw: false,
-    startOnMount: true,
+    separator: ',',
+    start: 0,
+    suffix: '',
+    useEasing: true,
     preserveValue: false,
   };
 
-  containerRef: React.RefObject<HTMLElement> = React.createRef();
+  containerRef: React.RefObject<any> = React.createRef();
 
   private instance: CountUp | null = null;
   private timeoutId: number | null = null;
@@ -128,7 +140,7 @@ class ReactCountUp extends Component<CountUpProps> {
       warning(
         !!(
           this.containerRef.current &&
-          (this.containerRef.current instanceof HTMLInputElement ||
+          (this.containerRef.current instanceof HTMLElement ||
             this.containerRef.current instanceof SVGTextElement ||
             this.containerRef.current instanceof SVGTSpanElement)
         ),
