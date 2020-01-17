@@ -1,6 +1,6 @@
 import React, { Component, Fragment, useEffect, useState, useRef } from 'react';
 import CountUp, { useCountUp } from 'react-countup';
-import { description, repository } from 'react-countup/package';
+// import { description, repository } from 'react-countup/package';
 import { RotateCw } from 'react-feather';
 import GithubCorner from 'react-github-corner';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
@@ -189,13 +189,16 @@ const delayStart = `
 
 const hook = `
 () => {
+  const countUpRef = useRef(null); 
+  
   const {
-    countUp,
     start,
     pauseResume,
     reset,
     update
   } = useCountUp({
+    ref: countUpRef,
+    startOnMount: true,
     start: 0,
     end: 1234567,
     delay: 2,
@@ -206,9 +209,10 @@ const hook = `
     onStart: () => console.log('Started! 💨'),
     onEnd: () => console.log('Ended! 👏')
   });
+  
   return (
     <div>
-      <div>{countUp}</div>
+      <input ref={countUpRef} />
       <button onClick={start}>Start</button>
       <button onClick={reset}>Reset</button>
       <button onClick={pauseResume}>Pause/Resume</button>
@@ -218,16 +222,16 @@ const hook = `
 };
 `;
 
-const repo = `https://github.com/${repository}`;
+// const repo = `https://github.com/${repository}`;
 
 const App = () => (
   <Main>
     <Title>React CountUp</Title>
-    <Text>{description}</Text>
+    {/*<Text>{description}</Text>*/}
     <Text>
-      <a href={`${repo}#installation`}>Installation</a>
-      {' · '}
-      <a href={`${repo}#api`}>API</a>
+      {/*<a href={`${repo}#installation`}>Installation</a>*/}
+      {/*{' · '}*/}
+      {/*<a href={`${repo}#api`}>API</a>*/}
     </Text>
     <Example code={simple} title="Simple">
       <Text>Edit the code to see live changes.</Text>
@@ -237,13 +241,13 @@ const App = () => (
     <Example code={autoStart} title="Autostart with render prop" />
     <Example code={delayStart} title="Delay start" />
     <Example code={hook} title="Useage as hook" />
-    <GithubCorner bannerColor="palevioletred" href={repo} />
-    <Footer>
-      <Text>
-        MIT · <a href={repo}>GitHub</a> ·{' '}
-        <a href="https://twitter.com/glnnrys">@glnnrys</a>
-      </Text>
-    </Footer>
+    {/*<GithubCorner bannerColor="palevioletred" href={repo} />*/}
+    {/*<Footer>*/}
+    {/*  <Text>*/}
+    {/*    MIT · <a href={repo}>GitHub</a> ·{' '}*/}
+    {/*    <a href="https://twitter.com/glnnrys">@glnnrys</a>*/}
+    {/*  </Text>*/}
+    {/*</Footer>*/}
   </Main>
 );
 
