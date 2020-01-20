@@ -12,6 +12,17 @@ it('renders start value correctly', () => {
   expect(container).toMatchSnapshot();
 });
 
+it('renders with numerals option', done => {
+  const numerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+  const { container } = render(<CountUp end={10} numerals={numerals} />);
+
+  setTimeout(() => {
+    const span = container.firstChild;
+    expect(span!.textContent).toEqual('١٠');
+    done();
+  }, 1200);
+});
+
 it('re-renders change of start value correctly', () => {
   const { container, rerender } = render(<CountUp end={10} />);
 
