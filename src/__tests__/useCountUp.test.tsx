@@ -6,64 +6,80 @@ import { cleanup } from '@testing-library/react-hooks';
 import { useCountUp } from '../index';
 
 afterEach(cleanup);
-//
-// it('renders countup correctly', async done => {
-//   const Hook = () => {
-//     const { countUp } = useCountUp({ end: 10 });
-//     return <span>{countUp}</span>;
-//   };
-//
-//   const { container } = render(<Hook />);
-//
-//   await act(() => {
-//     return new Promise(() => {
-//       setTimeout(() => {
-//         const span = container.firstChild;
-//         expect(span.textContent).toEqual('10');
-//         done();
-//       }, 1100);
-//     });
-//   });
-// });
-//
-// it('does not start countup when startOnMount is false', async done => {
-//   const Hook = () => {
-//     const { countUp } = useCountUp({ end: 10, startOnMount: false });
-//     return <span>{countUp}</span>;
-//   };
-//
-//   const { container } = render(<Hook />);
-//
-//   await act(() => {
-//     return new Promise(() => {
-//       setTimeout(() => {
-//         const span = container.firstChild;
-//         expect(span.textContent).toEqual('0');
-//         done();
-//       }, 1100);
-//     });
-//   });
-// });
-//
-// it('renders with delay correctly with hook', async done => {
-//   const Hook = () => {
-//     const { countUp } = useCountUp({ delay: 1, end: 10 });
-//     return <span>{countUp}</span>;
-//   };
-//
-//   const { container } = render(<Hook />);
-//
-//   await act(() => {
-//     return new Promise(() => {
-//       setTimeout(() => {
-//         const span = container.firstChild;
-//         expect(span.textContent).toEqual('10');
-//         done();
-//       }, 2100);
-//     });
-//   });
-// });
-//
+
+it('renders countup correctly', async done => {
+  const Hook = () => {
+    const countUpRef = React.useRef(null);
+    //@ts-ignore
+    useCountUp({ end: 10, ref: countUpRef, startOnMount: true });
+    return <span ref={countUpRef} />;
+  };
+
+  const { container } = render(<Hook />);
+
+  act(() => {
+    new Promise(() => {
+      setTimeout(() => {
+        const span = container.firstChild;
+        expect(span!.textContent).toEqual('10');
+        done();
+      }, 1100);
+    });
+  });
+});
+
+it('does not start countup when startOnMount is false', async done => {
+  const Hook = () => {
+    const countUpRef = React.useRef(null);
+    //@ts-ignore
+    useCountUp({ end: 10, ref: countUpRef, startOnMount: false });
+    return <span ref={countUpRef} />;
+  };
+
+  const { container } = render(<Hook />);
+
+  act(() => {
+    new Promise(() => {
+      setTimeout(() => {
+        const span = container.firstChild;
+        expect(span!.textContent).toEqual('');
+        done();
+      }, 1100);
+    });
+  });
+});
+
+it('renders with delay correctly with hook', async done => {
+  const Hook = () => {
+    const countUpRef = React.useRef(null);
+    //@ts-ignore
+    useCountUp({ end: 10, ref: countUpRef, startOnMount: true, delay: 1 });
+    return <span ref={countUpRef} />;
+  };
+
+  const { container } = render(<Hook />);
+
+  act(() => {
+    new Promise(() => {
+      setTimeout(() => {
+        const span = container.firstChild;
+        expect(span!.textContent).not.toEqual('10');
+        done();
+      }, 1100);
+    });
+  });
+
+  act(() => {
+    new Promise(() => {
+      setTimeout(() => {
+        const span = container.firstChild;
+        expect(span!.textContent).toEqual('10');
+        done();
+      }, 2100);
+    });
+  });
+});
+
 // it('calls start correctly with hook', () => {
 //   const spy = {};
 //   const Hook = () => {
