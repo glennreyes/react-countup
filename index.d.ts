@@ -49,6 +49,7 @@ export interface CountUpProps extends CallbackProps {
   delay?: number;
   duration?: number;
   end: number;
+  numerals?: string[];
   prefix?: string;
   redraw?: boolean;
   preserveValue?: boolean;
@@ -68,6 +69,7 @@ export interface useCountUpProps extends CallbackProps {
   startOnMount?: boolean;
   start?: number;
   end: number;
+  ref: React.RefObject<any>;
   delay?: number;
   duration?: number;
   easingFn?: EasingFn;
