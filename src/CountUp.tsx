@@ -135,7 +135,9 @@ class ReactCountUp extends Component<CountUpProps> {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
-    this.instance!.reset();
+    if (this.instance) {
+      this.instance.reset();
+    }
   }
 
   createInstance = () => {
@@ -150,6 +152,7 @@ class ReactCountUp extends Component<CountUpProps> {
         ),
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
+      return null;
     }
     return createCountUpInstance(
       this.containerRef.current as HTMLElement,

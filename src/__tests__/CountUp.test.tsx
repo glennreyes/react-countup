@@ -171,16 +171,6 @@ it('renders as a render prop component correctly', () => {
   expect(container).toMatchSnapshot();
 });
 
-// it('renders with autostart correctly', () => {
-//   const { container } = render(
-//     <CountUp autostart end={10}>
-//       {({ countUpRef }) => <div ref={countUpRef} />}
-//     </CountUp>,
-//   );
-//
-//   expect(container).toMatchSnapshot();
-// });
-
 it('does not reset if preserveValue is true', done => {
   const { container, rerender } = render(
     <CountUp duration={1} end={10} preserveValue />,
