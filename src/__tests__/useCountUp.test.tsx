@@ -10,7 +10,6 @@ afterEach(cleanup);
 it('renders countup correctly', async done => {
   const Hook = () => {
     const countUpRef = React.useRef(null);
-    //@ts-ignore
     useCountUp({ end: 10, ref: countUpRef, startOnMount: true });
     return <span ref={countUpRef} />;
   };
@@ -31,7 +30,6 @@ it('renders countup correctly', async done => {
 it('does not start countup when startOnMount is false', async done => {
   const Hook = () => {
     const countUpRef = React.useRef(null);
-    //@ts-ignore
     useCountUp({ end: 10, ref: countUpRef, startOnMount: false });
     return <span ref={countUpRef} />;
   };
@@ -52,7 +50,6 @@ it('does not start countup when startOnMount is false', async done => {
 it('renders with delay correctly with hook', async done => {
   const Hook = () => {
     const countUpRef = React.useRef(null);
-    //@ts-ignore
     useCountUp({ end: 10, ref: countUpRef, startOnMount: true, delay: 1 });
     return <span ref={countUpRef} />;
   };
@@ -100,7 +97,6 @@ const spy: Spy = {
 it('calls start correctly with hook', () => {
   const Hook = () => {
     const countUpRef = React.useRef(null);
-    //@ts-ignore
     const { start } = useCountUp({
       end: 10,
       ref: countUpRef,
@@ -125,7 +121,6 @@ it('calls start correctly with hook', () => {
 it('calls reset correctly with hook', () => {
   const Hook = () => {
     const countUpRef = React.useRef(null);
-    //@ts-ignore
     const { reset } = useCountUp({
       end: 10,
       ref: countUpRef,
@@ -142,66 +137,93 @@ it('calls reset correctly with hook', () => {
   };
 
   const { container } = render(<Hook />);
-  const div = container.firstChild!;
-  fireEvent.click(div as Element);
+  fireEvent.click(container.firstChild as Element);
   expect(spy.reset).toHaveBeenCalled();
 });
 
-// it('calls update correctly with hook', () => {
-//   const spy = {};
-//
-//   const Hook = () => {
-//     const onUpdate = jest.fn();
-//     const { countUp, update } = useCountUp({ end: 10, onUpdate });
-//     spy.onUpdate = onUpdate;
-//     return <span onClick={update}>{countUp}</span>;
-//   };
-//
-//   const { container } = render(<Hook />);
-//   fireEvent.click(container.firstChild);
-//   expect(spy.onUpdate).toHaveBeenCalled();
-// });
+it('calls update correctly with hook', () => {
+  const spy = {
+    onUpdate: jest.fn(),
+  };
 
-// it('calls pauseResume correctly with hook', () => {
-//   const spy = {};
-//
-//   const Hook = () => {
-//     const onPauseResume = jest.fn();
-//     const { countUp, pauseResume } = useCountUp({ end: 10, onPauseResume });
-//     spy.onPauseResume = onPauseResume;
-//     return <span onClick={pauseResume}>{countUp}</span>;
-//   };
-//
-//   const { container } = render(<Hook />);
-//   fireEvent.click(container.firstChild);
-//   expect(spy.onPauseResume).toHaveBeenCalled();
-// });
+  const Hook = () => {
+    const countUpRef = React.useRef(null);
+    const { update } = useCountUp({
+      end: 10,
+      ref: countUpRef,
+      onUpdate: spy.onUpdate,
+    });
+    return (
+      <>
+        <div onClick={() => update()} />
+        <span ref={countUpRef} />
+      </>
+    );
+  };
 
-// it('calls start correctly with hook', async done => {
-//   const spy = {};
-//   const onStart = jest.fn();
-//   const Hook = () => {
-//     spy.onStart = onStart;
-//     spyOn(spy, 'onStart');
-//     const { countUp, start } = useCountUp({
-//       end: 10,
-//       onStart,
-//       startOnMount: false,
-//     });
-//     return <span onClick={start}>{countUp}</span>;
-//   };
-//
-//   const { container } = render(<Hook />);
-//
-//   fireEvent.click(container.firstChild);
-//
-//   await act(() => {
-//     return new Promise(() => {
-//       setTimeout(() => {
-//         done();
-//       }, 1100);
-//     });
-//   });
-//
-//   expect(spy.onStart).toHaveBeenCalled();
-// });
+  const { container } = render(<Hook />);
+  fireEvent.click(container.firstChild as Element);
+  expect(spy.onUpdate).toHaveBeenCalled();
+});
+
+it('calls pauseResume correctly with hook', () => {
+  const spy = {
+    onPauseResume: jest.fn(),
+  };
+
+  const Hook = () => {
+    const countUpRef = React.useRef(null);
+    const { pauseResume } = useCountUp({
+      end: 10,
+      ref: countUpRef,
+      onPauseResume: spy.onPauseResume,
+    });
+    return (
+      <>
+        <div onClick={() => pauseResume()} />
+        <span ref={countUpRef} />
+      </>
+    );
+  };
+
+  const { container } = render(<Hook />);
+  fireEvent.click(container.firstChild as Element);
+  expect(spy.onPauseResume).toHaveBeenCalled();
+});
+
+it('calls start correctly with hook', async done => {
+  const spy = {
+    onStart: jest.fn(),
+  };
+
+  const Hook = () => {
+    const countUpRef = React.useRef(null);
+    spyOn(spy, 'onStart');
+    const { start } = useCountUp({
+      ref: countUpRef,
+      end: 10,
+      onStart: spy.onStart,
+      startOnMount: false,
+    });
+    return (
+      <>
+        <div onClick={start} />
+        <span ref={countUpRef} />
+      </>
+    );
+  };
+
+  const { container } = render(<Hook />);
+
+  fireEvent.click(container.firstChild as Element);
+
+  act(() => {
+    new Promise(() => {
+      setTimeout(() => {
+        done();
+      }, 1100);
+    });
+  });
+
+  expect(spy.onStart).toHaveBeenCalled();
+});
