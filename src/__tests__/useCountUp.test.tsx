@@ -61,7 +61,6 @@ it('renders with delay correctly with hook', async done => {
       setTimeout(() => {
         const span = container.firstChild;
         expect(span!.textContent).not.toEqual('10');
-        done();
       }, 1100);
     });
   });
