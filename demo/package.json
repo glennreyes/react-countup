@@ -12,7 +12,7 @@
     "react-live": "^2.2.1",
     "react-scripts": "3.3.0",
     "serve": "^11.2.0",
-    "styled-components": "^4.4.0"
+    "styled-components": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
