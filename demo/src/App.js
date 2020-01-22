@@ -1,10 +1,12 @@
 import React, { Component, Fragment, useEffect, useState, useRef } from 'react';
 import CountUp, { useCountUp } from 'react-countup';
-// import { description, repository } from 'react-countup/package';
 import { RotateCw } from 'react-feather';
 import GithubCorner from 'react-github-corner';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import styled from 'styled-components';
+
+const description = 'A React component wrapper around CountUp.js';
+const repository = 'glennreyes/react-countup';
 
 const RefreshButton = styled.button`
   background: none;
@@ -155,7 +157,7 @@ const renderProp = `
   >
   {({ countUpRef, start }) => (
     <div>
-      <span ref={countUpRef} />
+      <div ref={countUpRef} />
       <button onClick={start}>Start</button>
     </div>
   )}
@@ -222,16 +224,16 @@ const hook = `
 };
 `;
 
-// const repo = `https://github.com/${repository}`;
+const repo = `https://github.com/${repository}`;
 
 const App = () => (
   <Main>
     <Title>React CountUp</Title>
-    {/*<Text>{description}</Text>*/}
+    <Text>{description}</Text>
     <Text>
-      {/*<a href={`${repo}#installation`}>Installation</a>*/}
-      {/*{' · '}*/}
-      {/*<a href={`${repo}#api`}>API</a>*/}
+      <a href={`${repo}#installation`}>Installation</a>
+      {' · '}
+      <a href={`${repo}#api`}>API</a>
     </Text>
     <Example code={simple} title="Simple">
       <Text>Edit the code to see live changes.</Text>
@@ -241,13 +243,13 @@ const App = () => (
     <Example code={autoStart} title="Autostart with render prop" />
     <Example code={delayStart} title="Delay start" />
     <Example code={hook} title="Useage as hook" />
-    {/*<GithubCorner bannerColor="palevioletred" href={repo} />*/}
-    {/*<Footer>*/}
-    {/*  <Text>*/}
-    {/*    MIT · <a href={repo}>GitHub</a> ·{' '}*/}
-    {/*    <a href="https://twitter.com/glnnrys">@glnnrys</a>*/}
-    {/*  </Text>*/}
-    {/*</Footer>*/}
+    <GithubCorner bannerColor="palevioletred" href={repo} />
+    <Footer>
+      <Text>
+        MIT · <a href={repo}>GitHub</a> ·{' '}
+        <a href="https://twitter.com/glnnrys">@glnnrys</a>
+      </Text>
+    </Footer>
   </Main>
 );
 
