@@ -3,8 +3,8 @@ import CountUp from './CountUp';
 import { createCountUpInstance } from './common';
 
 // CountUp.js requires an element to execute it's animation,
-// since it only checks for truthy values -1 is enough to mock an element.
-const NO_ELEMENT = -1;
+// and just sets the innerHTML of the element.
+const MOCK_ELEMENT = { innerHTML: null };
 
 const useCountUp = props => {
   const _props = { ...CountUp.defaultProps, ...props };
@@ -15,7 +15,7 @@ const useCountUp = props => {
   const countUpRef = useRef(null);
 
   const createInstance = () => {
-    const countUp = createCountUpInstance(NO_ELEMENT, _props);
+    const countUp = createCountUpInstance(MOCK_ELEMENT, _props);
     let formattingFnRef = countUp.options.formattingFn;
     countUp.options.formattingFn = (...args) => {
       const result = formattingFnRef(...args);
