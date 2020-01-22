@@ -190,19 +190,62 @@ it('calls pauseResume correctly with hook', () => {
   expect(spy.onPauseResume).toHaveBeenCalled();
 });
 
-it('calls start correctly with hook', async done => {
+it('calls onStart and onEnd correctly with hook', async done => {
   const spy = {
     onStart: jest.fn(),
+    onEnd: jest.fn(),
   };
 
   const Hook = () => {
     const countUpRef = React.useRef(null);
     spyOn(spy, 'onStart');
+    spyOn(spy, 'onEnd');
     const { start } = useCountUp({
       ref: countUpRef,
       end: 10,
       onStart: spy.onStart,
+      duration: 1,
+      onEnd: spy.onEnd,
       startOnMount: false,
+    });
+    return (
+      <>
+        <div onClick={start} />
+        <span ref={countUpRef} />
+      </>
+    );
+  };
+
+  const { container } = render(<Hook />);
+
+  fireEvent.click(container.firstChild as Element);
+
+  expect(spy.onStart).toHaveBeenCalled();
+
+  act(() => {
+    new Promise(() => {
+      setTimeout(() => {
+        expect(spy.onEnd).toHaveBeenCalled();
+        done();
+      }, 1100);
+    });
+  });
+});
+
+it('calls onEnd correctly with hook when startOnMount is true', async done => {
+  const spy = {
+    onEnd: jest.fn(),
+  };
+
+  const Hook = () => {
+    const countUpRef = React.useRef(null);
+    spyOn(spy, 'onEnd');
+    const { start } = useCountUp({
+      ref: countUpRef,
+      end: 10,
+      duration: 1,
+      onEnd: spy.onEnd,
+      startOnMount: true,
     });
     return (
       <>
@@ -219,10 +262,9 @@ it('calls start correctly with hook', async done => {
   act(() => {
     new Promise(() => {
       setTimeout(() => {
+        expect(spy.onEnd).toHaveBeenCalled();
         done();
       }, 1100);
     });
   });
-
-  expect(spy.onStart).toHaveBeenCalled();
 });
