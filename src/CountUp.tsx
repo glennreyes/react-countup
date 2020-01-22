@@ -164,7 +164,9 @@ class ReactCountUp extends Component<CountUpProps> {
     const { reset, restart: start, update } = this;
     const { onPauseResume } = this.props;
 
-    this.instance!.pauseResume();
+    if (this.instance) {
+      this.instance.pauseResume();
+    }
 
     if (onPauseResume !== undefined) {
       onPauseResume({ reset, start, update });
@@ -175,7 +177,9 @@ class ReactCountUp extends Component<CountUpProps> {
     const { pauseResume, restart: start, update } = this;
     const { onReset } = this.props;
 
-    this.instance!.reset();
+    if (this.instance) {
+      this.instance.reset();
+    }
 
     if (onReset !== undefined) {
       onReset({ pauseResume, start, update });
@@ -190,12 +194,15 @@ class ReactCountUp extends Component<CountUpProps> {
   start = () => {
     const { pauseResume, reset, restart: start, update } = this;
     const { delay, onEnd, onStart } = this.props;
-    const run = () =>
-      this.instance!.start(() => {
-        if (onEnd !== undefined) {
-          onEnd({ pauseResume, reset, start, update });
-        }
-      });
+    const run = () => {
+      if (this.instance) {
+        this.instance.start(() => {
+          if (onEnd !== undefined) {
+            onEnd({ pauseResume, reset, start, update });
+          }
+        });
+      }
+    };
 
     // Delay start if delay prop is properly set
     if (delay && delay > 0) {
@@ -213,7 +220,9 @@ class ReactCountUp extends Component<CountUpProps> {
     const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 
-    this.instance!.update(newEnd);
+    if (this.instance) {
+      this.instance.update(newEnd);
+    }
 
     if (onUpdate !== undefined) {
       onUpdate({ pauseResume, reset, start });
