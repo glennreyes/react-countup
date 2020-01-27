@@ -10,7 +10,7 @@ afterEach(cleanup);
 it('renders countup correctly', async done => {
   const Hook = () => {
     const countUpRef = React.useRef(null);
-    useCountUp({ end: 10, ref: countUpRef, startOnMount: true });
+    useCountUp({ end: 10, ref: countUpRef });
     return <span ref={countUpRef} />;
   };
 
@@ -50,7 +50,7 @@ it('does not start countup when startOnMount is false', async done => {
 it('renders with delay correctly with hook', async done => {
   const Hook = () => {
     const countUpRef = React.useRef(null);
-    useCountUp({ end: 10, ref: countUpRef, startOnMount: true, delay: 1 });
+    useCountUp({ end: 10, ref: countUpRef, delay: 1 });
     return <span ref={countUpRef} />;
   };
 
@@ -99,7 +99,6 @@ it('calls start correctly with hook', () => {
     const { start } = useCountUp({
       end: 10,
       ref: countUpRef,
-      startOnMount: true,
     });
     spy.start = start;
     spyOn(spy, 'start');
@@ -123,7 +122,6 @@ it('calls reset correctly with hook', () => {
     const { reset } = useCountUp({
       end: 10,
       ref: countUpRef,
-      startOnMount: true,
     });
     spy.reset = reset;
     spyOn(spy, 'reset');
@@ -245,7 +243,6 @@ it('calls onEnd correctly with hook when startOnMount is true', async done => {
       end: 10,
       duration: 1,
       onEnd: spy.onEnd,
-      startOnMount: true,
     });
     return (
       <>

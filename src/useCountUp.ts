@@ -4,8 +4,12 @@ import { createCountUpInstance } from './common';
 import { useCountUpProps } from '../index';
 import ReactCountUp from './CountUp';
 
+const defaultProps = {
+  startOnMount: true,
+};
+
 const useCountUp = (props: useCountUpProps) => {
-  const _props = { ...ReactCountUp.defaultProps, ...props };
+  const _props = { ...ReactCountUp.defaultProps, ...defaultProps, ...props };
   const countUpRef = useRef<CountUp | null>(null);
 
   const createInstance = () => {
