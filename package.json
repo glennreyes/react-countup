@@ -45,7 +45,7 @@
     "@testing-library/react": "9.4.0",
     "@testing-library/react-hooks": "3.2.1",
     "babel-jest": "25.1.0",
-    "husky": "4.2.1",
+    "husky": "4.2.2",
     "jest": "25.1.0",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.1",
