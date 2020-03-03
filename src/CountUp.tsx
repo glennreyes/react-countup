@@ -46,9 +46,9 @@ class ReactCountUp extends Component<CountUpProps> {
     preserveValue: false,
   };
 
-  private containerRef: React.RefObject<
+  private containerRef = React.createRef<
     HTMLElement & SVGTextElement & SVGTSpanElement
-  > = React.createRef();
+  >();
 
   private instance: CountUp | null = null;
   private timeoutId: number | null = null;
