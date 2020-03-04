@@ -33,38 +33,28 @@ const useCountUp = (props: useCountUpProps) => {
   const reset = () => {
     const { onReset } = _props;
     getCountUp().reset();
-    if (onReset !== undefined) {
-      onReset({ pauseResume, start: restart, update });
-    }
+    onReset?.({ pauseResume, start: restart, update });
   };
 
   const restart = () => {
     const { onStart, onEnd } = _props;
     getCountUp().reset();
     getCountUp().start(() => {
-      if (onEnd !== undefined) {
-        onEnd({ pauseResume, reset, start: restart, update });
-      }
+      onEnd?.({ pauseResume, reset, start: restart, update });
     });
-    if (onStart !== undefined) {
-      onStart({ pauseResume, reset, update });
-    }
+    onStart?.({ pauseResume, reset, update });
   };
 
   const pauseResume = () => {
     const { onPauseResume } = _props;
     getCountUp().pauseResume();
-    if (onPauseResume !== undefined) {
-      onPauseResume({ reset, start: restart, update });
-    }
+    onPauseResume?.({ reset, start: restart, update });
   };
 
   const update = (newEnd?: string | number) => {
     const { onUpdate } = _props;
     getCountUp().update(newEnd);
-    if (onUpdate !== undefined) {
-      onUpdate({ pauseResume, reset, start: restart });
-    }
+    onUpdate?.({ pauseResume, reset, start: restart });
   };
 
   useEffect(() => {
@@ -72,14 +62,10 @@ const useCountUp = (props: useCountUpProps) => {
     if (startOnMount) {
       const timeout = setTimeout(
         () => {
-          if (onStart !== undefined) {
-            onStart({ pauseResume, reset, update });
-          }
+          onStart?.({ pauseResume, reset, update });
           getCountUp().start(() => {
             clearTimeout(timeout);
-            if (onEnd !== undefined) {
-              onEnd({ pauseResume, reset, start: restart, update });
-            }
+            onEnd?.({ pauseResume, reset, start: restart, update });
           });
         },
         delay ? delay * 1000 : 0,

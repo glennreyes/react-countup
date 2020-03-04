@@ -163,10 +163,7 @@ class ReactCountUp extends Component<CountUpProps> {
     const { onPauseResume } = this.props;
 
     this.instance?.pauseResume();
-
-    if (onPauseResume !== undefined) {
-      onPauseResume({ reset, start, update });
-    }
+    onPauseResume?.({ reset, start, update });
   };
 
   reset = () => {
@@ -174,10 +171,7 @@ class ReactCountUp extends Component<CountUpProps> {
     const { onReset } = this.props;
 
     this.instance?.reset();
-
-    if (onReset !== undefined) {
-      onReset({ pauseResume, start, update });
-    }
+    onReset?.({ pauseResume, start, update });
   };
 
   restart = () => {
@@ -190,9 +184,7 @@ class ReactCountUp extends Component<CountUpProps> {
     const { delay, onEnd, onStart } = this.props;
     const run = () => {
       this.instance?.start(() => {
-        if (onEnd !== undefined) {
-          onEnd({ pauseResume, reset, start, update });
-        }
+        onEnd?.({ pauseResume, reset, start, update });
       });
     };
 
@@ -203,9 +195,7 @@ class ReactCountUp extends Component<CountUpProps> {
       run();
     }
 
-    if (onStart !== undefined) {
-      onStart({ pauseResume, reset, update });
-    }
+    onStart?.({ pauseResume, reset, update });
   };
 
   update = (newEnd?: string | number) => {
@@ -213,10 +203,7 @@ class ReactCountUp extends Component<CountUpProps> {
     const { onUpdate } = this.props;
 
     this.instance?.update(newEnd);
-
-    if (onUpdate !== undefined) {
-      onUpdate({ pauseResume, reset, start });
-    }
+    onUpdate?.({ pauseResume, reset, start });
   };
 
   render() {
