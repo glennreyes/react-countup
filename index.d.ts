@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 type Function = () => void;
-type UpdateFunction = (newEnd?: number) => void;
+type UpdateFunction = (newEnd?: string | number) => void;
 
 interface CallbackProps {
   onEnd?: (providedFn: {
@@ -81,7 +81,7 @@ type countUpHook = (
   start: Function;
   pauseResume: Function;
   reset: Function;
-  update: (newEnd?: number) => void;
+  update: UpdateFunction;
 };
 
 export const useCountUp: countUpHook;

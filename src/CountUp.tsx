@@ -208,7 +208,7 @@ class ReactCountUp extends Component<CountUpProps> {
     }
   };
 
-  update = (newEnd?: number) => {
+  update = (newEnd?: string | number) => {
     const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 

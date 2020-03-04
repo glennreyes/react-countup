@@ -59,7 +59,7 @@ const useCountUp = (props: useCountUpProps) => {
     }
   };
 
-  const update = (newEnd?: number) => {
+  const update = (newEnd?: string | number) => {
     const { onUpdate } = _props;
     getCountUp().update(newEnd);
     if (onUpdate !== undefined) {
