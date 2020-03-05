@@ -5,8 +5,6 @@ import warning from 'warning';
 import { createCountUpInstance } from './common';
 import { CountUpProps } from '../index';
 
-const AVAILABLE_TAGS = ['input', 'text', 'span', 'div', 'p'];
-
 class ReactCountUp extends Component<CountUpProps> {
   static propTypes = {
     decimal: PropTypes.string,
