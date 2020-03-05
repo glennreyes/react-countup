@@ -5,8 +5,6 @@ import warning from 'warning';
 import { createCountUpInstance } from './common';
 import { CountUpProps } from '../index';
 
-const AVAILABLE_SVG_TAGS = ['text', 'tspan'];
-
 class ReactCountUp extends Component<CountUpProps> {
   static propTypes = {
     decimal: PropTypes.string,
@@ -145,7 +143,7 @@ class ReactCountUp extends Component<CountUpProps> {
         this.containerRef.current instanceof HTMLElement ||
           !!(
             this.containerRef.current &&
-            AVAILABLE_SVG_TAGS.includes(
+            ['text', 'tspan'].includes(
               this.containerRef.current!.tagName.toLowerCase(),
             )
           ),
