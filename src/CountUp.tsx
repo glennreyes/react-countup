@@ -5,6 +5,8 @@ import warning from 'warning';
 import { createCountUpInstance } from './common';
 import { CountUpProps } from '../index';
 
+const AVAILABLE_SVG_TAGS = ['text', 'tspan'];
+
 class ReactCountUp extends Component<CountUpProps> {
   static propTypes = {
     decimal: PropTypes.string,
@@ -141,8 +143,12 @@ class ReactCountUp extends Component<CountUpProps> {
       // Warn when user didn't use containerRef at all
       warning(
         this.containerRef.current instanceof HTMLElement ||
-          (this.containerRef.current as any) instanceof SVGTextElement ||
-          (this.containerRef.current as any) instanceof SVGTSpanElement,
+          !!(
+            this.containerRef.current &&
+            AVAILABLE_SVG_TAGS.includes(
+              this.containerRef.current!.tagName.toLowerCase(),
+            )
+          ),
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
       return null;
