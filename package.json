@@ -51,7 +51,6 @@
     "react-dom": "16.13.0",
     "react-test-renderer": "16.13.0",
     "rollup": "2.0.6",
-    "rollup-plugin-babel": "4.4.0"
     "ts-jest": "25.2.1",
     "tslib": "1.11.1",
     "typescript": "3.8.3"
