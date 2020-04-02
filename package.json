@@ -47,7 +47,7 @@
     "babel-jest": "25.2.4",
     "husky": "4.2.3",
     "jest": "25.2.4",
-    "prettier": "1.19.1",
+    "prettier": "2.0.2",
     "pretty-quick": "2.0.1",
     "raf": "3.4.1",
     "react": "16.13.1",
