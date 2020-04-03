@@ -58,9 +58,8 @@ class CountUp extends Component {
     this.start();
   }
 
-  shouldComponentUpdate(nextProps) {
+  checkProps = (checkObject) => {
     const {
-      end,
       start,
       suffix,
       prefix,
@@ -71,17 +70,21 @@ class CountUp extends Component {
       decimal,
     } = this.props;
 
-    const hasCertainPropsChanged =
-      duration !== nextProps.duration ||
-      end !== nextProps.end ||
-      start !== nextProps.start ||
-      suffix !== nextProps.suffix ||
-      prefix !== nextProps.prefix ||
-      separator !== nextProps.separator ||
-      decimals !== nextProps.decimals ||
-      decimal !== nextProps.decimal;
+    const hasPropsChanged =
+      duration !== checkObject.duration ||
+      start !== checkObject.start ||
+      suffix !== checkObject.suffix ||
+      prefix !== checkObject.prefix ||
+      separator !== checkObject.separator ||
+      decimals !== checkObject.decimals ||
+      decimal !== checkObject.decimal;
 
-    return hasCertainPropsChanged || redraw;
+    return hasPropsChanged || redraw;
+  };
+
+  shouldComponentUpdate(nextProps) {
+    const { end } = this.props;
+    return this.checkProps(nextProps) || end !== nextProps.end;
   }
 
   componentDidUpdate(prevProps) {
@@ -89,27 +92,9 @@ class CountUp extends Component {
     // there's no way to update the values.
     // So we need to re-create the CountUp instance in order to
     // restart it.
-    const {
-      end,
-      start,
-      suffix,
-      prefix,
-      duration,
-      separator,
-      decimals,
-      decimal,
-      preserveValue,
-    } = this.props;
+    const { end, preserveValue } = this.props;
 
-    if (
-      duration !== prevProps.duration ||
-      start !== prevProps.start ||
-      suffix !== prevProps.suffix ||
-      prefix !== prevProps.prefix ||
-      separator !== prevProps.separator ||
-      decimals !== prevProps.decimals ||
-      decimal !== prevProps.decimal
-    ) {
+    if (this.checkProps(prevProps)) {
       this.instance.reset();
       this.instance = this.createInstance();
       this.start();
@@ -185,7 +170,7 @@ class CountUp extends Component {
     onStart({ pauseResume, reset, update });
   };
 
-  update = newEnd => {
+  update = (newEnd) => {
     const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 
