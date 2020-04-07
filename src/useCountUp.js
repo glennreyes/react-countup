@@ -2,25 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import CountUp from './CountUp';
 import { createCountUpInstance } from './common';
 
-// CountUp.js requires an element to execute it's animation,
-// and just sets the innerHTML of the element.
-const MOCK_ELEMENT = { innerHTML: null };
-
-const useCountUp = props => {
+const useCountUp = (props) => {
   const _props = { ...CountUp.defaultProps, ...props };
-  const { start, formattingFn } = _props;
-  const [count, setCount] = useState(
-    typeof formattingFn === 'function' ? formattingFn(start) : start,
-  );
+  const { ref, preserveValue, end } = _props;
   const countUpRef = useRef(null);
 
   const createInstance = () => {
-    const countUp = createCountUpInstance(MOCK_ELEMENT, _props);
-    let formattingFnRef = countUp.options.formattingFn;
-    countUp.options.formattingFn = (...args) => {
-      const result = formattingFnRef(...args);
-      setCount(result);
-    };
+    const countUp = createCountUpInstance(ref.current, _props);
     return countUp;
   };
 
@@ -55,7 +43,7 @@ const useCountUp = props => {
     onPauseResume({ reset, start: restart, update });
   };
 
-  const update = newEnd => {
+  const update = (newEnd) => {
     const { onUpdate } = _props;
     getCountUp().update(newEnd);
     onUpdate({ pauseResume, reset, start: restart });
@@ -75,7 +63,7 @@ const useCountUp = props => {
     return reset;
   }, []);
 
-  return { countUp: count, start: restart, pauseResume, reset, update };
+  return { start: restart, pauseResume, reset, update };
 };
 
 export default useCountUp;
