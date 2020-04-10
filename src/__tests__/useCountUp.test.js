@@ -124,6 +124,27 @@ it('calls pauseResume correctly with hook', () => {
   expect(spy.onPauseResume).toHaveBeenCalled();
 });
 
+it('re-renders when suffix changes', async (done) => {
+  const Hook = ({ suffix = '' }) => {
+    const div = React.useRef();
+    useCountUp({ end: 10, suffix, ref: div });
+    return <div ref={div} />;
+  };
+
+  const { container, rerender } = render(<Hook />);
+  rerender(<Hook suffix=" sec" />);
+
+  await act(() => {
+    return new Promise(() => {
+      setTimeout(() => {
+        const span = container.firstChild;
+        expect(span.textContent).toEqual('10 sec');
+        done();
+      }, 1100);
+    });
+  });
+});
+
 it('calls start correctly with hook', async (done) => {
   const spy = {};
   const onStart = jest.fn();

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { cleanup, fireEvent, render } from '@testing-library/react';
-import CountUp, { useCountUp } from '../index';
+import CountUp from '../index';
 
 afterEach(cleanup);
 
@@ -143,7 +143,7 @@ it('renders with delay as a render prop component correctly', () => {
 it('renders with delay as a render prop component correctly', () => {
   console.error = jest.fn();
 
-  const { container } = render(
+  render(
     <CountUp delay={1} end={10}>
       {({ countUpRef }) => <rect ref={countUpRef} />}
     </CountUp>,

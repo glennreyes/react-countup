@@ -12,9 +12,9 @@ const useCountUp = (props) => {
     return countUp;
   };
 
-  const getCountUp = () => {
+  const getCountUp = (recreate) => {
     const countUp = countUpRef.current;
-    if (countUp !== null) {
+    if (countUp !== null && !recreate) {
       return countUp;
     }
     const newCountUp = createInstance();
@@ -54,14 +54,14 @@ const useCountUp = (props) => {
     if (startOnMount) {
       const timeout = setTimeout(() => {
         onStart({ pauseResume, reset, update });
-        getCountUp().start(() => {
+        getCountUp(true).start(() => {
           clearTimeout(timeout);
           onEnd({ pauseResume, reset, start: restart, update });
         });
       }, delay * 1000);
     }
     return reset;
-  }, []);
+  }, [_props]);
 
   return { start: restart, pauseResume, reset, update };
 };
