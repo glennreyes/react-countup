@@ -44,7 +44,7 @@
     "@babel/preset-react": "7.9.4",
     "@testing-library/react": "10.0.3",
     "@testing-library/react-hooks": "3.2.1",
-    "babel-jest": "25.4.0",
+    "babel-jest": "25.5.0",
     "husky": "4.2.5",
     "jest": "25.4.0",
     "prettier": "2.0.5",
