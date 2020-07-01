@@ -42,7 +42,7 @@
     "@babel/plugin-proposal-class-properties": "7.10.4",
     "@babel/preset-env": "7.10.4",
     "@babel/preset-react": "7.10.1",
-    "@testing-library/react": "10.0.4",
+    "@testing-library/react": "10.4.3",
     "@testing-library/react-hooks": "3.3.0",
     "babel-jest": "26.0.1",
     "husky": "4.2.5",
