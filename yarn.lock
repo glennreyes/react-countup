@@ -1859,10 +1859,10 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
-countup.js@^1.9.3:
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-1.9.3.tgz#ce3e50cd7160441e478f07da31895edcc0f1c9dd"
-  integrity sha1-zj5QzXFgRB5HjwfaMYle3MDxyd0=
+countup.js@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.0.6.tgz#3696046e787c08b16cee811710deb030576a3aa0"
+  integrity sha512-pcOaDNjW8dz3V5hCZTIwQpRDGm6tdxz0BRbcKEgCAr+j6jbJcdDdnumr4DpCSjhih7s1m/cWYZNC5MuFeSflFA==
 
 cross-spawn@^6.0.0:
   version "6.0.5"
