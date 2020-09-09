@@ -56,9 +56,8 @@ class CountUp extends Component {
     this.start();
   }
 
-  shouldComponentUpdate(nextProps) {
+  checkProps = updatedProps => {
     const {
-      end,
       start,
       suffix,
       prefix,
@@ -69,17 +68,21 @@ class CountUp extends Component {
       decimal,
     } = this.props;
 
-    const hasCertainPropsChanged =
-      duration !== nextProps.duration ||
-      end !== nextProps.end ||
-      start !== nextProps.start ||
-      suffix !== nextProps.suffix ||
-      prefix !== nextProps.prefix ||
-      separator !== nextProps.separator ||
-      decimals !== nextProps.decimals ||
-      decimal !== nextProps.decimal;
+    const hasPropsChanged =
+      duration !== updatedProps.duration ||
+      start !== updatedProps.start ||
+      suffix !== updatedProps.suffix ||
+      prefix !== updatedProps.prefix ||
+      separator !== updatedProps.separator ||
+      decimals !== updatedProps.decimals ||
+      decimal !== updatedProps.decimal;
 
-    return hasCertainPropsChanged || redraw;
+    return hasPropsChanged || redraw;
+  };
+
+  shouldComponentUpdate(nextProps) {
+    const { end } = this.props;
+    this.checkProps(nextProps) || end !== nextProps.end;
   }
 
   componentDidUpdate(prevProps) {
@@ -87,27 +90,9 @@ class CountUp extends Component {
     // there's no way to update the values.
     // So we need to re-create the CountUp instance in order to
     // restart it.
-    const {
-      end,
-      start,
-      suffix,
-      prefix,
-      duration,
-      separator,
-      decimals,
-      decimal,
-      preserveValue,
-    } = this.props;
+    const { end, preserveValue } = this.props;
 
-    if (
-      duration !== prevProps.duration ||
-      start !== prevProps.start ||
-      suffix !== prevProps.suffix ||
-      prefix !== prevProps.prefix ||
-      separator !== prevProps.separator ||
-      decimals !== prevProps.decimals ||
-      decimal !== prevProps.decimal
-    ) {
+    if (this.checkProps(prevProps)) {
       this.instance.reset();
       this.instance = this.createInstance();
       this.start();
