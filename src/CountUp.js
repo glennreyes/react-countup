@@ -58,7 +58,7 @@ class CountUp extends Component {
     this.start();
   }
 
-  checkProps = updatedProps => {
+  checkProps = (updatedProps) => {
     const {
       start,
       suffix,
@@ -84,7 +84,7 @@ class CountUp extends Component {
 
   shouldComponentUpdate(nextProps) {
     const { end } = this.props;
-    this.checkProps(nextProps) || end !== nextProps.end;
+    return this.checkProps(nextProps) || end !== nextProps.end;
   }
 
   componentDidUpdate(prevProps) {
@@ -170,7 +170,7 @@ class CountUp extends Component {
     onStart({ pauseResume, reset, update });
   };
 
-  update = newEnd => {
+  update = (newEnd) => {
     const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 

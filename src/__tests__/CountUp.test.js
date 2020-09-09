@@ -28,7 +28,7 @@ it('re-renders change of duration value correctly', () => {
   expect(container).toMatchSnapshot();
 });
 
-it('clear previous counter when duration changed', done => {
+it('clear previous counter when duration changed', (done) => {
   const { container, rerender } = render(<CountUp duration={1} end={100} />);
 
   rerender(<CountUp duration={0.5} end={10} />);
@@ -40,7 +40,7 @@ it('clear previous counter when duration changed', done => {
   }, 1200);
 });
 
-it('re-renders when suffix changes', done => {
+it('re-renders when suffix changes', (done) => {
   const { container, rerender } = render(
     <CountUp duration={1} end={1} suffix="second" />,
   );
@@ -54,7 +54,7 @@ it('re-renders when suffix changes', done => {
   }, 1200);
 });
 
-it('re-renders when the separator changes', done => {
+it('re-renders when the separator changes', (done) => {
   const { container, rerender } = render(
     <CountUp duration={1} end={1} separator="" />,
   );
@@ -68,7 +68,7 @@ it('re-renders when the separator changes', done => {
   }, 1200);
 });
 
-it('re-renders when the decimals changes', done => {
+it('re-renders when the decimals changes', (done) => {
   const { container, rerender } = render(
     <CountUp duration={1} end={1} decimals={0} />,
   );
@@ -82,7 +82,7 @@ it('re-renders when the decimals changes', done => {
   }, 1200);
 });
 
-it('re-renders when the decimal changes', done => {
+it('re-renders when the decimal changes', (done) => {
   const { container, rerender } = render(<CountUp duration={1} end={1} />);
 
   rerender(<CountUp duration={1} end={10.5} decimals={1} decimal="." />);
@@ -94,7 +94,7 @@ it('re-renders when the decimal changes', done => {
   }, 1200);
 });
 
-it('re-renders when the prefix changes', done => {
+it('re-renders when the prefix changes', (done) => {
   const { container, rerender } = render(
     <CountUp duration={1} end={1} prefix="" />,
   );
@@ -170,7 +170,15 @@ it('renders with autostart correctly', () => {
   expect(container).toMatchSnapshot();
 });
 
-it('does not reset if preserveValue is true', done => {
+it('re-renders with redraw={true} correctly', () => {
+  const componentRender = jest.spyOn(CountUp.prototype, 'render');
+  const { rerender } = render(<CountUp end={10} redraw />);
+
+  rerender(<CountUp end={10} />);
+  expect(componentRender).toHaveBeenCalledTimes(2);
+});
+
+it('does not reset if preserveValue is true', (done) => {
   const { container, rerender } = render(
     <CountUp duration={1} end={10} preserveValue />,
   );
@@ -183,7 +191,7 @@ it('does not reset if preserveValue is true', done => {
   }, 1000);
 });
 
-it('does not reset if preserveValue is true and suffix is set', done => {
+it('does not reset if preserveValue is true and suffix is set', (done) => {
   const { container, rerender } = render(
     <CountUp duration={1} end={10} suffix="%" preserveValue />,
   );
@@ -196,7 +204,7 @@ it('does not reset if preserveValue is true and suffix is set', done => {
   }, 1000);
 });
 
-it('does not reset if preserveValue is true and prefix is set', done => {
+it('does not reset if preserveValue is true and prefix is set', (done) => {
   const { container, rerender } = render(
     <CountUp duration={1} end={10} prefix="->" preserveValue />,
   );
