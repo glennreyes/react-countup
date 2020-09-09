@@ -72,7 +72,10 @@ const useCountUp = props => {
         });
       }, delay * 1000);
     }
-    return reset;
+    return () => {
+      clearTimeout(timeout);
+      reset();
+    }
   }, []);
 
   return { countUp: count, start: restart, pauseResume, reset, update };
