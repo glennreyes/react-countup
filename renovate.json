@@ -1,3 +1,0 @@
-{
-  "extends": [":automergeMinor", ":pinOnlyDevDependencies", "config:js-lib"]
-}

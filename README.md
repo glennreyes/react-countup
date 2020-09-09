@@ -1,4 +1,4 @@
-# [React CountUp](https://react-countup.now.sh)
+# [React CountUp](https://tr8tk.csb.app/)
 
 [![GitHub license](https://img.shields.io/npm/l/react-countup.svg?style=flat-square)](https://github.com/glennreyes/react-countup/blob/master/LICENSE)
 [![Build Status](https://img.shields.io/travis/glennreyes/react-countup.svg?style=flat-square)](https://travis-ci.org/glennreyes/react-countup)
@@ -8,6 +8,8 @@
 [![Gzip size](https://img.badgesize.io/https://unpkg.com/react-countup?style=flat-square&compression=gzip)](https://img.badgesize.io/https://unpkg.com/react-countup)
 
 A configurable React component wrapper around [CountUp.js](https://inorganik.github.io/countUp.js/).
+
+Click [here](https://codesandbox.io/s/github/glennreyes/react-countup/tree/master/demo?fontsize=14&hidenavigation=1&theme=dark&view=preview) to view on CodeSandbox.
 
 ### Looking for v3.x docs?
 
@@ -39,6 +41,7 @@ Click [here](https://github.com/glennreyes/react-countup/tree/d0002932dac8a274f9
       - [`preserveValue: boolean`](#preservevalue-boolean)
       - [`separator: string`](#separator-string)
       - [`start: number`](#start-number)
+      - [`startOnMount: boolean`](#startonmount-boolean)
       - [`suffix: string`](#suffix-string)
       - [`useEasing: boolean`](#useeasing-boolean)
       - [`easingFn: (t: number, b: number, c: number, d: number) => number`](#easingfn-t-number-b-number-c-number-d-number--number)
@@ -249,6 +252,12 @@ Specifies character of thousands separator.
 Initial value.
 
 Default: `0`
+
+#### `startOnMount: boolean`
+
+Use for start counter on mount for hook usage.
+
+Default: `true`
 
 #### `suffix: string`
 
