@@ -51,7 +51,7 @@
     "pretty-quick": "3.1.0",
     "raf": "3.4.1",
     "react": "16.14.0",
-    "react-dom": "16.13.1",
+    "react-dom": "16.14.0",
     "react-test-renderer": "16.14.0",
     "rollup": "2.34.0",
     "rollup-plugin-babel": "4.4.0"
