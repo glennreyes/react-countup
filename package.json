@@ -52,7 +52,7 @@
     "raf": "3.4.1",
     "react": "16.14.0",
     "react-dom": "16.13.1",
-    "react-test-renderer": "16.13.1",
+    "react-test-renderer": "16.14.0",
     "rollup": "2.32.1",
     "rollup-plugin-babel": "4.4.0"
   }
