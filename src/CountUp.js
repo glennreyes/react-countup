@@ -78,7 +78,7 @@ class CountUp extends Component {
       prefix !== updatedProps.prefix ||
       separator !== updatedProps.separator ||
       decimals !== updatedProps.decimals ||
-      decimal !== updatedProps.decimal
+      decimal !== updatedProps.decimal ||
       className !== updatedProps.className;
 
     return hasPropsChanged || redraw;
