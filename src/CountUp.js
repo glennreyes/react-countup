@@ -118,7 +118,9 @@ class CountUp extends Component {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
-    this.instance.reset();
+    if (this.instance.target) {
+      this.instance.reset();
+    }
   }
 
   createInstance = () => {

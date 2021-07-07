@@ -1,4 +1,4 @@
-import CountUp from 'countup.js';
+import { CountUp } from 'countup.js';
 
 export const createCountUpInstance = (el, props) => {
   const {
@@ -8,16 +8,21 @@ export const createCountUpInstance = (el, props) => {
     easingFn,
     end,
     formattingFn,
+    numerals,
     prefix,
     separator,
     start,
     suffix,
     useEasing,
   } = props;
-  return new CountUp(el, start, end, decimals, duration, {
+  return new CountUp(el, end, {
+    startVal: start,
+    duration,
     decimal,
+    decimalPlaces: decimals,
     easingFn,
     formattingFn,
+    numerals,
     separator,
     prefix,
     suffix,

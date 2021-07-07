@@ -7,198 +7,183 @@ import { useCountUp } from '../index';
 
 afterEach(cleanup);
 
-it('renders countup correctly', async () => {
-  const Hook = () => {
-    const { countUp } = useCountUp({ end: 10 });
-    return <span>{countUp}</span>;
-  };
-
-  const { container } = render(<Hook />);
-
+const checkContent = async (container, expectedValue, timeout = 1100) => {
   await act(() => {
     return new Promise((res) => {
       setTimeout(() => {
         const span = container.firstChild;
-        expect(span.textContent).toEqual('10');
+        expect(span.textContent).toEqual(expectedValue);
         res();
-      }, 1100);
+      }, timeout);
     });
   });
-});
+}
 
-it('does not start countup when startOnMount is false', async () => {
-  const Hook = () => {
-    const { countUp } = useCountUp({ end: 10, startOnMount: false });
-    return <span>{countUp}</span>;
-  };
+describe('useCountUp', () => {
+  it('renders countup correctly with ref', async () => {
+    const Hook = () => {
+      const span = React.useRef(null);
+      useCountUp({ end: 10, ref: span });
+      return <span ref={span} />;
+    };
 
-  const { container } = render(<Hook />);
+    const { container } = render(<Hook />);
 
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        const span = container.firstChild;
-        expect(span.textContent).toEqual('0');
-        res();
-      }, 1100);
-    });
-  });
-});
-
-it('renders with delay correctly with hook', async () => {
-  const Hook = () => {
-    const { countUp } = useCountUp({ delay: 1, end: 10 });
-    return <span>{countUp}</span>;
-  };
-
-  const { container } = render(<Hook />);
-
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        const span = container.firstChild;
-        expect(span.textContent).toEqual('10');
-        res();
-      }, 2100);
-    });
-  });
-});
-
-it('calls start correctly with hook', async () => {
-  let startFn;
-  const onStart = jest.fn();
-  const Hook = () => {
-    const { countUp, start } = useCountUp({ end: 10, onStart, startOnMount: false });
-    startFn = start;
-    return <span>{countUp}</span>;
-  };
-
-  const { container } = render(<Hook />);
-  act(() => {
-    startFn();
-  })
-  expect(onStart).toHaveBeenCalled();
-
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        const span = container.firstChild;
-        expect(span.textContent).toEqual('10');
-        res();
-      }, 1100);
-    });
-  });
-});
-
-it('calls reset correctly with hook', async () => {
-  let resetFn;
-  const onReset = jest.fn();
-  const Hook = () => {
-    const { countUp, reset } = useCountUp({ end: 10, onReset });
-    resetFn = reset;
-    return <span>{countUp}</span>;
-  };
-
-  const { container } = render(<Hook />);
-
-  const span = container.firstChild;
-
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        expect(span.textContent).toEqual('10');
-        res();
-      }, 1100);
-    });
+    await checkContent(container, '10');
   });
 
-  act(() => {
-    resetFn();
-  })
-  expect(onReset).toHaveBeenCalled();
-  expect(span.textContent).toEqual('0');
-});
+  it('renders countup correctly with element id', async () => {
+    const Hook = () => {
+      useCountUp({ end: 10, ref: "counter" });
+      return <span id="counter" />;
+    };
 
-it('calls update correctly with hook', async () => {
-  let updateFn;
-  const onUpdate = jest.fn();
+    const { container } = render(<Hook />);
 
-  const Hook = () => {
-    const { countUp, update } = useCountUp({ end: 10, onUpdate });
-    updateFn = update;
-    return <span onClick={update}>{countUp}</span>;
-  };
-
-  const { container } = render(<Hook />);
-
-  const span = container.firstChild;
-
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        expect(span.textContent).toEqual('10');
-        res();
-      }, 1100);
-    });
+    await checkContent(container, '10');
   });
 
-  act(() => {
-    updateFn(20);
-  })
-  expect(onUpdate).toHaveBeenCalled();
+  it('does not start countup when startOnMount is false', async () => {
+    const Hook = () => {
+      useCountUp({ end: 10, startOnMount: false, ref: "counter" });
+      return <span id="counter"/>;
+    };
 
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        expect(span.textContent).toEqual('20');
-        res();
-      }, 1100);
-    });
-  });
-});
+    const { container } = render(<Hook/>);
 
-it('calls pauseResume correctly with hook', async () => {
-  let pauseResumeFn;
-  const onPauseResume = jest.fn();
-
-  const Hook = () => {
-    const { countUp, pauseResume } = useCountUp({ end: 10, onPauseResume });
-    pauseResumeFn = pauseResume;
-    return <span>{countUp}</span>;
-  };
-
-  const { container } = render(<Hook />);
-  const span = container.firstChild;
-
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        pauseResumeFn();
-        expect(onPauseResume).toHaveBeenCalled();
-        res();
-      }, 400);
-    });
+    await checkContent(container, '');
   });
 
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        expect(span.textContent).not.toEqual('10');
-        res();
-      }, 1100);
-    });
+  it('renders with delay correctly', async () => {
+    const Hook = () => {
+      useCountUp({ delay: 1, duration: 1, end: 10, ref: "counter" });
+      return <span id="counter"/>;
+    };
+
+    const { container } = render(<Hook/>);
+
+    await checkContent(container, '', 900);
+    await checkContent(container, '10');
   });
 
-  act(() => {
-    pauseResumeFn();
-  })
+  it('calls onStart correctly', async () => {
+    let startFn;
+    const onStart = jest.fn();
+    const Hook = () => {
+      const { start } = useCountUp({ end: 10, onStart, startOnMount: false, ref: "counter" });
+      startFn = start;
+      return <span id="counter"/>;
+    };
 
-  await act(() => {
-    return new Promise((res) => {
-      setTimeout(() => {
-        expect(span.textContent).toEqual('10');
-        res();
-      }, 1100);
+    const { container } = render(<Hook/>);
+    act(() => {
+      startFn();
+    })
+    expect(onStart).toHaveBeenCalled();
+
+    await checkContent(container, '10');
+  });
+
+  it('calls onReset correctly', async () => {
+    let resetFn;
+    const onReset = jest.fn();
+    const Hook = () => {
+      const { reset } = useCountUp({ end: 10, onReset, ref: "counter" });
+      resetFn = reset;
+      return <span id="counter"/>;
+    };
+
+    const { container } = render(<Hook/>);
+
+    const span = container.firstChild;
+
+    await checkContent(container, '10');
+
+    act(() => {
+      resetFn();
+    })
+    expect(onReset).toHaveBeenCalled();
+    expect(span.textContent).toEqual('0');
+  });
+
+  it('calls update correctly', async () => {
+    let updateFn;
+    const onUpdate = jest.fn();
+
+    const Hook = () => {
+      const { update } = useCountUp({ duration: 1, end: 10, onUpdate, ref: "counter" });
+      updateFn = update;
+      return <span id="counter"/>;
+    };
+
+    const { container } = render(<Hook/>);
+
+    await checkContent(container, '10');
+
+    act(() => {
+      updateFn(20);
+    })
+    expect(onUpdate).toHaveBeenCalled();
+    await checkContent(container, '20');
+  });
+
+  it('calls onPauseResume correctly', async () => {
+    let pauseResumeFn;
+    const onPauseResume = jest.fn();
+
+    const Hook = () => {
+      const { pauseResume } = useCountUp({ duration: 1, end: 10, onPauseResume, ref: "counter" });
+      pauseResumeFn = pauseResume;
+      return <span id="counter"/>;
+    };
+
+    const { container } = render(<Hook/>);
+    const span = container.firstChild;
+
+    await act(() => {
+      return new Promise((res) => {
+        setTimeout(() => {
+          pauseResumeFn();
+          expect(onPauseResume).toHaveBeenCalled();
+          res();
+        }, 400);
+      });
     });
+
+    await act(() => {
+      return new Promise((res) => {
+        setTimeout(() => {
+          expect(span.textContent).not.toEqual('10');
+          res();
+        }, 1100);
+      });
+    });
+
+    act(() => {
+      pauseResumeFn();
+    })
+
+    await checkContent(container, '10')
+  });
+
+  it('re-renders for new props', async () => {
+    const Hook = ({ suffix = '', prefix = '', separator= '', end = 10 }) => {
+      const div = React.useRef();
+      useCountUp({ end, suffix, prefix, separator, ref: div });
+      return <div ref={div} />;
+    };
+
+    const { container, rerender } = render(<Hook />);
+    rerender(<Hook suffix=" sec" />);
+
+    await checkContent(container, '10 sec');
+
+    rerender(<Hook prefix="$" />);
+
+    await checkContent(container, '$10');
+
+    rerender(<Hook separator="," end={1000} />);
+
+    await checkContent(container, '1,000');
   });
 });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`re-renders change of duration value correctly 1`] = `
+exports[`CountUp component re-renders change of duration value correctly 1`] = `
 <div>
   <span>
     0
@@ -8,7 +8,7 @@ exports[`re-renders change of duration value correctly 1`] = `
 </div>
 `;
 
-exports[`re-renders change of end value correctly 1`] = `
+exports[`CountUp component re-renders change of end value correctly 1`] = `
 <div>
   <span>
     0
@@ -16,23 +16,23 @@ exports[`re-renders change of end value correctly 1`] = `
 </div>
 `;
 
-exports[`re-renders change of start value correctly 1`] = `
+exports[`CountUp component re-renders change of start value correctly 1`] = `
 <div>
   <span>
-    5
+    10
   </span>
 </div>
 `;
 
-exports[`re-renders with redraw={false} correctly 1`] = `
+exports[`CountUp component re-renders with redraw={false} correctly 1`] = `
 <div>
   <span>
-    0
+    10
   </span>
 </div>
 `;
 
-exports[`renders as a render prop component correctly 1`] = `
+exports[`CountUp component renders as a render prop component correctly 1`] = `
 <div>
   <div>
     0
@@ -40,15 +40,15 @@ exports[`renders as a render prop component correctly 1`] = `
 </div>
 `;
 
-exports[`renders start value correctly 1`] = `
+exports[`CountUp component renders start value correctly 1`] = `
 <div>
   <span>
-    0
+    10
   </span>
 </div>
 `;
 
-exports[`renders with autostart correctly 1`] = `
+exports[`CountUp component renders with autostart correctly 1`] = `
 <div>
   <div>
     0
@@ -56,7 +56,7 @@ exports[`renders with autostart correctly 1`] = `
 </div>
 `;
 
-exports[`renders with delay as a render prop component correctly 1`] = `
+exports[`CountUp component renders with delay as a render prop component correctly 1`] = `
 <div>
   <div>
     0
@@ -64,7 +64,7 @@ exports[`renders with delay as a render prop component correctly 1`] = `
 </div>
 `;
 
-exports[`renders with delay correctly 1`] = `
+exports[`CountUp component renders with delay correctly 1`] = `
 <div>
   <span>
     0
