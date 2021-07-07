@@ -153,8 +153,8 @@ Note that `delay={0}` will automatically start the count up.
 import { useCountUp } from 'react-countup';
 
 const SimpleHook = () => {
-  const { countUp } = useCountUp({ end: 1234567 });
-  return <div>{countUp}</div>;
+  useCountUp({ end: 1234567 });
+  return <span id="counter"/>;
 };
 ```
 
@@ -164,7 +164,9 @@ const SimpleHook = () => {
 import { useCountUp } from 'react-countup';
 
 const CompleteHook = () => {
-  const { countUp, start, pauseResume, reset, update } = useCountUp({
+  const countUpRef = React.useRef(null);
+  const { start, pauseResume, reset, update } = useCountUp({
+    ref: countUpRef,
     start: 0,
     end: 1234567,
     delay: 1000,
@@ -177,7 +179,7 @@ const CompleteHook = () => {
   });
   return (
     <div>
-      <div>{countUp}</div>
+      <div ref={countUpRef}/>
       <button onClick={start}>Start</button>
       <button onClick={reset}>Reset</button>
       <button onClick={pauseResume}>Pause/Resume</button>
