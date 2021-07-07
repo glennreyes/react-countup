@@ -1,33 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import CountUp from './CountUp';
 import { createCountUpInstance } from './common';
 
-// CountUp.js requires an element to execute it's animation,
-// and just sets the innerHTML of the element.
-const MOCK_ELEMENT = { innerHTML: null };
-
 const useCountUp = (props) => {
   const _props = { ...CountUp.defaultProps, ...props };
-  const { start, formattingFn } = _props;
-  const [count, setCount] = useState(
-    typeof formattingFn === 'function' ? formattingFn(start) : start,
-  );
+  const { ref } = _props;
   const countUpRef = useRef(null);
   const timerRef = useRef(null);
 
-  const createInstance = () => {
-    const countUp = createCountUpInstance(MOCK_ELEMENT, _props);
-    let formattingFnRef = countUp.options.formattingFn;
-    countUp.options.formattingFn = (...args) => {
-      const result = formattingFnRef(...args);
-      setCount(result);
-    };
-    return countUp;
-  };
+  const createInstance = () =>
+    createCountUpInstance(typeof ref === 'string' ? ref : ref.current, _props);
 
-  const getCountUp = () => {
+  const getCountUp = (recreate) => {
     const countUp = countUpRef.current;
-    if (countUp !== null) {
+    if (countUp !== null && !recreate) {
       return countUp;
     }
     const newCountUp = createInstance();
@@ -67,7 +53,7 @@ const useCountUp = (props) => {
     if (startOnMount) {
       timerRef.current = setTimeout(() => {
         onStart({ pauseResume, reset, update });
-        getCountUp().start(() => {
+        getCountUp(true).start(() => {
           clearTimeout(timerRef.current);
           onEnd({ pauseResume, reset, start: restart, update });
         });
@@ -77,9 +63,9 @@ const useCountUp = (props) => {
       clearTimeout(timerRef.current);
       reset();
     };
-  }, []);
+  }, [_props]);
 
-  return { countUp: count, start: restart, pauseResume, reset, update };
+  return { start: restart, pauseResume, reset, update };
 };
 
 export default useCountUp;

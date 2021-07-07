@@ -1,5 +1,7 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  setupFiles: ['raf/polyfill'],
   testURL: 'http://localhost',
+  transformIgnorePatterns: [
+    "/node_modules/(?!countup\\.js).+\\.js$",
+  ],
 };
