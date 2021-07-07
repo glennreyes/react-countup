@@ -69,6 +69,7 @@ class CountUp extends Component {
       decimals,
       decimal,
       className,
+      formattingFn
     } = this.props;
 
     const hasPropsChanged =
@@ -79,7 +80,8 @@ class CountUp extends Component {
       separator !== updatedProps.separator ||
       decimals !== updatedProps.decimals ||
       decimal !== updatedProps.decimal ||
-      className !== updatedProps.className;
+      className !== updatedProps.className ||
+      formattingFn !== updatedProps.formattingFn;
 
     return hasPropsChanged || redraw;
   };
