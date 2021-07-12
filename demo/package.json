@@ -4,18 +4,18 @@
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",
-    "react": "^16.10.2",
-    "react-countup": "^4.2.2",
-    "react-dom": "^16.10.2",
-    "react-feather": "^2.0.3",
-    "react-github-corner": "^2.3.0",
-    "react-live": "^2.2.1",
-    "react-scripts": "3.4.1",
-    "serve": "^11.2.0",
-    "styled-components": "^5.0.0"
+    "react": "^17.0.2",
+    "react-countup": "^5.0.0-0",
+    "react-dom": "^17.0.2",
+    "react-feather": "^2.0.9",
+    "react-github-corner": "^2.5.0",
+    "react-live": "^2.2.3",
+    "react-scripts": "4.0.3",
+    "serve": "^12.0.0",
+    "styled-components": "^5.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build": "react-scripts build",
     "deploy": "now --public && now alias",
     "now-build": "npm run build",

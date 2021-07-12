@@ -164,6 +164,7 @@ describe('useCountUp', () => {
     })
 
     await checkContent(container, '10')
+    expect(onEnd).toHaveBeenCalled()
   });
 
   it('re-renders for new props', async () => {
