@@ -15,7 +15,7 @@
     "styled-components": "^5.3.0"
   },
   "scripts": {
-    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "deploy": "now --public && now alias",
     "now-build": "npm run build",
