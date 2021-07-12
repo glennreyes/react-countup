@@ -190,17 +190,17 @@ const delayStart = `
 const hook = `
 () => {
   const {
-    countUp,
     start,
     pauseResume,
     reset,
     update
   } = useCountUp({
+    ref: "counter",
     start: 0,
     end: 1234567,
     delay: 2,
     duration: 5,
-    onReset: () => console.log('Resetted!'),
+    onReset: () => console.log('Reseted!'),
     onUpdate: () => console.log('Updated!'),
     onPauseResume: () => console.log('Paused or resumed!'),
     onStart: () => console.log('Started! 💨'),
@@ -208,7 +208,7 @@ const hook = `
   });
   return (
     <div>
-      <div>{countUp}</div>
+      <div id="counter"/>
       <button onClick={start}>Start</button>
       <button onClick={reset}>Reset</button>
       <button onClick={pauseResume}>Pause/Resume</button>
@@ -236,7 +236,7 @@ const App = () => (
     <Example code={manualStart} title="Manually start with render prop" />
     <Example code={autoStart} title="Autostart with render prop" />
     <Example code={delayStart} title="Delay start" />
-    <Example code={hook} title="Useage as hook" />
+    <Example code={hook} title="Usage as hook" />
     <GithubCorner bannerColor="palevioletred" href={repo} />
     <Footer>
       <Text>

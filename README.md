@@ -153,7 +153,7 @@ Note that `delay={0}` will automatically start the count up.
 import { useCountUp } from 'react-countup';
 
 const SimpleHook = () => {
-  useCountUp({ end: 1234567 });
+  useCountUp({ ref: "counter", end: 1234567 });
   return <span id="counter"/>;
 };
 ```
