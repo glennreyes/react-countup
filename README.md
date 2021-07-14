@@ -325,6 +325,8 @@ Updates transition to the new end value (if given)
 
 ## Protips
 
+### Trigger of transition
+
 By default, the animation is triggered if any of the following props has changed:
 
 - `duration`
@@ -332,6 +334,33 @@ By default, the animation is triggered if any of the following props has changed
 - `start`
 
 If `redraw` is set to `true` your component will start the transition on every component update.
+
+### Run if in focus
+
+You need to check if your counter in viewport, [react-visibility-sensor](https://github.com/joshwnj/react-visibility-sensor) can be used for this purpose.
+
+```js
+import React from "react";
+import CountUp from "react-countup";
+import VisibilitySensor from "react-visibility-sensor";
+import "./styles.css";
+
+export default function App() {
+  return (
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      <div className="content" />
+      <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+        {({ isVisible }) => (
+          <div style={{ height: 100 }}>
+            {isVisible ? <CountUp end={1000} /> : null}
+          </div>
+        )}
+      </VisibilitySensor>
+    </div>
+  );
+}
+```
 
 ## License
 
