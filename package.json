@@ -20,12 +20,11 @@
   "homepage": "https://react-countup.now.sh",
   "main": "build",
   "files": [
-    "build",
-    "index.d.ts"
+    "build"
   ],
-  "typings": "index.d.ts",
+  "typings": "build/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && tsc --emitDeclarationOnly --noEmit false --project tsconfig.build.json --outDir dist-untyped",
     "prepublishOnly": "yarn build",
     "test": "jest"
   },
@@ -33,6 +32,8 @@
     "react": ">= 16.3.0"
   },
   "dependencies": {
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/warning": "^3.0.0",
     "countup.js": "^2.0.7",
     "prop-types": "^15.7.2",
     "warning": "^4.0.3"

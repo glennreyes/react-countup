@@ -1,9 +1,22 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import warning from 'warning';
 import { createCountUpInstance } from './common';
+import { CountUp as CountUpJs } from 'countup.js';
+import { CallbackProps, CommonProps, RenderCounterProps } from './types';
 
-class CountUp extends Component {
+export interface CountUpProps extends CommonProps, CallbackProps {
+  className?: string;
+  redraw?: boolean;
+  preserveValue?: boolean;
+  children?: (props: RenderCounterProps) => React.ReactNode;
+  style: CSSProperties;
+}
+
+class CountUp extends Component<CountUpProps> {
+  private instance: CountUpJs | undefined;
+  private timeoutId: NodeJS.Timeout | undefined;
+
   static propTypes = {
     decimal: PropTypes.string,
     decimals: PropTypes.number,
@@ -118,7 +131,8 @@ class CountUp extends Component {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
-    if (this.instance.target) {
+    // instance.target is incorrectly marked private by typescript
+    if ((this.instance as any).target) {
       this.instance.reset();
     }
   }
@@ -185,7 +199,7 @@ class CountUp extends Component {
     onUpdate({ pauseResume, reset, start });
   };
 
-  containerRef = React.createRef();
+  containerRef = React.createRef<any>();
 
   render() {
     const { children, className, style } = this.props;
