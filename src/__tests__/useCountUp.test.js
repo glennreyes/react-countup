@@ -51,7 +51,7 @@ describe('useCountUp', () => {
 
     const { container } = render(<Hook/>);
 
-    await checkContent(container, '');
+    await checkContent(container, '0');
   });
 
   it('renders with delay correctly', async () => {
@@ -62,7 +62,7 @@ describe('useCountUp', () => {
 
     const { container } = render(<Hook/>);
 
-    await checkContent(container, '', 900);
+    await checkContent(container, '0', 900);
     await checkContent(container, '10');
   });
 

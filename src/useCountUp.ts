@@ -1,11 +1,12 @@
 import { CallbackProps, CommonProps, UpdateFn } from './types';
-import { useEffect, useRef } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import { createCountUpInstance } from './common';
 import { useEventCallback } from './helpers/useEventCallback';
 
 export interface useCountUpProps extends CommonProps, CallbackProps {
   startOnMount?: boolean;
-  ref?: string | React.RefObject<any>;
+  ref?: string | React.MutableRefObject<any>;
+  enableReinitialize?: boolean;
 }
 
 const defaults = {
@@ -21,17 +22,17 @@ const defaults = {
   onStart: () => {},
   onUpdate: () => {},
   prefix: '',
-  redraw: false,
   separator: '',
   start: 0,
   startOnMount: true,
   suffix: '',
   style: undefined,
   useEasing: true,
+  enableReinitialize: true,
 };
 
 const useCountUp = (props: useCountUpProps) => {
-  const config = { ...defaults, ...props };
+  const config = useMemo(() => ({ ...defaults, ...props }), [props]);
   const { ref } = config;
   const countUpRef = useRef(null);
   const timerRef = useRef(null);
@@ -54,11 +55,13 @@ const useCountUp = (props: useCountUpProps) => {
   });
 
   const start = useEventCallback(() => {
+    clearTimeout(timerRef.current);
+    const countUp = getCountUp(true);
+
     const { delay, onStart, onEnd } = config;
 
     const run = () =>
-      getCountUp(true).start(() => {
-        clearTimeout(timerRef.current);
+      countUp.start(() => {
         onEnd({ pauseResume, reset, start: restart, update });
       });
 
@@ -100,23 +103,25 @@ const useCountUp = (props: useCountUpProps) => {
     start();
   });
 
-  const maybeStartOnMount = useEventCallback(() => {
-    const { startOnMount } = config;
-    if (startOnMount) {
+  const initialize = useEventCallback(() => {
+    // populate initial instance on mount
+    getCountUp();
+
+    if (config.startOnMount) {
       start();
     }
   });
 
   useEffect(() => {
-    maybeStartOnMount();
+    initialize();
 
     return () => {
       clearTimeout(timerRef.current);
       reset();
     };
-  }, [maybeStartOnMount, reset]);
+  }, [initialize, reset, config.enableReinitialize && config]);
 
-  return { start: restart, pauseResume, reset, restart, update };
+  return { start: restart, pauseResume, reset, update };
 };
 
 export default useCountUp;

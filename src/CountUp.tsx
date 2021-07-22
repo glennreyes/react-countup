@@ -14,17 +14,17 @@ export interface CountUpProps extends CommonProps, CallbackProps {
 
 const CountUp = (props: CountUpProps) => {
   const { className, redraw, children, style, ...useCountUpProps } = props;
-  const containerRef = React.useRef<any>();
+  const containerRef = React.useRef<any>(null);
   const isInitializedRef = React.useRef(false);
 
   const countUp = useCountUp({
     ...useCountUpProps,
     ref: containerRef,
-    startOnMount: typeof children !== 'function'
+    startOnMount: typeof children !== 'function' || props.delay === 0
   });
 
   const restart = useEventCallback(() => {
-    countUp.restart();
+    countUp.start();
   });
 
   const update = useEventCallback((end: number) => {
