@@ -6,7 +6,6 @@ import { useEventCallback } from './helpers/useEventCallback';
 export interface useCountUpProps extends CommonProps, CallbackProps {
   startOnMount?: boolean;
   ref?: string | React.MutableRefObject<any>;
-  enableReinitialize?: boolean;
 }
 
 const defaults = {
@@ -28,7 +27,6 @@ const defaults = {
   suffix: '',
   style: undefined,
   useEasing: true,
-  enableReinitialize: true,
 };
 
 const useCountUp = (props: useCountUpProps) => {
@@ -119,7 +117,7 @@ const useCountUp = (props: useCountUpProps) => {
       clearTimeout(timerRef.current);
       reset();
     };
-  }, [initialize, reset, config.enableReinitialize && config]);
+  }, [initialize, reset, config]);
 
   return { start: restart, pauseResume, reset, update };
 };
