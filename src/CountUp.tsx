@@ -1,222 +1,159 @@
-import PropTypes from 'prop-types';
-import React, { Component, CSSProperties } from 'react';
+import React, { CSSProperties, useEffect } from 'react';
 import warning from 'warning';
 import { createCountUpInstance } from './common';
 import { CountUp as CountUpJs } from 'countup.js';
 import { CallbackProps, CommonProps, RenderCounterProps } from './types';
+import { useEventCallback } from './helpers/useEventCallback';
 
 export interface CountUpProps extends CommonProps, CallbackProps {
   className?: string;
   redraw?: boolean;
   preserveValue?: boolean;
-  children?: (props: RenderCounterProps) => React.ReactNode;
+  children?: (props: RenderCounterProps) => JSX.Element | null;
   style: CSSProperties;
 }
 
-class CountUp extends Component<CountUpProps> {
-  private instance: CountUpJs | undefined;
-  private timeoutId: NodeJS.Timeout | undefined;
+const CountUp: React.FC<CountUpProps> = (props) => {
+  const instance = React.useRef<CountUpJs | undefined>();
+  const timeoutId = React.useRef<NodeJS.Timeout | undefined>();
+  const containerRef = React.createRef<any>();
 
-  static propTypes = {
-    decimal: PropTypes.string,
-    decimals: PropTypes.number,
-    delay: PropTypes.number,
-    easingFn: PropTypes.func,
-    end: PropTypes.number.isRequired,
-    formattingFn: PropTypes.func,
-    onEnd: PropTypes.func,
-    onStart: PropTypes.func,
-    prefix: PropTypes.string,
-    redraw: PropTypes.bool,
-    separator: PropTypes.string,
-    start: PropTypes.number,
-    startOnMount: PropTypes.bool,
-    suffix: PropTypes.string,
-    style: PropTypes.object,
-    useEasing: PropTypes.bool,
-    preserveValue: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    decimal: '.',
-    decimals: 0,
-    delay: null,
-    duration: null,
-    easingFn: null,
-    formattingFn: null,
-    onEnd: () => {},
-    onPauseResume: () => {},
-    onReset: () => {},
-    onStart: () => {},
-    onUpdate: () => {},
-    prefix: '',
-    redraw: false,
-    separator: '',
-    start: 0,
-    startOnMount: true,
-    suffix: '',
-    style: undefined,
-    useEasing: true,
-    preserveValue: false,
-  };
-
-  componentDidMount() {
-    const { children, delay } = this.props;
-    this.instance = this.createInstance();
-
-    // Don't invoke start if component is used as a render prop
-    if (typeof children === 'function' && delay !== 0) return;
-
-    // Otherwise just start immediately
-    this.start();
-  }
-
-  checkProps = (updatedProps) => {
-    const {
-      start,
-      suffix,
-      prefix,
-      redraw,
-      duration,
-      separator,
-      decimals,
-      decimal,
-      className,
-      formattingFn
-    } = this.props;
-
-    const hasPropsChanged =
-      duration !== updatedProps.duration ||
-      start !== updatedProps.start ||
-      suffix !== updatedProps.suffix ||
-      prefix !== updatedProps.prefix ||
-      separator !== updatedProps.separator ||
-      decimals !== updatedProps.decimals ||
-      decimal !== updatedProps.decimal ||
-      className !== updatedProps.className ||
-      formattingFn !== updatedProps.formattingFn;
-
-    return hasPropsChanged || redraw;
-  };
-
-  shouldComponentUpdate(nextProps) {
-    const { end } = this.props;
-    return this.checkProps(nextProps) || end !== nextProps.end;
-  }
-
-  componentDidUpdate(prevProps) {
-    // If duration, suffix, prefix, separator or start has changed
-    // there's no way to update the values.
-    // So we need to re-create the CountUp instance in order to
-    // restart it.
-    const { end, preserveValue } = this.props;
-
-    if (this.checkProps(prevProps)) {
-      this.instance.reset();
-      this.instance = this.createInstance();
-      this.start();
-    }
-
-    // Only end value has changed, so reset and and re-animate with the updated
-    // end value.
-    if (end !== prevProps.end) {
-      if (!preserveValue) {
-        this.instance.reset();
-      }
-      this.instance.update(end);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
-    // instance.target is incorrectly marked private by typescript
-    if ((this.instance as any).target) {
-      this.instance.reset();
-    }
-  }
-
-  createInstance = () => {
-    if (typeof this.props.children === 'function') {
+  const createInstance = () => {
+    if (typeof props.children === 'function') {
       // Warn when user didn't use containerRef at all
       warning(
-        this.containerRef.current &&
-          (this.containerRef.current instanceof HTMLElement ||
-            this.containerRef.current instanceof SVGTextElement ||
-            this.containerRef.current instanceof SVGTSpanElement),
+        containerRef.current &&
+          (containerRef.current instanceof HTMLElement ||
+            containerRef.current instanceof SVGTextElement ||
+            containerRef.current instanceof SVGTSpanElement),
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }
-    return createCountUpInstance(this.containerRef.current, this.props);
+    return createCountUpInstance(containerRef.current, props);
   };
 
-  pauseResume = () => {
-    const { reset, restart: start, update } = this;
-    const { onPauseResume } = this.props;
+  const pauseResume = useEventCallback(() => {
+    const { onPauseResume } = props;
 
-    this.instance.pauseResume();
+    instance.current.pauseResume();
 
     onPauseResume({ reset, start, update });
-  };
+  });
 
-  reset = () => {
-    const { pauseResume, restart: start, update } = this;
-    const { onReset } = this.props;
+  const reset = useEventCallback(() => {
+    const { onReset } = props;
 
-    this.instance.reset();
+    instance.current.reset();
 
-    onReset({ pauseResume, start, update });
-  };
+    onReset({ pauseResume, start: restart, update });
+  });
 
-  restart = () => {
-    this.reset();
-    this.start();
-  };
+  const restart = useEventCallback(() => {
+    reset();
+    start();
+  });
 
-  start = () => {
-    const { pauseResume, reset, restart: start, update } = this;
-    const { delay, onEnd, onStart } = this.props;
+  const start = useEventCallback(() => {
+    const { delay, onEnd, onStart } = props;
     const run = () =>
-      this.instance.start(() => onEnd({ pauseResume, reset, start, update }));
+      instance.current.start(() => onEnd({ pauseResume, reset, start, update }));
 
     // Delay start if delay prop is properly set
     if (delay > 0) {
-      this.timeoutId = setTimeout(run, delay * 1000);
+      timeoutId.current = setTimeout(run, delay * 1000);
     } else {
       run();
     }
 
     onStart({ pauseResume, reset, update });
-  };
+  });
 
-  update = (newEnd) => {
-    const { pauseResume, reset, restart: start } = this;
-    const { onUpdate } = this.props;
+  const update = useEventCallback((newEnd) => {
+    const { onUpdate } = props;
 
-    this.instance.update(newEnd);
+    instance.current.update(newEnd);
 
-    onUpdate({ pauseResume, reset, start });
-  };
+    onUpdate({ pauseResume, reset, start: restart });
+  });
 
-  containerRef = React.createRef<any>();
+  const reinitialize = useEventCallback(() => {
+    instance.current.reset();
+    instance.current = createInstance();
+    start();
+  });
 
-  render() {
-    const { children, className, style } = this.props;
-    const { containerRef, pauseResume, reset, restart, update } = this;
-
-    if (typeof children === 'function') {
-      return children({
-        countUpRef: containerRef,
-        pauseResume,
-        reset,
-        start: restart,
-        update,
-      });
+  const updateEnd = useEventCallback((end: number) => {
+    // Only end value has changed, so reset and and re-animate with the updated
+    // end value.
+    if (!props.preserveValue) {
+      instance.current.reset();
     }
+    instance.current.update(end);
+  });
 
-    return <span className={className} ref={containerRef} style={style} />;
+  // if props.redraw, call this effect on every props change
+  useEffect(() => {
+    if (props.redraw) {
+      reinitialize();
+    }
+  }, [props.redraw && props]);
+
+  // if not props.redraw, call this effect only when certain props are changed
+  useEffect(() => {
+    if (!props.redraw) {
+      reinitialize();
+    }
+  }, [
+    props.redraw,
+    props.start,
+    props.suffix,
+    props.prefix,
+    props.duration,
+    props.separator,
+    props.decimals,
+    props.decimal,
+    props.className,
+    props.formattingFn
+  ]);
+
+  useEffect(() => {
+    const { children, delay } = props;
+    instance.current = createInstance();
+
+    // Don't invoke start if component is used as a render prop
+    if (typeof children === 'function' && delay !== 0) return;
+
+    // Otherwise just start immediately
+    start();
+
+    return () => {
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current);
+      }
+      // instance.target is incorrectly marked private by typescript
+      if ((instance.current as any).target) {
+        instance.current.reset();
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    updateEnd(props.end);
+  }, [props.end]);
+
+  const { children, className, style } = props;
+
+  if (typeof children === 'function') {
+    return children({
+      countUpRef: containerRef,
+      pauseResume,
+      reset,
+      start: restart,
+      update,
+    });
   }
+
+  return <span className={className} ref={containerRef} style={style} />;
 }
 
 export default CountUp;
