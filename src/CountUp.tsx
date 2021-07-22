@@ -9,7 +9,7 @@ export interface CountUpProps extends CommonProps, CallbackProps {
   className?: string;
   redraw?: boolean;
   preserveValue?: boolean;
-  children?: (props: RenderCounterProps) => JSX.Element | null;
+  children?: (props: RenderCounterProps) => React.ReactNode;
   style: CSSProperties;
 }
 
@@ -144,13 +144,15 @@ const CountUp: React.FC<CountUpProps> = (props) => {
   const { children, className, style } = props;
 
   if (typeof children === 'function') {
+    // TypeScript only lets functional components return JSX.Element | null.
+    // However, it will render just like before, and we don't want to break backwards compatibility on the render function.
     return children({
       countUpRef: containerRef,
       pauseResume,
       reset,
       start: restart,
       update,
-    });
+    }) as JSX.Element | null;
   }
 
   return <span className={className} ref={containerRef} style={style} />;
