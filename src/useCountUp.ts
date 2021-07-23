@@ -59,7 +59,7 @@ const useCountUp = (props: useCountUpProps) => {
         onEnd?.({ pauseResume, reset, start: restart, update });
       });
 
-    if (typeof delay !== "undefined" && delay > 0) {
+    if (delay && delay > 0) {
       timerRef.current = setTimeout(run, delay * 1000);
     } else {
       run();
