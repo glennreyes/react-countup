@@ -24,7 +24,7 @@
   ],
   "typings": "build/index.d.ts",
   "scripts": {
-    "build": "rollup -c && tsc --noEmit false --project src/tsconfig.json --outDir build",
+    "build": "rollup -c && tsc --emitDeclarationOnly --noEmit false --project src/tsconfig.json --outDir build",
     "prepublishOnly": "yarn build",
     "test": "jest"
   },
