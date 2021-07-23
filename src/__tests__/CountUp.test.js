@@ -170,11 +170,11 @@ describe('CountUp component', () => {
   });
 
   it('re-renders with redraw={true} correctly', () => {
-    const componentRender = jest.spyOn(CountUp.prototype, 'render');
-    const { rerender } = render(<CountUp end={10} redraw/>);
+    const onStart = jest.fn();
+    const { rerender } = render(<CountUp end={10} onStart={onStart} redraw />);
 
-    rerender(<CountUp end={10}/>);
-    expect(componentRender).toHaveBeenCalledTimes(2);
+    rerender(<CountUp end={10} onStart={onStart} redraw />);
+    expect(onStart).toHaveBeenCalledTimes(2);
   });
 
   it('does not reset if preserveValue is true', (done) => {

@@ -2,19 +2,17 @@ import { CallbackProps, CommonProps, UpdateFn } from './types';
 import { useMemo, useRef, useEffect } from 'react';
 import { createCountUpInstance } from './common';
 import { useEventCallback } from './helpers/useEventCallback';
+import { CountUp as CountUpJs } from 'countup.js';
 
 export interface useCountUpProps extends CommonProps, CallbackProps {
   startOnMount?: boolean;
-  ref?: string | React.MutableRefObject<any>;
+  ref: string | React.MutableRefObject<any>;
+  enableReinitialize?: boolean;
 }
 
-const defaults = {
+const defaults: Partial<useCountUpProps> = {
   decimal: '.',
   decimals: 0,
-  delay: null,
-  duration: null,
-  easingFn: null,
-  formattingFn: null,
   onEnd: () => {},
   onPauseResume: () => {},
   onReset: () => {},
@@ -25,15 +23,16 @@ const defaults = {
   start: 0,
   startOnMount: true,
   suffix: '',
-  style: undefined,
   useEasing: true,
+  enableReinitialize: true,
 };
 
 const useCountUp = (props: useCountUpProps) => {
-  const config = useMemo(() => ({ ...defaults, ...props }), [props]);
+  const config = useMemo<useCountUpProps>(() => ({ ...defaults, ...props }), [props]);
   const { ref } = config;
-  const countUpRef = useRef(null);
-  const timerRef = useRef(null);
+  const countUpRef = useRef<CountUpJs>();
+  const timerRef = useRef<NodeJS.Timeout>();
+  const isInitializedRef = useRef(false);
 
   const createInstance = useEventCallback(() => {
     return createCountUpInstance(
@@ -44,7 +43,7 @@ const useCountUp = (props: useCountUpProps) => {
 
   const getCountUp = useEventCallback((recreate?: boolean) => {
     const countUp = countUpRef.current;
-    if (countUp !== null && !recreate) {
+    if (countUp && !recreate) {
       return countUp;
     }
     const newCountUp = createInstance();
@@ -53,23 +52,20 @@ const useCountUp = (props: useCountUpProps) => {
   });
 
   const start = useEventCallback(() => {
-    clearTimeout(timerRef.current);
-    const countUp = getCountUp(true);
-
     const { delay, onStart, onEnd } = config;
 
     const run = () =>
-      countUp.start(() => {
-        onEnd({ pauseResume, reset, start: restart, update });
+      getCountUp(true).start(() => {
+        onEnd?.({ pauseResume, reset, start: restart, update });
       });
 
-    if (delay > 0) {
+    if (typeof delay !== "undefined" && delay > 0) {
       timerRef.current = setTimeout(run, delay * 1000);
     } else {
       run();
     }
 
-    onStart({ pauseResume, reset, update });
+    onStart?.({ pauseResume, reset, update });
   });
 
   const pauseResume = useEventCallback(() => {
@@ -77,15 +73,17 @@ const useCountUp = (props: useCountUpProps) => {
 
     getCountUp().pauseResume();
 
-    onPauseResume({ reset, start: restart, update });
+    onPauseResume?.({ reset, start: restart, update });
   });
 
   const reset = useEventCallback(() => {
+    timerRef.current && clearTimeout(timerRef.current);
+
     const { onReset } = config;
 
     getCountUp().reset();
 
-    onReset({ pauseResume, start: restart, update });
+    onReset?.({ pauseResume, start: restart, update });
   });
 
   const update: UpdateFn = useEventCallback((newEnd) => {
@@ -93,7 +91,7 @@ const useCountUp = (props: useCountUpProps) => {
 
     getCountUp().update(newEnd);
 
-    onUpdate({ pauseResume, reset, start: restart });
+    onUpdate?.({ pauseResume, reset, start: restart });
   });
 
   const restart = useEventCallback(() => {
@@ -101,25 +99,36 @@ const useCountUp = (props: useCountUpProps) => {
     start();
   });
 
-  const initialize = useEventCallback(() => {
-    // populate initial instance on mount
-    getCountUp();
-
+  const maybeInitialize = useEventCallback(() => {
     if (config.startOnMount) {
       start();
     }
   });
 
-  useEffect(() => {
-    initialize();
-
-    return () => {
-      clearTimeout(timerRef.current);
+  const maybeReinitialize = () => {
+    if (config.startOnMount) {
       reset();
-    };
-  }, [initialize, reset, config]);
+      start();
+    }
+  }
 
-  return { start: restart, pauseResume, reset, update };
+  useEffect(() => {
+    if (!isInitializedRef.current) {
+      isInitializedRef.current = true;
+
+      maybeInitialize();
+    } else if (config.enableReinitialize) {
+      maybeReinitialize();
+    }
+  }, [maybeInitialize, reset, config]);
+
+  useEffect(() => {
+    return () => {
+      reset();
+    }
+  }, []);
+
+  return { start: restart, pauseResume, reset, update, getCountUp };
 };
 
 export default useCountUp;

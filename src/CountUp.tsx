@@ -8,7 +8,7 @@ export interface CountUpProps extends CommonProps, CallbackProps {
   className?: string;
   redraw?: boolean;
   children?: (props: RenderCounterProps) => React.ReactNode;
-  style: CSSProperties;
+  style?: CSSProperties;
   preserveValue?: boolean;
 }
 
@@ -20,14 +20,16 @@ const CountUp = (props: CountUpProps) => {
   const countUp = useCountUp({
     ...useCountUpProps,
     ref: containerRef,
-    startOnMount: typeof children !== 'function' || props.delay === 0
+    startOnMount: typeof children !== 'function' || props.delay === 0,
+    // component manually restarts
+    enableReinitialize: false,
   });
 
   const restart = useEventCallback(() => {
     countUp.start();
   });
 
-  const update = useEventCallback((end: number) => {
+  const update = useEventCallback((end: string | number) => {
     if (!props.preserveValue) {
       countUp.reset();
     }
@@ -35,6 +37,9 @@ const CountUp = (props: CountUpProps) => {
   });
 
   useEffect(() => {
+    // unlike the hook, the CountUp component initializes on mount
+    countUp.getCountUp();
+
     if (typeof props.children === 'function') {
       // Warn when user didn't use containerRef at all
       warning(
