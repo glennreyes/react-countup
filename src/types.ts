@@ -44,7 +44,7 @@ type EasingFn = (t: number, b: number, c: number, d: number) => number;
 export interface CommonProps {
   decimal?: string;
   decimals?: number;
-  delay?: number;
+  delay?: number | null;
   duration?: number;
   easingFn?: EasingFn;
   end: number;
@@ -67,8 +67,8 @@ export interface CallbackProps {
 
 export interface RenderCounterProps {
   countUpRef: React.RefObject<any>;
-  start?: Function;
-  pauseResume?: Function;
-  reset?: Function;
-  update?: (newEnd?: number) => void;
+  start: Function;
+  pauseResume: Function;
+  reset: Function;
+  update: UpdateFn;
 }

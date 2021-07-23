@@ -10,7 +10,7 @@ export interface CountUpProps extends CommonProps, CallbackProps {
   redraw?: boolean;
   preserveValue?: boolean;
   children?: (props: RenderCounterProps) => React.ReactNode;
-  style: CSSProperties;
+  style?: CSSProperties;
 }
 
 class CountUp extends Component<CountUpProps> {
@@ -71,7 +71,7 @@ class CountUp extends Component<CountUpProps> {
     this.start();
   }
 
-  checkProps = (updatedProps) => {
+  checkProps = (updatedProps: CountUpProps) => {
     const {
       start,
       suffix,
@@ -99,12 +99,12 @@ class CountUp extends Component<CountUpProps> {
     return hasPropsChanged || redraw;
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: CountUpProps) {
     const { end } = this.props;
     return this.checkProps(nextProps) || end !== nextProps.end;
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: CountUpProps) {
     // If duration, suffix, prefix, separator or start has changed
     // there's no way to update the values.
     // So we need to re-create the CountUp instance in order to
@@ -112,7 +112,7 @@ class CountUp extends Component<CountUpProps> {
     const { end, preserveValue } = this.props;
 
     if (this.checkProps(prevProps)) {
-      this.instance.reset();
+      this.instance?.reset();
       this.instance = this.createInstance();
       this.start();
     }
@@ -121,9 +121,9 @@ class CountUp extends Component<CountUpProps> {
     // end value.
     if (end !== prevProps.end) {
       if (!preserveValue) {
-        this.instance.reset();
+        this.instance?.reset();
       }
-      this.instance.update(end);
+      this.instance?.update(end);
     }
   }
 
@@ -133,7 +133,7 @@ class CountUp extends Component<CountUpProps> {
     }
     // instance.target is incorrectly marked private by typescript
     if ((this.instance as any).target) {
-      this.instance.reset();
+      this.instance?.reset();
     }
   }
 
@@ -155,18 +155,18 @@ class CountUp extends Component<CountUpProps> {
     const { reset, restart: start, update } = this;
     const { onPauseResume } = this.props;
 
-    this.instance.pauseResume();
+    this.instance?.pauseResume();
 
-    onPauseResume({ reset, start, update });
+    onPauseResume?.({ reset, start, update });
   };
 
   reset = () => {
     const { pauseResume, restart: start, update } = this;
     const { onReset } = this.props;
 
-    this.instance.reset();
+    this.instance?.reset();
 
-    onReset({ pauseResume, start, update });
+    onReset?.({ pauseResume, start, update });
   };
 
   restart = () => {
@@ -178,25 +178,25 @@ class CountUp extends Component<CountUpProps> {
     const { pauseResume, reset, restart: start, update } = this;
     const { delay, onEnd, onStart } = this.props;
     const run = () =>
-      this.instance.start(() => onEnd({ pauseResume, reset, start, update }));
+      this.instance?.start(() => onEnd?.({ pauseResume, reset, start, update }));
 
     // Delay start if delay prop is properly set
-    if (delay > 0) {
+    if (delay && delay > 0) {
       this.timeoutId = setTimeout(run, delay * 1000);
     } else {
       run();
     }
 
-    onStart({ pauseResume, reset, update });
+    onStart?.({ pauseResume, reset, update });
   };
 
-  update = (newEnd) => {
+  update = (newEnd: string | number) => {
     const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 
-    this.instance.update(newEnd);
+    this.instance?.update(newEnd);
 
-    onUpdate({ pauseResume, reset, start });
+    onUpdate?.({ pauseResume, reset, start });
   };
 
   containerRef = React.createRef<any>();
