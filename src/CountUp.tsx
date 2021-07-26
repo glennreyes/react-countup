@@ -1,28 +1,20 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import warning from 'warning';
 import { createCountUpInstance } from './common';
+import { CountUp as CountUpJs } from 'countup.js';
+import { CallbackProps, CommonProps, RenderCounterProps } from './types';
 
-class CountUp extends Component {
-  static propTypes = {
-    decimal: PropTypes.string,
-    decimals: PropTypes.number,
-    delay: PropTypes.number,
-    easingFn: PropTypes.func,
-    end: PropTypes.number.isRequired,
-    formattingFn: PropTypes.func,
-    onEnd: PropTypes.func,
-    onStart: PropTypes.func,
-    prefix: PropTypes.string,
-    redraw: PropTypes.bool,
-    separator: PropTypes.string,
-    start: PropTypes.number,
-    startOnMount: PropTypes.bool,
-    suffix: PropTypes.string,
-    style: PropTypes.object,
-    useEasing: PropTypes.bool,
-    preserveValue: PropTypes.bool,
-  };
+export interface CountUpProps extends CommonProps, CallbackProps {
+  className?: string;
+  redraw?: boolean;
+  preserveValue?: boolean;
+  children?: (props: RenderCounterProps) => React.ReactNode;
+  style?: CSSProperties;
+}
+
+class CountUp extends Component<CountUpProps> {
+  private instance: CountUpJs | undefined;
+  private timeoutId: ReturnType<typeof setTimeout> | undefined;
 
   static defaultProps = {
     decimal: '.',
@@ -58,7 +50,7 @@ class CountUp extends Component {
     this.start();
   }
 
-  checkProps = (updatedProps) => {
+  checkProps = (updatedProps: CountUpProps) => {
     const {
       start,
       suffix,
@@ -86,12 +78,12 @@ class CountUp extends Component {
     return hasPropsChanged || redraw;
   };
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps: CountUpProps) {
     const { end } = this.props;
     return this.checkProps(nextProps) || end !== nextProps.end;
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: CountUpProps) {
     // If duration, suffix, prefix, separator or start has changed
     // there's no way to update the values.
     // So we need to re-create the CountUp instance in order to
@@ -99,7 +91,7 @@ class CountUp extends Component {
     const { end, preserveValue } = this.props;
 
     if (this.checkProps(prevProps)) {
-      this.instance.reset();
+      this.instance?.reset();
       this.instance = this.createInstance();
       this.start();
     }
@@ -108,9 +100,9 @@ class CountUp extends Component {
     // end value.
     if (end !== prevProps.end) {
       if (!preserveValue) {
-        this.instance.reset();
+        this.instance?.reset();
       }
-      this.instance.update(end);
+      this.instance?.update(end);
     }
   }
 
@@ -118,7 +110,8 @@ class CountUp extends Component {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
-    if (this.instance.target) {
+    // instance.target is incorrectly marked private by typescript
+    if (this.instance && (this.instance as any).target) {
       this.instance.reset();
     }
   }
@@ -127,11 +120,8 @@ class CountUp extends Component {
     if (typeof this.props.children === 'function') {
       // Warn when user didn't use containerRef at all
       warning(
-        this.containerRef.current &&
-          (this.containerRef.current instanceof HTMLElement ||
-            this.containerRef.current instanceof SVGTextElement ||
-            this.containerRef.current instanceof SVGTSpanElement),
-        `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
+        this.containerRef.current instanceof Element,
+        `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an Element, eg. <span ref={containerRef} />.`,
       );
     }
     return createCountUpInstance(this.containerRef.current, this.props);
@@ -141,18 +131,18 @@ class CountUp extends Component {
     const { reset, restart: start, update } = this;
     const { onPauseResume } = this.props;
 
-    this.instance.pauseResume();
+    this.instance?.pauseResume();
 
-    onPauseResume({ reset, start, update });
+    onPauseResume?.({ reset, start, update });
   };
 
   reset = () => {
     const { pauseResume, restart: start, update } = this;
     const { onReset } = this.props;
 
-    this.instance.reset();
+    this.instance?.reset();
 
-    onReset({ pauseResume, start, update });
+    onReset?.({ pauseResume, start, update });
   };
 
   restart = () => {
@@ -164,28 +154,28 @@ class CountUp extends Component {
     const { pauseResume, reset, restart: start, update } = this;
     const { delay, onEnd, onStart } = this.props;
     const run = () =>
-      this.instance.start(() => onEnd({ pauseResume, reset, start, update }));
+      this.instance?.start(() => onEnd?.({ pauseResume, reset, start, update }));
 
     // Delay start if delay prop is properly set
-    if (delay > 0) {
+    if (delay && delay > 0) {
       this.timeoutId = setTimeout(run, delay * 1000);
     } else {
       run();
     }
 
-    onStart({ pauseResume, reset, update });
+    onStart?.({ pauseResume, reset, update });
   };
 
-  update = (newEnd) => {
+  update = (newEnd: string | number) => {
     const { pauseResume, reset, restart: start } = this;
     const { onUpdate } = this.props;
 
-    this.instance.update(newEnd);
+    this.instance?.update(newEnd);
 
-    onUpdate({ pauseResume, reset, start });
+    onUpdate?.({ pauseResume, reset, start });
   };
 
-  containerRef = React.createRef();
+  containerRef = React.createRef<any>();
 
   render() {
     const { children, className, style } = this.props;
