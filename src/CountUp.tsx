@@ -111,8 +111,8 @@ class CountUp extends Component<CountUpProps> {
       clearTimeout(this.timeoutId);
     }
     // instance.target is incorrectly marked private by typescript
-    if ((this.instance as any).target) {
-      this.instance?.reset();
+    if (this.instance && (this.instance as any).target) {
+      this.instance.reset();
     }
   }
 
