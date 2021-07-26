@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Component, CSSProperties } from 'react';
 import warning from 'warning';
 import { createCountUpInstance } from './common';
@@ -16,26 +15,6 @@ export interface CountUpProps extends CommonProps, CallbackProps {
 class CountUp extends Component<CountUpProps> {
   private instance: CountUpJs | undefined;
   private timeoutId: NodeJS.Timeout | undefined;
-
-  static propTypes = {
-    decimal: PropTypes.string,
-    decimals: PropTypes.number,
-    delay: PropTypes.number,
-    easingFn: PropTypes.func,
-    end: PropTypes.number.isRequired,
-    formattingFn: PropTypes.func,
-    onEnd: PropTypes.func,
-    onStart: PropTypes.func,
-    prefix: PropTypes.string,
-    redraw: PropTypes.bool,
-    separator: PropTypes.string,
-    start: PropTypes.number,
-    startOnMount: PropTypes.bool,
-    suffix: PropTypes.string,
-    style: PropTypes.object,
-    useEasing: PropTypes.bool,
-    preserveValue: PropTypes.bool,
-  };
 
   static defaultProps = {
     decimal: '.',
