@@ -16,5 +16,5 @@ export default {
       extensions,
     }),
   ],
-  external: ['countup.js', 'prop-types', 'react', 'react-dom', 'warning'],
+  external: ['countup.js', 'react', 'react-dom', 'warning'],
 };
