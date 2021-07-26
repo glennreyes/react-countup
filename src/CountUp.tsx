@@ -121,10 +121,8 @@ class CountUp extends Component<CountUpProps> {
       // Warn when user didn't use containerRef at all
       warning(
         this.containerRef.current &&
-          (this.containerRef.current instanceof HTMLElement ||
-            this.containerRef.current instanceof SVGTextElement ||
-            this.containerRef.current instanceof SVGTSpanElement),
-        `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
+          (this.containerRef.current instanceof Element),
+        `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an Element, eg. <span ref={containerRef} />.`,
       );
     }
     return createCountUpInstance(this.containerRef.current, this.props);
