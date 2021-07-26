@@ -120,8 +120,7 @@ class CountUp extends Component<CountUpProps> {
     if (typeof this.props.children === 'function') {
       // Warn when user didn't use containerRef at all
       warning(
-        this.containerRef.current &&
-          (this.containerRef.current instanceof Element),
+        this.containerRef.current instanceof Element,
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an Element, eg. <span ref={containerRef} />.`,
       );
     }
