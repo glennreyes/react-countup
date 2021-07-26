@@ -14,7 +14,7 @@ export interface CountUpProps extends CommonProps, CallbackProps {
 
 class CountUp extends Component<CountUpProps> {
   private instance: CountUpJs | undefined;
-  private timeoutId: NodeJS.Timeout | undefined;
+  private timeoutId: ReturnType<typeof setTimeout> | undefined;
 
   static defaultProps = {
     decimal: '.',
