@@ -31,7 +31,7 @@ const useCountUp = (props: useCountUpProps) => {
   const config = useMemo<useCountUpProps>(() => ({ ...defaults, ...props }), [props]);
   const { ref } = config;
   const countUpRef = useRef<CountUpJs>();
-  const timerRef = useRef<NodeJS.Timeout>();
+  const timerRef = useRef<ReturnType<typeof setTimeout>>();
   const isInitializedRef = useRef(false);
 
   const createInstance = useEventCallback(() => {

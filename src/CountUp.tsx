@@ -43,10 +43,7 @@ const CountUp = (props: CountUpProps) => {
     if (typeof props.children === 'function') {
       // Warn when user didn't use containerRef at all
       warning(
-        containerRef.current &&
-          (containerRef.current instanceof HTMLElement ||
-            containerRef.current instanceof SVGTextElement ||
-            containerRef.current instanceof SVGTSpanElement),
+        containerRef.current instanceof Element,
         `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
       );
     }
