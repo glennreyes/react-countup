@@ -1,6 +1,6 @@
 import React, { Component, CSSProperties } from 'react';
 import warning from 'warning';
-import { createCountUpInstance } from './common';
+import { createCountUpInstance, DEFAULTS } from './common';
 import { CountUp as CountUpJs } from 'countup.js';
 import { CallbackProps, CommonProps, RenderCounterProps } from './types';
 
@@ -17,25 +17,9 @@ class CountUp extends Component<CountUpProps> {
   private timeoutId: ReturnType<typeof setTimeout> | undefined;
 
   static defaultProps = {
-    decimal: '.',
-    decimals: 0,
-    delay: null,
-    duration: null,
-    easingFn: null,
-    formattingFn: null,
-    onEnd: () => {},
-    onPauseResume: () => {},
-    onReset: () => {},
-    onStart: () => {},
-    onUpdate: () => {},
-    prefix: '',
+    ...DEFAULTS,
     redraw: false,
-    separator: '',
-    start: 0,
-    startOnMount: true,
-    suffix: '',
     style: undefined,
-    useEasing: true,
     preserveValue: false,
   };
 

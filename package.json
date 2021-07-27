@@ -20,7 +20,8 @@
   "homepage": "https://react-countup.now.sh",
   "main": "build",
   "files": [
-    "build"
+    "build/index.js",
+    "build/index.d.ts"
   ],
   "typings": "build/index.d.ts",
   "scripts": {
