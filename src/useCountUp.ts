@@ -1,6 +1,6 @@
 import { CallbackProps, CommonProps, UpdateFn } from './types';
-import { useEffect, useRef } from 'react';
-import { createCountUpInstance } from './common';
+import React, { useEffect, useRef } from 'react';
+import { createCountUpInstance, DEFAULTS } from './common';
 import { CountUp as CountUpJs } from 'countup.js';
 
 export interface useCountUpProps extends CommonProps, CallbackProps {
@@ -9,20 +9,8 @@ export interface useCountUpProps extends CommonProps, CallbackProps {
 }
 
 const defaults: Partial<useCountUpProps> = {
-  decimal: '.',
-  decimals: 0,
-  delay: null,
-  onEnd: () => {},
-  onPauseResume: () => {},
-  onReset: () => {},
-  onStart: () => {},
-  onUpdate: () => {},
-  prefix: '',
-  separator: '',
-  start: 0,
+  ...DEFAULTS,
   startOnMount: true,
-  suffix: '',
-  useEasing: true,
 };
 
 const useCountUp = (props: useCountUpProps) => {
@@ -53,10 +41,10 @@ const useCountUp = (props: useCountUpProps) => {
   const restart = () => {
     const { onStart, onEnd } = parsedProps;
     getCountUp().reset();
+    onStart?.({ pauseResume, reset, update });
     getCountUp().start(() => {
       onEnd?.({ pauseResume, reset, start: restart, update });
     });
-    onStart?.({ pauseResume, reset, update });
   };
 
   const pauseResume = () => {

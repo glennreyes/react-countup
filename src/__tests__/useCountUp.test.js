@@ -106,6 +106,24 @@ describe('useCountUp', () => {
     expect(span.textContent).toEqual('0');
   });
 
+  it('calls onEnd correctly', async () => {
+    let startFn;
+    const onEnd = jest.fn();
+    const Hook = () => {
+      const { start } = useCountUp({ end: 10, duration: 1, onEnd, startOnMount: false, ref: "counter" });
+      startFn = start;
+      return <span id="counter"/>;
+    };
+
+    const { container } = render(<Hook/>);
+    act(() => {
+      startFn();
+    })
+
+    await checkContent(container, '10');
+    expect(onEnd).toHaveBeenCalled();
+  });
+
   it('calls update correctly', async () => {
     let updateFn;
     const onUpdate = jest.fn();
