@@ -1,5 +1,4 @@
 import React, { CSSProperties, useEffect } from 'react';
-import warning from 'warning';
 import { CallbackProps, CommonProps, RenderCounterProps } from './types';
 import { useEventCallback } from './helpers/useEventCallback';
 import useCountUp from './useCountUp';
@@ -37,16 +36,16 @@ const CountUp = (props: CountUpProps) => {
   });
 
   useEffect(() => {
-    // unlike the hook, the CountUp component initializes on mount
-    countUp.getCountUp();
-
     if (typeof props.children === 'function') {
       // Warn when user didn't use containerRef at all
-      warning(
-        containerRef.current instanceof Element,
-        `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an HTMLElement, eg. <span ref={containerRef} />.`,
-      );
+      if (!(containerRef.current instanceof Element)) {
+        console.error(`Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an Element, eg. <span ref={containerRef} />.`);
+        return;
+      }
     }
+
+    // unlike the hook, the CountUp component initializes on mount
+    countUp.getCountUp();
   }, []);
 
   useEffect(() => {

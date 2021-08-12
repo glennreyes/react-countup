@@ -10,25 +10,18 @@ export interface useCountUpProps extends CommonProps, CallbackProps {
   enableReinitialize?: boolean;
 }
 
-const defaults: Partial<useCountUpProps> = {
+const DEFAULTS = {
   decimal: '.',
-  decimals: 0,
-  onEnd: () => {},
-  onPauseResume: () => {},
-  onReset: () => {},
-  onStart: () => {},
-  onUpdate: () => {},
+  delay: null,
   prefix: '',
-  separator: '',
+  suffix: '',
   start: 0,
   startOnMount: true,
-  suffix: '',
-  useEasing: true,
   enableReinitialize: true,
 };
 
 const useCountUp = (props: useCountUpProps) => {
-  const config = useMemo<useCountUpProps>(() => ({ ...defaults, ...props }), [props]);
+  const config = useMemo(() => ({ ...DEFAULTS, ...props }), [props]);
   const { ref } = config;
   const countUpRef = useRef<CountUpJs>();
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
