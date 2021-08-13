@@ -41,7 +41,7 @@ const useCountUp = (props: useCountUpProps) => {
   const createInstance = useEventCallback(() => {
     return createCountUpInstance(
       typeof ref === 'string' ? ref : ref.current,
-      config
+      instanceProps
     )
   });
 
