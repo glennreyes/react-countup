@@ -4,7 +4,7 @@ import { CountUpInstanceProps } from './types';
 export const createCountUpInstance = (
   el: string | HTMLElement,
   props: CountUpInstanceProps,
-) => {
+): CountUp => {
   const {
     decimal,
     decimals,

@@ -153,8 +153,8 @@ Note that `delay={0}` will automatically start the count up.
 import { useCountUp } from 'react-countup';
 
 const SimpleHook = () => {
-  useCountUp({ ref: "counter", end: 1234567 });
-  return <span id="counter"/>;
+  useCountUp({ ref: 'counter', end: 1234567 });
+  return <span id="counter" />;
 };
 ```
 
@@ -179,7 +179,7 @@ const CompleteHook = () => {
   });
   return (
     <div>
-      <div ref={countUpRef}/>
+      <div ref={countUpRef} />
       <button onClick={start}>Start</button>
       <button onClick={reset}>Reset</button>
       <button onClick={pauseResume}>Pause/Resume</button>
@@ -340,10 +340,10 @@ If `redraw` is set to `true` your component will start the transition on every c
 You need to check if your counter in viewport, [react-visibility-sensor](https://github.com/joshwnj/react-visibility-sensor) can be used for this purpose.
 
 ```js
-import React from "react";
-import CountUp from "react-countup";
-import VisibilitySensor from "react-visibility-sensor";
-import "./styles.css";
+import React from 'react';
+import CountUp from 'react-countup';
+import VisibilitySensor from 'react-visibility-sensor';
+import './styles.css';
 
 export default function App() {
   return (

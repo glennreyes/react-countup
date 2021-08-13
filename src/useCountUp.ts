@@ -1,4 +1,4 @@
-import { CallbackProps, CommonProps, UpdateFn } from './types';
+import { CallbackProps, CommonProps, CountUpApi, UpdateFn } from './types';
 import { useMemo, useRef, useEffect } from 'react';
 import { createCountUpInstance } from './common';
 import { useEventCallback } from './helpers/useEventCallback';
@@ -6,7 +6,7 @@ import { CountUp as CountUpJs } from 'countup.js';
 
 export interface useCountUpProps extends CommonProps, CallbackProps {
   startOnMount?: boolean;
-  ref: string | React.MutableRefObject<any>;
+  ref: string | React.RefObject<HTMLElement>;
   enableReinitialize?: boolean;
 }
 
@@ -20,7 +20,7 @@ const DEFAULTS = {
   enableReinitialize: true,
 };
 
-const useCountUp = (props: useCountUpProps) => {
+const useCountUp = (props: useCountUpProps): CountUpApi => {
   const {
     ref,
     startOnMount,
@@ -40,9 +40,10 @@ const useCountUp = (props: useCountUpProps) => {
 
   const createInstance = useEventCallback(() => {
     return createCountUpInstance(
-      typeof ref === 'string' ? ref : ref.current,
-      config
-    )
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      typeof ref === 'string' ? ref : ref.current!,
+      instanceProps,
+    );
   });
 
   const getCountUp = useEventCallback((recreate?: boolean) => {
@@ -101,12 +102,12 @@ const useCountUp = (props: useCountUpProps) => {
     }
   });
 
-  const maybeReinitialize = () => {
+  const maybeReinitialize = useEventCallback(() => {
     if (startOnMount) {
       reset();
       start();
     }
-  }
+  });
 
   useEffect(() => {
     if (!isInitializedRef.current) {
@@ -117,15 +118,18 @@ const useCountUp = (props: useCountUpProps) => {
       maybeReinitialize();
     }
   }, [
+    enableReinitialize,
+    isInitializedRef,
     maybeInitialize,
+    maybeReinitialize,
     props,
   ]);
 
   useEffect(() => {
     return () => {
       reset();
-    }
-  }, []);
+    };
+  }, [reset]);
 
   return { start: restart, pauseResume, reset, update, getCountUp };
 };
