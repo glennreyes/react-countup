@@ -21,8 +21,19 @@ const DEFAULTS = {
 };
 
 const useCountUp = (props: useCountUpProps) => {
-  const config = useMemo(() => ({ ...DEFAULTS, ...props }), [props]);
-  const { ref } = config;
+  const {
+    ref,
+    startOnMount,
+    enableReinitialize,
+    delay,
+    onEnd,
+    onStart,
+    onPauseResume,
+    onReset,
+    onUpdate,
+    ...instanceProps
+  } = useMemo(() => ({ ...DEFAULTS, ...props }), [props]);
+
   const countUpRef = useRef<CountUpJs>();
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
   const isInitializedRef = useRef(false);
@@ -45,8 +56,6 @@ const useCountUp = (props: useCountUpProps) => {
   });
 
   const start = useEventCallback(() => {
-    const { delay, onStart, onEnd } = config;
-
     const run = () =>
       getCountUp(true).start(() => {
         onEnd?.({ pauseResume, reset, start: restart, update });
@@ -62,8 +71,6 @@ const useCountUp = (props: useCountUpProps) => {
   });
 
   const pauseResume = useEventCallback(() => {
-    const { onPauseResume } = config;
-
     getCountUp().pauseResume();
 
     onPauseResume?.({ reset, start: restart, update });
@@ -72,16 +79,12 @@ const useCountUp = (props: useCountUpProps) => {
   const reset = useEventCallback(() => {
     timerRef.current && clearTimeout(timerRef.current);
 
-    const { onReset } = config;
-
     getCountUp().reset();
 
     onReset?.({ pauseResume, start: restart, update });
   });
 
   const update: UpdateFn = useEventCallback((newEnd) => {
-    const { onUpdate } = config;
-
     getCountUp().update(newEnd);
 
     onUpdate?.({ pauseResume, reset, start: restart });
@@ -93,13 +96,13 @@ const useCountUp = (props: useCountUpProps) => {
   });
 
   const maybeInitialize = useEventCallback(() => {
-    if (config.startOnMount) {
+    if (startOnMount) {
       start();
     }
   });
 
   const maybeReinitialize = () => {
-    if (config.startOnMount) {
+    if (startOnMount) {
       reset();
       start();
     }
@@ -110,10 +113,13 @@ const useCountUp = (props: useCountUpProps) => {
       isInitializedRef.current = true;
 
       maybeInitialize();
-    } else if (config.enableReinitialize) {
+    } else if (enableReinitialize) {
       maybeReinitialize();
     }
-  }, [maybeInitialize, reset, config]);
+  }, [
+    maybeInitialize,
+    props,
+  ]);
 
   useEffect(() => {
     return () => {
