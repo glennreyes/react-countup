@@ -1,16 +1,10 @@
 import { CountUp } from 'countup.js';
-import { CountUpProps } from './CountUp';
-import { useCountUpProps } from './useCountUp';
+import { CountUpInstanceProps } from './types';
 
-export const DEFAULTS = {
-  decimal: '.',
-  delay: null,
-  prefix: '',
-  suffix: '',
-  start: 0
-}
-
-export const createCountUpInstance = (el: string | HTMLElement | HTMLInputElement, props: useCountUpProps | CountUpProps) => {
+export const createCountUpInstance = (
+  el: string | HTMLElement,
+  props: CountUpInstanceProps,
+) => {
   const {
     decimal,
     decimals,

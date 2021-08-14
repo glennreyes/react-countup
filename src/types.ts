@@ -41,10 +41,9 @@ export type OnUpdateCallback = (args: OnUpdateArgs) => void;
 
 type EasingFn = (t: number, b: number, c: number, d: number) => number;
 
-export interface CommonProps {
+export interface CountUpInstanceProps {
   decimal?: string;
   decimals?: number;
-  delay?: number | null;
   duration?: number;
   easingFn?: EasingFn;
   end: number;
@@ -55,6 +54,10 @@ export interface CommonProps {
   suffix?: string;
   useEasing?: boolean;
   numerals?: string[];
+}
+
+export interface CommonProps extends CountUpInstanceProps {
+  delay?: number | null;
 }
 
 export interface CallbackProps {

@@ -1,179 +1,97 @@
-import React, { Component, CSSProperties } from 'react';
-import { createCountUpInstance, DEFAULTS } from './common';
-import { CountUp as CountUpJs } from 'countup.js';
+import React, { CSSProperties, useEffect } from 'react';
 import { CallbackProps, CommonProps, RenderCounterProps } from './types';
+import { useEventCallback } from './helpers/useEventCallback';
+import useCountUp from './useCountUp';
 
 export interface CountUpProps extends CommonProps, CallbackProps {
   className?: string;
   redraw?: boolean;
-  preserveValue?: boolean;
   children?: (props: RenderCounterProps) => React.ReactNode;
   style?: CSSProperties;
+  preserveValue?: boolean;
 }
 
-class CountUp extends Component<CountUpProps> {
-  private instance: CountUpJs | undefined;
-  private timeoutId: ReturnType<typeof setTimeout> | undefined;
+const CountUp = (props: CountUpProps) => {
+  const { className, redraw, children, style, ...useCountUpProps } = props;
+  const containerRef = React.useRef<any>(null);
+  const isInitializedRef = React.useRef(false);
 
-  static defaultProps = {
-    ...DEFAULTS,
-    redraw: false,
-    style: undefined,
-    preserveValue: false,
-  };
+  const countUp = useCountUp({
+    ...useCountUpProps,
+    ref: containerRef,
+    startOnMount: typeof children !== 'function' || props.delay === 0,
+    // component manually restarts
+    enableReinitialize: false,
+  });
 
-  componentDidMount() {
-    const { children, delay } = this.props;
-    this.instance = this.createInstance();
+  const restart = useEventCallback(() => {
+    countUp.start();
+  });
 
-    // Don't invoke start if component is used as a render prop
-    if (typeof children === 'function' && delay !== 0) return;
-
-    // Otherwise just start immediately
-    this.start();
-  }
-
-  checkProps = (updatedProps: CountUpProps) => {
-    const {
-      start,
-      suffix,
-      prefix,
-      redraw,
-      duration,
-      separator,
-      decimals,
-      decimal,
-      className,
-      formattingFn
-    } = this.props;
-
-    const hasPropsChanged =
-      duration !== updatedProps.duration ||
-      start !== updatedProps.start ||
-      suffix !== updatedProps.suffix ||
-      prefix !== updatedProps.prefix ||
-      separator !== updatedProps.separator ||
-      decimals !== updatedProps.decimals ||
-      decimal !== updatedProps.decimal ||
-      className !== updatedProps.className ||
-      formattingFn !== updatedProps.formattingFn;
-
-    return hasPropsChanged || redraw;
-  };
-
-  shouldComponentUpdate(nextProps: CountUpProps) {
-    const { end } = this.props;
-    return this.checkProps(nextProps) || end !== nextProps.end;
-  }
-
-  componentDidUpdate(prevProps: CountUpProps) {
-    // If duration, suffix, prefix, separator or start has changed
-    // there's no way to update the values.
-    // So we need to re-create the CountUp instance in order to
-    // restart it.
-    const { end, preserveValue } = this.props;
-
-    if (this.checkProps(prevProps)) {
-      this.instance?.reset();
-      this.instance = this.createInstance();
-      this.start();
+  const update = useEventCallback((end: string | number) => {
+    if (!props.preserveValue) {
+      countUp.reset();
     }
+    countUp.update(end);
+  });
 
-    // Only end value has changed, so reset and and re-animate with the updated
-    // end value.
-    if (end !== prevProps.end) {
-      if (!preserveValue) {
-        this.instance?.reset();
-      }
-      this.instance?.update(end);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
-
-    this.instance?.reset();
-  }
-
-  createInstance = () => {
-    if (typeof this.props.children === 'function') {
+  useEffect(() => {
+    if (typeof props.children === 'function') {
       // Warn when user didn't use containerRef at all
-      if (!(this.containerRef.current instanceof Element)) {
+      if (!(containerRef.current instanceof Element)) {
         console.error(`Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an Element, eg. <span ref={containerRef} />.`);
         return;
       }
     }
-    return createCountUpInstance(this.containerRef.current, this.props);
-  };
 
-  pauseResume = () => {
-    const { reset, restart: start, update } = this;
-    const { onPauseResume } = this.props;
+    // unlike the hook, the CountUp component initializes on mount
+    countUp.getCountUp();
+  }, []);
 
-    this.instance?.pauseResume();
-
-    onPauseResume?.({ reset, start, update });
-  };
-
-  reset = () => {
-    const { pauseResume, restart: start, update } = this;
-    const { onReset } = this.props;
-
-    this.instance?.reset();
-
-    onReset?.({ pauseResume, start, update });
-  };
-
-  restart = () => {
-    this.reset();
-    this.start();
-  };
-
-  start = () => {
-    const { pauseResume, reset, restart: start, update } = this;
-    const { delay, onEnd, onStart } = this.props;
-    const run = () =>
-      this.instance?.start(() => onEnd?.({ pauseResume, reset, start, update }));
-
-    // Delay start if delay prop is properly set
-    if (delay && delay > 0) {
-      this.timeoutId = setTimeout(run, delay * 1000);
-    } else {
-      run();
+  useEffect(() => {
+    if (isInitializedRef.current) {
+      update(props.end);
     }
+  }, [props.end]);
 
-    onStart?.({ pauseResume, reset, update });
-  };
-
-  update = (newEnd: string | number) => {
-    const { pauseResume, reset, restart: start } = this;
-    const { onUpdate } = this.props;
-
-    this.instance?.update(newEnd);
-
-    onUpdate?.({ pauseResume, reset, start });
-  };
-
-  containerRef = React.createRef<any>();
-
-  render() {
-    const { children, className, style } = this.props;
-    const { containerRef, pauseResume, reset, restart, update } = this;
-
-    if (typeof children === 'function') {
-      return children({
-        countUpRef: containerRef,
-        pauseResume,
-        reset,
-        start: restart,
-        update,
-      });
+  // if props.redraw, call this effect on every props change
+  useEffect(() => {
+    if (props.redraw && isInitializedRef.current) {
+      restart();
     }
+  }, [props.redraw && props]);
 
-    return <span className={className} ref={containerRef} style={style} />;
+  // if not props.redraw, call this effect only when certain props are changed
+  useEffect(() => {
+    if (!props.redraw && isInitializedRef.current) {
+      restart();
+    }
+  }, [
+    props.redraw,
+    props.start,
+    props.suffix,
+    props.prefix,
+    props.duration,
+    props.separator,
+    props.decimals,
+    props.decimal,
+    props.className,
+    props.formattingFn
+  ]);
+
+  useEffect(() => {
+    isInitializedRef.current = true;
+  }, []);
+
+  if (typeof children === 'function') {
+    // TypeScript forces functional components to return JSX.Element | null.
+    return children({
+      countUpRef: containerRef,
+      ...countUp,
+    }) as JSX.Element | null;
   }
+
+  return <span className={className} ref={containerRef} style={style} />;
 }
 
 export default CountUp;

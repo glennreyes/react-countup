@@ -1,28 +1,51 @@
 import { CallbackProps, CommonProps, UpdateFn } from './types';
-import React, { useEffect, useRef } from 'react';
-import { createCountUpInstance, DEFAULTS } from './common';
+import { useMemo, useRef, useEffect } from 'react';
+import { createCountUpInstance } from './common';
+import { useEventCallback } from './helpers/useEventCallback';
 import { CountUp as CountUpJs } from 'countup.js';
 
 export interface useCountUpProps extends CommonProps, CallbackProps {
   startOnMount?: boolean;
-  ref: string | React.RefObject<any>;
+  ref: string | React.MutableRefObject<any>;
+  enableReinitialize?: boolean;
 }
 
-const defaults: Partial<useCountUpProps> = {
-  ...DEFAULTS,
+const DEFAULTS = {
+  decimal: '.',
+  delay: null,
+  prefix: '',
+  suffix: '',
+  start: 0,
   startOnMount: true,
+  enableReinitialize: true,
 };
 
 const useCountUp = (props: useCountUpProps) => {
-  const parsedProps = { ...defaults, ...props };
-  const { ref } = parsedProps;
+  const {
+    ref,
+    startOnMount,
+    enableReinitialize,
+    delay,
+    onEnd,
+    onStart,
+    onPauseResume,
+    onReset,
+    onUpdate,
+    ...instanceProps
+  } = useMemo(() => ({ ...DEFAULTS, ...props }), [props]);
+
   const countUpRef = useRef<CountUpJs>();
-  const timerRef = useRef<NodeJS.Timeout>();
+  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const isInitializedRef = useRef(false);
 
-  const createInstance = () =>
-    createCountUpInstance(typeof ref === 'string' ? ref : ref.current, parsedProps);
+  const createInstance = useEventCallback(() => {
+    return createCountUpInstance(
+      typeof ref === 'string' ? ref : ref.current,
+      instanceProps
+    )
+  });
 
-  const getCountUp = (recreate?: boolean) => {
+  const getCountUp = useEventCallback((recreate?: boolean) => {
     const countUp = countUpRef.current;
     if (countUp && !recreate) {
       return countUp;
@@ -30,53 +53,81 @@ const useCountUp = (props: useCountUpProps) => {
     const newCountUp = createInstance();
     countUpRef.current = newCountUp;
     return newCountUp;
-  };
+  });
 
-  const reset = () => {
-    const { onReset } = parsedProps;
-    getCountUp().reset();
-    onReset?.({ pauseResume, start: restart, update });
-  };
+  const start = useEventCallback(() => {
+    const run = () =>
+      getCountUp(true).start(() => {
+        onEnd?.({ pauseResume, reset, start: restart, update });
+      });
 
-  const restart = () => {
-    const { onStart, onEnd } = parsedProps;
-    getCountUp().reset();
+    if (delay && delay > 0) {
+      timerRef.current = setTimeout(run, delay * 1000);
+    } else {
+      run();
+    }
+
     onStart?.({ pauseResume, reset, update });
-    getCountUp().start(() => {
-      onEnd?.({ pauseResume, reset, start: restart, update });
-    });
-  };
+  });
 
-  const pauseResume = () => {
-    const { onPauseResume } = parsedProps;
+  const pauseResume = useEventCallback(() => {
     getCountUp().pauseResume();
-    onPauseResume?.({ reset, start: restart, update });
-  };
 
-  const update: UpdateFn = (newEnd) => {
-    const { onUpdate } = parsedProps;
+    onPauseResume?.({ reset, start: restart, update });
+  });
+
+  const reset = useEventCallback(() => {
+    timerRef.current && clearTimeout(timerRef.current);
+
+    getCountUp().reset();
+
+    onReset?.({ pauseResume, start: restart, update });
+  });
+
+  const update: UpdateFn = useEventCallback((newEnd) => {
     getCountUp().update(newEnd);
+
     onUpdate?.({ pauseResume, reset, start: restart });
-  };
+  });
+
+  const restart = useEventCallback(() => {
+    reset();
+    start();
+  });
+
+  const maybeInitialize = useEventCallback(() => {
+    if (startOnMount) {
+      start();
+    }
+  });
+
+  const maybeReinitialize = () => {
+    if (startOnMount) {
+      reset();
+      start();
+    }
+  }
 
   useEffect(() => {
-    const { delay, onStart, onEnd, startOnMount } = parsedProps;
-    if (startOnMount) {
-      timerRef.current = setTimeout(() => {
-        onStart?.({ pauseResume, reset, update });
-        getCountUp(true).start(() => {
-          timerRef.current && clearTimeout(timerRef.current);
-          onEnd?.({ pauseResume, reset, start: restart, update });
-        });
-      }, delay ? delay * 1000 : 0);
-    }
-    return () => {
-      timerRef.current && clearTimeout(timerRef.current);
-      reset();
-    };
-  }, [parsedProps]);
+    if (!isInitializedRef.current) {
+      isInitializedRef.current = true;
 
-  return { start: restart, pauseResume, reset, update };
+      maybeInitialize();
+    } else if (enableReinitialize) {
+      maybeReinitialize();
+    }
+  }, [
+    maybeInitialize,
+    props,
+  ]);
+
+  useEffect(() => {
+    return () => {
+      reset();
+    }
+  }, []);
+
+  return { start: restart, pauseResume, reset, update, getCountUp };
 };
 
 export default useCountUp;
