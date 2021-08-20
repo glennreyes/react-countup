@@ -206,7 +206,6 @@ describe('useCountUp', () => {
   });
 
   it('re-renders for new props', async () => {
-    // eslint-disable-next-line react/prop-types
     const Hook = ({ suffix = '', prefix = '', separator = '', end = 10 }) => {
       const div = React.useRef();
       useCountUp({ end, suffix, prefix, separator, ref: div });
