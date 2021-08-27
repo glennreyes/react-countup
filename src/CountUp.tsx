@@ -11,12 +11,18 @@ export interface CountUpProps extends CommonProps, CallbackProps {
   preserveValue?: boolean;
 }
 
-const CountUp = (props: CountUpProps) => {
+const CountUp: React.FC<CountUpProps> = (props) => {
   const { className, redraw, children, style, ...useCountUpProps } = props;
-  const containerRef = React.useRef<any>(null);
+  const containerRef = React.useRef<HTMLElement>(null);
   const isInitializedRef = React.useRef(false);
 
-  const countUp = useCountUp({
+  const {
+    start,
+    reset,
+    update: updateCountUp,
+    pauseResume,
+    getCountUp,
+  } = useCountUp({
     ...useCountUpProps,
     ref: containerRef,
     startOnMount: typeof children !== 'function' || props.delay === 0,
@@ -25,41 +31,49 @@ const CountUp = (props: CountUpProps) => {
   });
 
   const restart = useEventCallback(() => {
-    countUp.start();
+    start();
   });
 
   const update = useEventCallback((end: string | number) => {
     if (!props.preserveValue) {
-      countUp.reset();
+      reset();
     }
-    countUp.update(end);
+    updateCountUp(end);
   });
 
-  useEffect(() => {
+  const initializeOnMount = useEventCallback(() => {
     if (typeof props.children === 'function') {
       // Warn when user didn't use containerRef at all
       if (!(containerRef.current instanceof Element)) {
-        console.error(`Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an Element, eg. <span ref={containerRef} />.`);
+        console.error(
+          `Couldn't find attached element to hook the CountUp instance into! Try to attach "containerRef" from the render prop to a an Element, eg. <span ref={containerRef} />.`,
+        );
         return;
       }
     }
 
     // unlike the hook, the CountUp component initializes on mount
-    countUp.getCountUp();
-  }, []);
+    getCountUp();
+  });
+
+  useEffect(() => {
+    initializeOnMount();
+  }, [initializeOnMount]);
 
   useEffect(() => {
     if (isInitializedRef.current) {
       update(props.end);
     }
-  }, [props.end]);
+  }, [props.end, update]);
+
+  const redrawDependencies = redraw && props;
 
   // if props.redraw, call this effect on every props change
   useEffect(() => {
-    if (props.redraw && isInitializedRef.current) {
+    if (redraw && isInitializedRef.current) {
       restart();
     }
-  }, [props.redraw && props]);
+  }, [restart, redraw, redrawDependencies]);
 
   // if not props.redraw, call this effect only when certain props are changed
   useEffect(() => {
@@ -67,6 +81,7 @@ const CountUp = (props: CountUpProps) => {
       restart();
     }
   }, [
+    restart,
     props.redraw,
     props.start,
     props.suffix,
@@ -76,7 +91,7 @@ const CountUp = (props: CountUpProps) => {
     props.decimals,
     props.decimal,
     props.className,
-    props.formattingFn
+    props.formattingFn,
   ]);
 
   useEffect(() => {
@@ -87,11 +102,15 @@ const CountUp = (props: CountUpProps) => {
     // TypeScript forces functional components to return JSX.Element | null.
     return children({
       countUpRef: containerRef,
-      ...countUp,
+      start,
+      reset,
+      update: updateCountUp,
+      pauseResume,
+      getCountUp,
     }) as JSX.Element | null;
   }
 
   return <span className={className} ref={containerRef} style={style} />;
-}
+};
 
 export default CountUp;

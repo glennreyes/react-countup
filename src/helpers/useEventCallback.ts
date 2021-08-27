@@ -1,5 +1,6 @@
-import { useCallback, useRef } from "react";
-import { useIsomorphicLayoutEffect } from "./useIsomorphicLayoutEffect";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useCallback, useRef } from 'react';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 /**
  * Create a stable reference to a callback which is updated after each render is committed.
@@ -17,6 +18,6 @@ export function useEventCallback<T extends (...args: any[]) => any>(fn: T): T {
 
   return useCallback(
     (...args: any[]) => ref.current.apply(void 0, args),
-    []
+    [],
   ) as T;
 }
