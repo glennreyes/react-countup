@@ -1,5 +1,5 @@
 import { CallbackProps, CommonProps, CountUpApi, UpdateFn } from './types';
-import { useMemo, useRef, useEffect } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { createCountUpInstance } from './common';
 import { useEventCallback } from './helpers/useEventCallback';
 import { CountUp as CountUpJs } from 'countup.js';
@@ -40,7 +40,6 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
 
   const createInstance = useEventCallback(() => {
     return createCountUpInstance(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       typeof ref === 'string' ? ref : ref.current!,
       instanceProps,
     );
@@ -96,15 +95,11 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
     start();
   });
 
-  const maybeInitialize = useEventCallback(() => {
+  const maybeInitialize = useEventCallback((enableReinitialize?: boolean) => {
     if (startOnMount) {
-      start();
-    }
-  });
-
-  const maybeReinitialize = useEventCallback(() => {
-    if (startOnMount) {
-      reset();
+      if (enableReinitialize) {
+        reset();
+      }
       start();
     }
   });
@@ -115,14 +110,21 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
 
       maybeInitialize();
     } else if (enableReinitialize) {
-      maybeReinitialize();
+      maybeInitialize(enableReinitialize);
     }
   }, [
     enableReinitialize,
     isInitializedRef,
     maybeInitialize,
-    maybeReinitialize,
-    props,
+    delay,
+    props.start,
+    props.suffix,
+    props.prefix,
+    props.duration,
+    props.separator,
+    props.decimals,
+    props.decimal,
+    props.formattingFn,
   ]);
 
   useEffect(() => {
