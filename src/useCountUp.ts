@@ -95,9 +95,9 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
     start();
   });
 
-  const maybeInitialize = useEventCallback((enableReinitialize?: boolean) => {
+  const maybeInitialize = useEventCallback((shouldReset?: boolean) => {
     if (startOnMount) {
-      if (enableReinitialize) {
+      if (shouldReset) {
         reset();
       }
       start();
@@ -110,7 +110,7 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
 
       maybeInitialize();
     } else if (enableReinitialize) {
-      maybeInitialize(enableReinitialize);
+      maybeInitialize(true);
     }
   }, [
     enableReinitialize,
