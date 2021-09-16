@@ -362,6 +362,45 @@ export default function App() {
 }
 ```
 
+### Set accessibility properties for occupation period 
+
+You can use callback properties to control accessibility:
+
+```js
+import React from "react";
+import CountUp, { useCountUp } from "react-countup";
+
+export default function App() {
+  useCountUp({ ref: "counter", end: 10, duration: 2 });
+  const [loading, setLoading] = React.useState(false);
+  
+  const onStart = () => {
+    setLoading(true);
+  };
+  
+  const onEnd = () => {
+    setLoading(false);
+  };
+  
+  const containerProps = {
+    "aria-busy": loading
+  };
+
+  return (
+    <>
+      <CountUp
+        end={123457}
+        duration="3"
+        onStart={onStart}
+        onEnd={onEnd}
+        containerProps={containerProps}
+      />
+      <div id="counter" aria-busy={loading} />
+    </>
+  );
+}
+```
+
 ## License
 
 MIT
