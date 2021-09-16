@@ -135,8 +135,19 @@ const Subtitle = styled.h2`
 const Text = styled.p``;
 const Title = styled.h1``;
 
-const simple = `
-<CountUp end={123457} />
+const simple = `<CountUp end={123457} />`;
+
+const accessibility = `
+() => {
+  const [loading, setLoading] = React.useState(false);
+  const onStart = () => {setLoading(true)};
+  const onEnd = () => {setLoading(false)};
+  const containerProps = {
+    'aria-busy': loading
+  };
+  
+  return <CountUp end={123457} duration="3" onStart={onStart} onEnd={onEnd} containerProps={containerProps} />
+}
 `;
 
 const renderProp = `
@@ -232,6 +243,7 @@ const App = () => (
     <Example code={simple} title="Simple">
       <Text>Edit the code to see live changes.</Text>
     </Example>
+    <Example code={accessibility} title="Accessibility" />
     <Example code={renderProp} title="Render prop" />
     <Example code={manualStart} title="Manually start with render prop" />
     <Example code={autoStart} title="Autostart with render prop" />

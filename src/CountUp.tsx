@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect } from 'react';
+import React, { CSSProperties, ReactNode, ComponentPropsWithoutRef, useEffect } from 'react';
 import { CallbackProps, CommonProps, RenderCounterProps } from './types';
 import { useEventCallback } from './helpers/useEventCallback';
 import useCountUp from './useCountUp';
@@ -6,13 +6,14 @@ import useCountUp from './useCountUp';
 export interface CountUpProps extends CommonProps, CallbackProps {
   className?: string;
   redraw?: boolean;
-  children?: (props: RenderCounterProps) => React.ReactNode;
+  children?: (props: RenderCounterProps) => ReactNode;
   style?: CSSProperties;
   preserveValue?: boolean;
+  containerProps?: ComponentPropsWithoutRef<"span">
 }
 
 const CountUp: React.FC<CountUpProps> = (props) => {
-  const { className, redraw, children, style, ...useCountUpProps } = props;
+  const { className, redraw, containerProps, children, style, ...useCountUpProps } = props;
   const containerRef = React.useRef<HTMLElement>(null);
   const isInitializedRef = React.useRef(false);
 
@@ -77,12 +78,12 @@ const CountUp: React.FC<CountUpProps> = (props) => {
 
   // if not props.redraw, call this effect only when certain props are changed
   useEffect(() => {
-    if (!props.redraw && isInitializedRef.current) {
+    if (!redraw && isInitializedRef.current) {
       restart();
     }
   }, [
     restart,
-    props.redraw,
+    redraw,
     props.start,
     props.suffix,
     props.prefix,
@@ -110,7 +111,7 @@ const CountUp: React.FC<CountUpProps> = (props) => {
     }) as JSX.Element | null;
   }
 
-  return <span className={className} ref={containerRef} style={style} />;
+  return <span className={className} ref={containerRef} style={style} {...containerProps} />;
 };
 
 export default CountUp;
