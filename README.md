@@ -58,6 +58,9 @@ Click [here](https://github.com/glennreyes/react-countup/tree/d0002932dac8a274f9
       - [`start: () => void`](#start---void)
       - [`update: (newEnd: number?) => void`](#update-newend-number--void)
   - [Protips](#protips)
+    - [Trigger of transition](#trigger-of-transition)
+    - [Run if in focus](#run-if-in-focus)
+    - [Set accessibility properties for occupation period](#set-accessibility-properties-for-occupation-period)
   - [License](#license)
 
 ## Installation
