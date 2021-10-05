@@ -1,4 +1,5 @@
 import React, { Component, Fragment, useEffect, useState, useRef } from 'react';
+import dracula from 'prism-react-renderer/themes/dracula';
 import CountUp, { useCountUp } from 'react-countup';
 import { description, repository } from 'react-countup/package';
 import { RotateCw } from 'react-feather';
@@ -24,11 +25,6 @@ const RefreshButton = styled.button`
   }
 `;
 
-const Editor = styled(LiveEditor).attrs({ style: { padding: 16 } })`
-  font-family: 'Overpass Mono', monospace;
-  overflow: auto;
-`;
-
 const Error = styled(LiveError)`
   background: palevioletred;
   color: white;
@@ -49,9 +45,10 @@ class Example extends Component {
           <Provider
             scope={{ CountUp, useCountUp, useState, useRef, useEffect }}
             code={code.trim()}
+            theme={dracula}
             {...rest}
           >
-            <Editor />
+            <LiveEditor />
             <RefreshButton onClick={this.refresh} title="Re-render">
               <RotateCw size={16} />
             </RefreshButton>
