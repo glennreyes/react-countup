@@ -214,7 +214,7 @@ Amount of decimals to display.
 
 Default: `0`
 
-#### `delay: ?number`
+#### `delay: number`
 
 Delay in seconds before starting the transition.
 
@@ -282,7 +282,9 @@ Default: [`easeInExpo`](https://github.com/inorganik/countUp.js/blob/master/coun
 
 #### `formattingFn: (value: number) => string`
 
-Function to customize the formatting of the number
+Function to customize the formatting of the number.
+
+To prevent component from unnecessary updates this function should be memoized with [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)
 
 #### `onEnd: ({ pauseResume, reset, start, update }) => void`
 
