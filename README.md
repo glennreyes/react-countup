@@ -11,9 +11,11 @@ A configurable React component wrapper around [CountUp.js](https://inorganik.git
 
 Click [here](https://codesandbox.io/s/github/glennreyes/react-countup/tree/master/demo?fontsize=14&hidenavigation=1&theme=dark&view=preview) to view on CodeSandbox.
 
-### Looking for v3.x docs?
+### Previous docs
 
-Click [here](https://github.com/glennreyes/react-countup/tree/d0002932dac8a274f951e53b1d9b1f4719176147) to get to the previous docs.
+- [v3.x](https://github.com/glennreyes/react-countup/tree/d0002932dac8a274f951e53b1d9b1f4719176147)
+- [v4.x](https://github.com/glennreyes/react-countup/tree/afd39ca66a317271ad3135b0a924b86e2982f207)
+- [v5.x](https://github.com/glennreyes/react-countup/tree/ae4586c9f502fba726ff2d24d215c88d8f4879d7)
 
 ![react-countup](https://user-images.githubusercontent.com/5080854/43985960-0a7fb776-9d0c-11e8-8082-975b1e8bf51c.gif)
 
