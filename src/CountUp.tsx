@@ -111,7 +111,7 @@ const CountUp: React.FC<CountUpProps> = (props) => {
     }) as JSX.Element | null;
   }
 
-  return <span className={className} ref={containerRef} style={style} {...containerProps} />;
+  return <span className={className} ref={containerRef} style={style} {...containerProps}>{props.start}</span>;
 };
 
 export default CountUp;
