@@ -1,4 +1,9 @@
-import React, { CSSProperties, ReactNode, ComponentPropsWithoutRef, useEffect } from 'react';
+import React, {
+  CSSProperties,
+  ReactNode,
+  ComponentPropsWithoutRef,
+  useEffect,
+} from 'react';
 import { CallbackProps, CommonProps, RenderCounterProps } from './types';
 import { useEventCallback } from './helpers/useEventCallback';
 import useCountUp from './useCountUp';
@@ -9,11 +14,18 @@ export interface CountUpProps extends CommonProps, CallbackProps {
   children?: (props: RenderCounterProps) => ReactNode;
   style?: CSSProperties;
   preserveValue?: boolean;
-  containerProps?: ComponentPropsWithoutRef<"span">
+  containerProps?: ComponentPropsWithoutRef<'span'>;
 }
 
 const CountUp: React.FC<CountUpProps> = (props) => {
-  const { className, redraw, containerProps, children, style, ...useCountUpProps } = props;
+  const {
+    className,
+    redraw,
+    containerProps,
+    children,
+    style,
+    ...useCountUpProps
+  } = props;
   const containerRef = React.useRef<HTMLElement>(null);
   const isInitializedRef = React.useRef(false);
 
@@ -111,7 +123,16 @@ const CountUp: React.FC<CountUpProps> = (props) => {
     }) as JSX.Element | null;
   }
 
-  return <span className={className} ref={containerRef} style={style} {...containerProps}>{props.start}</span>;
+  return (
+    <span
+      className={className}
+      ref={containerRef}
+      style={style}
+      {...containerProps}
+    >
+      {props.start ? getCountUp().formattingFn(props.start) : ''}
+    </span>
+  );
 };
 
 export default CountUp;
