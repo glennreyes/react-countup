@@ -7,7 +7,7 @@ import { useCountUp } from '../index';
 
 afterEach(cleanup);
 
-const checkContent = async (container, expectedValue, timeout = 1100) => {
+const checkContent = async (container, expectedValue, timeout = 2100) => {
   await act(() => {
     return new Promise((res) => {
       setTimeout(() => {

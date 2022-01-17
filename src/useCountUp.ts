@@ -15,6 +15,7 @@ const DEFAULTS = {
   delay: null,
   prefix: '',
   suffix: '',
+  duration: 2,
   start: 0,
   startOnMount: true,
   enableReinitialize: true,

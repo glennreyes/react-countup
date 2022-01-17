@@ -5,18 +5,24 @@ import CountUp from '../index';
 afterEach(cleanup);
 
 describe('CountUp component', () => {
-  it('renders start value correctly', () => {
+  it('renders start value correctly', (done) => {
     const { container } = render(<CountUp end={10} />);
 
-    expect(container).toMatchSnapshot();
+    setTimeout(() => {
+      expect(container).toMatchSnapshot();
+      done();
+    }, 2000);
   });
 
-  it('re-renders change of start value correctly', () => {
+  it('re-renders change of start value correctly', (done) => {
     const { container, rerender } = render(<CountUp end={10} />);
 
     rerender(<CountUp start={5} end={10} />);
 
-    expect(container).toMatchSnapshot();
+    setTimeout(() => {
+      expect(container).toMatchSnapshot();
+      done();
+    }, 2000);
   });
 
   it('re-renders change of duration value correctly', () => {
@@ -113,12 +119,15 @@ describe('CountUp component', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('re-renders with redraw={false} correctly', () => {
+  it('re-renders with redraw={false} correctly', (done) => {
     const { container, rerender } = render(<CountUp redraw={false} end={10} />);
 
     rerender(<CountUp redraw={false} end={10} />);
 
-    expect(container).toMatchSnapshot();
+    setTimeout(() => {
+      expect(container).toMatchSnapshot();
+      done();
+    }, 2000);
   });
 
   it('renders with delay correctly', () => {
