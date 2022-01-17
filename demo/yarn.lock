@@ -10107,10 +10107,10 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
-react-countup@^6.0.0-2:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-6.0.0.tgz#463f174781db4bec25de8853335c18ff0a305131"
-  integrity sha512-Q5M8TbtdeSrnK6UaMgZBaV13GZHKsWh5FedzFM9HSWcI48x1SzJ33fCJcX23juLzguwRU3ZtumqlLdCUJdRPfA==
+react-countup@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-6.1.0.tgz#ac9b923ecf1351a0c3281209ba55952345814cd8"
+  integrity sha512-0tN65l4ksaNa4rm8ZKshpGxbIHQ4RAh8TGaKYp06EZ7nZw+haXpW3dQTVDhTey9+10jDkJgdzyXKDmC96c1M8g==
   dependencies:
     countup.js "^2.0.8"
 
