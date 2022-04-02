@@ -34,7 +34,7 @@
     "react": ">= 16.3.0"
   },
   "dependencies": {
-    "countup.js": "^2.0.8"
+    "countup.js": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.17.8",
