@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CountUp as CountUpJs } from 'countup.js';
+import { CountUp as CountUpJs, CountUpOptions } from 'countup.js';
 
 type VoidFn = () => void;
 export type UpdateFn = (newEnd: string | number) => void;
@@ -48,21 +48,10 @@ export interface OnUpdateArgs {
 }
 export type OnUpdateCallback = (args: OnUpdateArgs) => void;
 
-type EasingFn = (t: number, b: number, c: number, d: number) => number;
-
-export interface CountUpInstanceProps {
-  decimal?: string;
+export interface CountUpInstanceProps extends CountUpOptions {
   decimals?: number;
-  duration?: number;
-  easingFn?: EasingFn;
   end: number;
-  formattingFn?: (n: number) => string;
-  prefix?: string;
-  separator?: string;
   start?: number;
-  suffix?: string;
-  useEasing?: boolean;
-  numerals?: string[];
 }
 
 export interface CommonProps extends CountUpInstanceProps {
