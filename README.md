@@ -48,6 +48,8 @@ Click [here](https://codesandbox.io/s/github/glennreyes/react-countup/tree/maste
       - [`useEasing: boolean`](#useeasing-boolean)
       - [`easingFn: (t: number, b: number, c: number, d: number) => number`](#easingfn-t-number-b-number-c-number-d-number--number)
       - [`formattingFn: (value: number) => string`](#formattingfn-value-number--string)
+      - [`enableScrollSpy: boolean`](#enablescrollspy-boolean)
+      - [`scrollSpyDelay: number`](#scrollspydelay-number)
       - [`onEnd: ({ pauseResume, reset, start, update }) => void`](#onend--pauseresume-reset-start-update---void)
       - [`onStart: ({ pauseResume, reset, update }) => void`](#onstart--pauseresume-reset-update---void)
       - [`onPauseResume: ({ reset, start, update }) => void`](#onpauseresume--reset-start-update---void)
@@ -288,6 +290,14 @@ Function to customize the formatting of the number.
 
 To prevent component from unnecessary updates this function should be memoized with [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)
 
+#### `enableScrollSpy: boolean`
+
+Enables start animation when target is in view.
+
+#### `scrollSpyDelay: number`
+
+Delay (ms) after target comes into view
+
 #### `onEnd: ({ pauseResume, reset, start, update }) => void`
 
 Callback function on transition end.
@@ -355,7 +365,6 @@ import './styles.css';
 export default function App() {
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
       <div className="content" />
       <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
         {({ isVisible }) => (
@@ -364,6 +373,31 @@ export default function App() {
           </div>
         )}
       </VisibilitySensor>
+    </div>
+  );
+}
+```
+
+> Note: For latest **react-countup** releases there are new options [`enableScrollSpy`](#enablescrollspy-boolean) and [`scrollSpyDelay`](#scrollspydelay-number) which enable scroll spy, so that as user scrolls to the target element, it begins counting animation automatically once it has scrolled into view.
+
+```js
+import "./styles.css";
+import CountUp, { useCountUp } from "react-countup";
+
+export default function App() {
+  useCountUp({
+    ref: "counter",
+    end: 1234567,
+    enableScrollSpy: true,
+    scrollSpyDelay: 1000
+  });
+
+  return (
+    <div className="App">
+      <div className="content" />
+      <CountUp end={100} enableScrollSpy />
+      <br />
+      <span id="counter" />
     </div>
   );
 }
