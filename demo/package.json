@@ -4,15 +4,14 @@
   "private": true,
   "dependencies": {
     "prism-react-renderer": "^1.2.1",
-    "prop-types": "^15.6.2",
-    "react": "^17.0.2",
-    "react-countup": "^6.1.0",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-countup": "^6.2.0",
+    "react-dom": "^18.0.0",
     "react-feather": "^2.0.9",
     "react-github-corner": "^2.5.0",
     "react-live": "^2.2.3",
-    "react-scripts": "4.0.3",
-    "serve": "^12.0.0",
+    "react-scripts": "5.0.0",
+    "serve": "^13.0.2",
     "styled-components": "^5.3.0"
   },
   "scripts": {

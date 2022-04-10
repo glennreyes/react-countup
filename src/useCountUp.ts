@@ -80,7 +80,9 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
   const reset = useEventCallback(() => {
     timerRef.current && clearTimeout(timerRef.current);
 
-    getCountUp().reset();
+    // try {
+      getCountUp().reset();
+    // } catch (e) {}
 
     onReset?.({ pauseResume, start: restart, update });
   });
