@@ -299,6 +299,10 @@ Enables start animation when target is in view.
 
 Delay (ms) after target comes into view
 
+#### `scrollSpyOnce: boolean`
+
+Run scroll spy only once
+
 #### `onEnd: ({ pauseResume, reset, start, update }) => void`
 
 Callback function on transition end.
