@@ -50,6 +50,7 @@ Click [here](https://codesandbox.io/s/github/glennreyes/react-countup/tree/maste
       - [`formattingFn: (value: number) => string`](#formattingfn-value-number--string)
       - [`enableScrollSpy: boolean`](#enablescrollspy-boolean)
       - [`scrollSpyDelay: number`](#scrollspydelay-number)
+      - [`scrollSpyOnce: boolean`](#scrollspyonce-boolean)
       - [`onEnd: ({ pauseResume, reset, start, update }) => void`](#onend--pauseresume-reset-start-update---void)
       - [`onStart: ({ pauseResume, reset, update }) => void`](#onstart--pauseresume-reset-update---void)
       - [`onPauseResume: ({ reset, start, update }) => void`](#onpauseresume--reset-start-update---void)

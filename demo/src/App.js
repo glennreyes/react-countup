@@ -1,7 +1,6 @@
 import React, { Component, Fragment, useEffect, useState, useRef } from 'react';
 import dracula from 'prism-react-renderer/themes/dracula';
 import CountUp, { useCountUp } from 'react-countup';
-import { description, repository } from 'react-countup/package';
 import { RotateCw } from 'react-feather';
 import GithubCorner from 'react-github-corner';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
@@ -226,7 +225,8 @@ const hook = `
 };
 `;
 
-const repo = `https://github.com/${repository}`;
+const repo = `https://github.com/glennreyes/react-countup`;
+const description = 'A React component wrapper around CountUp.js';
 
 const App = () => (
   <Main>
