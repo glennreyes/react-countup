@@ -2,10 +2,7 @@
 
 import React from 'react';
 import { render, act } from '@testing-library/react';
-import { cleanup } from '@testing-library/react-hooks';
 import { useCountUp } from '../index';
-
-afterEach(cleanup);
 
 const checkContent = async (container, expectedValue, timeout = 2100) => {
   await act(() => {
