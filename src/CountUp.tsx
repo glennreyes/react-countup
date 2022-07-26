@@ -38,7 +38,7 @@ const CountUp: React.FC<CountUpProps> = (props) => {
   } = useCountUp({
     ...useCountUpProps,
     ref: containerRef,
-    startOnMount: typeof children !== 'function' || props.delay === 0,
+    startOnMount: typeof children !== 'function' || props.delay >== 0,
     // component manually restarts
     enableReinitialize: false,
   });
