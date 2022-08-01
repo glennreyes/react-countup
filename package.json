@@ -58,7 +58,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-test-renderer": "18.2.0",
-    "rollup": "2.75.7",
+    "rollup": "2.77.2",
     "rollup-plugin-babel": "4.4.0",
     "typescript": "^4.3.5"
   }
