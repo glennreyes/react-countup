@@ -2263,9 +2263,9 @@ core-js-compat@^3.20.0, core-js-compat@^3.22.1:
     semver "7.0.0"
 
 countup.js@^2.2.0:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.3.1.tgz#764b386136ac5d532cacb9134f4fc18d538c486a"
-  integrity sha512-kZ0OIYQo1Ni5VIyZD1BapS1yBaHGCeV/NfgKAunmKsm6EvU84Vs90LQNbeBWzejivJ13FXgq3m4OxOMCnb6aZA==
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.3.2.tgz#9a91d95780be1c908d1e6feb548625f353f57988"
+  integrity sha512-dQ7F/CmKGjaO6cDfhtEXwsKVlXIpJ89dFs8PvkaZH9jBVJ2Z8GU4iwG/qP7MgY8qwr+1skbwR6qecWWQLUzB8Q==
 
 cross-spawn@^7.0.0:
   version "7.0.1"
