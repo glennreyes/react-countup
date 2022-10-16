@@ -130,7 +130,9 @@ const CountUp: React.FC<CountUpProps> = (props) => {
       style={style}
       {...containerProps}
     >
-      {props.start ? getCountUp().formattingFn(props.start) : ''}
+      {typeof props.start !== 'undefined'
+        ? getCountUp().formattingFn(props.start)
+        : ''}
     </span>
   );
 };
