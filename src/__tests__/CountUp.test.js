@@ -303,7 +303,7 @@ describe('CountUp component', () => {
     expect(spy.pauseResume).toHaveBeenCalled();
   });
 
-  it.skip('throws warning if ref not attached to a component', () => {
+  it('throws warning if ref not attached to a component', () => {
     console.error = jest.fn();
     jest.spyOn(console, 'error');
 

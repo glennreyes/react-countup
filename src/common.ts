@@ -20,7 +20,7 @@ export const createCountUpInstance = (
     useEasing,
     enableScrollSpy,
     scrollSpyDelay,
-    scrollSpyOnce
+    scrollSpyOnce,
   } = props;
 
   return new CountUp(el, end, {
@@ -38,6 +38,6 @@ export const createCountUpInstance = (
     useGrouping: !!separator,
     enableScrollSpy,
     scrollSpyDelay,
-    scrollSpyOnce
+    scrollSpyOnce,
   });
 };

@@ -78,11 +78,14 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
   });
 
   const reset = useEventCallback(() => {
-    timerRef.current && clearTimeout(timerRef.current);
-
-    getCountUp().reset();
-
-    onReset?.({ pauseResume, start: restart, update });
+    // Quick fix for https://github.com/glennreyes/react-countup/issues/736 - should be investigated
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (getCountUp().el) {
+      timerRef.current && clearTimeout(timerRef.current);
+      getCountUp().reset();
+      onReset?.({ pauseResume, start: restart, update });
+    }
   });
 
   const update: UpdateFn = useEventCallback((newEnd) => {
