@@ -386,15 +386,15 @@ export default function App() {
 > Note: For latest **react-countup** releases there are new options [`enableScrollSpy`](#enablescrollspy-boolean) and [`scrollSpyDelay`](#scrollspydelay-number) which enable scroll spy, so that as user scrolls to the target element, it begins counting animation automatically once it has scrolled into view.
 
 ```js
-import "./styles.css";
-import CountUp, { useCountUp } from "react-countup";
+import './styles.css';
+import CountUp, { useCountUp } from 'react-countup';
 
 export default function App() {
   useCountUp({
-    ref: "counter",
+    ref: 'counter',
     end: 1234567,
     enableScrollSpy: true,
-    scrollSpyDelay: 1000
+    scrollSpyDelay: 1000,
   });
 
   return (
