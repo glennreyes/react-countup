@@ -52,6 +52,7 @@ export interface CountUpInstanceProps extends CountUpOptions {
   decimals?: number;
   end: number;
   start?: number;
+  useEasing?: boolean;
 }
 
 export interface CommonProps extends CountUpInstanceProps {
