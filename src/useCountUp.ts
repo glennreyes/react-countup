@@ -19,6 +19,7 @@ const DEFAULTS = {
   start: 0,
   startOnMount: true,
   enableReinitialize: true,
+  useEasing: true,
 };
 
 const useCountUp = (props: useCountUpProps): CountUpApi => {
