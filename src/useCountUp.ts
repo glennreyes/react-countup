@@ -1,10 +1,10 @@
-import { CallbackProps, CommonProps, CountUpApi, UpdateFn } from './types';
+import { CallbackProps, CommonProps, CountUpApi, CountUpInstanceProps, UpdateFn } from "./types";
 import React, { useMemo, useRef, useEffect } from 'react';
 import { createCountUpInstance } from './common';
 import { useEventCallback } from './helpers/useEventCallback';
 import { CountUp as CountUpJs } from 'countup.js';
 
-export interface useCountUpProps extends CommonProps, CallbackProps {
+export interface UseCountUpProps extends CommonProps, CallbackProps {
   startOnMount?: boolean;
   ref: string | React.RefObject<HTMLElement>;
   enableReinitialize?: boolean;
@@ -26,7 +26,10 @@ const DEFAULTS = {
   useIndianSeparators: false,
 };
 
-const useCountUp = (props: useCountUpProps): CountUpApi => {
+const useCountUp = (props: UseCountUpProps): CountUpApi => {
+  const filteredProps: Partial<UseCountUpProps> = Object.fromEntries(
+    Object.entries(props).filter(([, value]) => value !== undefined)
+  );
   const {
     ref,
     startOnMount,
@@ -38,7 +41,7 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
     onReset,
     onUpdate,
     ...instanceProps
-  } = useMemo(() => ({ ...DEFAULTS, ...props }), [props]);
+  } = useMemo(() => ({ ...DEFAULTS, ...filteredProps }), [props]);
 
   const countUpRef = useRef<CountUpJs>();
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
@@ -46,8 +49,9 @@ const useCountUp = (props: useCountUpProps): CountUpApi => {
 
   const createInstance = useEventCallback(() => {
     return createCountUpInstance(
-      typeof ref === 'string' ? ref : ref.current!,
-      instanceProps,
+      typeof ref === 'string' ? ref : ref!.current!,
+      instanceProps as CountUpInstanceProps
+      ,
     );
   });
 

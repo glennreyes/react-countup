@@ -225,6 +225,23 @@ describe('CountUp component', () => {
     }, 1000);
   });
 
+  it('applies default params for wrapped component', (done) => {
+    const WrappedCountUp = ({ prefix, suffix }) => (
+      <CountUp start={0} end={100} duration={1} prefix={prefix} suffix={suffix} />
+    );
+
+    const { container } = render(
+      <WrappedCountUp />,
+    );
+
+    setTimeout(() => {
+      const span = container.firstChild;
+      expect(span.textContent).toEqual('100');
+      done();
+    }, 1000);
+
+  })
+
   it('calls start correctly', () => {
     const spy = {};
 
