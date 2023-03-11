@@ -46,6 +46,8 @@ Click [here](https://codesandbox.io/s/github/glennreyes/react-countup/tree/maste
       - [`startOnMount: boolean`](#startonmount-boolean)
       - [`suffix: string`](#suffix-string)
       - [`useEasing: boolean`](#useeasing-boolean)
+      - [`useGrouping: boolean`](#usegrouping-boolean)
+      - [`useIndianSeparators: boolean`](#useindianseparators-boolean)
       - [`easingFn: (t: number, b: number, c: number, d: number) => number`](#easingfn-t-number-b-number-c-number-d-number--number)
       - [`formattingFn: (value: number) => string`](#formattingfn-value-number--string)
       - [`enableScrollSpy: boolean`](#enablescrollspy-boolean)
@@ -278,6 +280,18 @@ Static text after the transitioning value.
 Enables easing. Set to `false` for a linear transition.
 
 Default: `true`
+
+#### `useGrouping: boolean`
+
+Enables grouping with [separator](#separator-string).
+
+Default: `true`
+
+#### `useIndianSeparators: boolean`
+
+Enables grouping using indian separation, f.e. 1,00,000 vs 100,000
+
+Default: `false`
 
 #### `easingFn: (t: number, b: number, c: number, d: number) => number`
 
