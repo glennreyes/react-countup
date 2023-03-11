@@ -12,14 +12,18 @@ export interface useCountUpProps extends CommonProps, CallbackProps {
 
 const DEFAULTS = {
   decimal: '.',
+  separator: ',',
   delay: null,
   prefix: '',
   suffix: '',
   duration: 2,
   start: 0,
+  decimals: 0,
   startOnMount: true,
   enableReinitialize: true,
   useEasing: true,
+  useGrouping: true,
+  useIndianSeparators: false,
 };
 
 const useCountUp = (props: useCountUpProps): CountUpApi => {
