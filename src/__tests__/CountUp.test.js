@@ -136,6 +136,18 @@ describe('CountUp component', () => {
     expect(container).toMatchSnapshot();
   });
 
+  it('renders with useIndianSeparators prop correctly', (done) => {
+    const { container } = render(
+      <CountUp duration={1} end={100000} useIndianSeparators />,
+    );
+
+    setTimeout(() => {
+      const span = container.firstChild;
+      expect(span.textContent).toEqual('1,00,000');
+      done();
+    }, 1200);
+  })
+
   it('renders with delay as a render prop component correctly', () => {
     const { container } = render(
       <CountUp delay={1} end={10}>
