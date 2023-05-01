@@ -59,7 +59,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-test-renderer": "18.2.0",
-    "rollup": "3.19.1",
+    "rollup": "3.21.2",
     "typescript": "^4.9.3"
   }
 }
