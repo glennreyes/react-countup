@@ -2271,9 +2271,9 @@ core-js-compat@^3.25.1:
     browserslist "^4.21.4"
 
 countup.js@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.5.0.tgz#156d300044b6dd8239f6e8315addfc3f8143b5a3"
-  integrity sha512-/59H8Q6wzu6VfHeqGUgXoyh6kgboGr5mALmRKi8YA11DlcaXSnT1PZG6mTyBRLco4ZjExKlmfNHeMbQgZvis9Q==
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.6.1.tgz#7458a9bfabc965467e3d589498eacb5ba1c8d951"
+  integrity sha512-EK2CAi6TCGP7YVnb2iyaSNLF1RH00XQXX/TSYoy1tmM9n0uuU7Wa15VE0WRwptYLBEcwQjwuyT/IsIKBKt/KoQ==
 
 cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
