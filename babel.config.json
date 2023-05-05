@@ -8,5 +8,16 @@
     "test": {
       "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]
     }
-  }
+  },
+  "plugins": [
+    // Your existing plugins
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "countup.js": "./node_modules/countup.js/dist/countUp.umd.js"
+        }
+      }
+    ]
+  ]
 }
