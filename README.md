@@ -43,6 +43,7 @@ Click [here](https://codesandbox.io/s/github/glennreyes/react-countup/tree/maste
       - [`preserveValue: boolean`](#preservevalue-boolean)
       - [`separator: string`](#separator-string)
       - [`start: number`](#start-number)
+      - [`plugin: CountUpPlugin`](#plugin-countupplugin)
       - [`startOnMount: boolean`](#startonmount-boolean)
       - [`suffix: string`](#suffix-string)
       - [`useEasing: boolean`](#useeasing-boolean)
@@ -265,6 +266,10 @@ Initial value.
 
 Default: `0`
 
+#### `plugin: CountUpPlugin`
+
+Define plugin for alternate animations
+
 #### `startOnMount: boolean`
 
 Use for start counter on mount for hook usage.
@@ -457,6 +462,29 @@ export default function App() {
       />
       <div id="counter" aria-busy={loading} />
     </>
+  );
+}
+```
+
+### Plugin usage
+
+```js
+import { CountUp } from 'countup.js';
+import { Odometer } from 'odometer_countup';
+
+export default function App() {
+  useCountUp({
+    ref: 'counter',
+    end: 1234567,
+    enableScrollSpy: true,
+    scrollSpyDelay: 1000,
+    plugin: Odometer,
+  });
+
+  return (
+    <div className="App">
+      <span id="counter" />
+    </div>
   );
 }
 ```

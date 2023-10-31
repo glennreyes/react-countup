@@ -23,6 +23,7 @@ export const createCountUpInstance = (
     enableScrollSpy,
     scrollSpyDelay,
     scrollSpyOnce,
+    plugin,
   } = props;
 
   return new CountUp(el, end, {
@@ -36,6 +37,7 @@ export const createCountUpInstance = (
     separator,
     prefix,
     suffix,
+    plugin,
     useEasing,
     useIndianSeparators,
     useGrouping,
