@@ -1,4 +1,10 @@
-import { CallbackProps, CommonProps, CountUpApi, CountUpInstanceProps, UpdateFn } from "./types";
+import {
+  CallbackProps,
+  CommonProps,
+  CountUpApi,
+  CountUpInstanceProps,
+  UpdateFn,
+} from './types';
 import React, { useMemo, useRef, useEffect } from 'react';
 import { createCountUpInstance } from './common';
 import { useEventCallback } from './helpers/useEventCallback';
@@ -28,7 +34,7 @@ const DEFAULTS = {
 
 const useCountUp = (props: UseCountUpProps): CountUpApi => {
   const filteredProps: Partial<UseCountUpProps> = Object.fromEntries(
-    Object.entries(props).filter(([, value]) => value !== undefined)
+    Object.entries(props).filter(([, value]) => value !== undefined),
   );
   const {
     ref,
@@ -50,8 +56,7 @@ const useCountUp = (props: UseCountUpProps): CountUpApi => {
   const createInstance = useEventCallback(() => {
     return createCountUpInstance(
       typeof ref === 'string' ? ref : ref!.current!,
-      instanceProps as CountUpInstanceProps
-      ,
+      instanceProps as CountUpInstanceProps,
     );
   });
 
