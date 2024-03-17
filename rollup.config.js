@@ -5,10 +5,16 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default {
   input: 'src/index.ts',
-  output: {
-    file: 'build/index.js',
-    format: 'cjs',
-  },
+  output: [
+    {
+      file: 'build/index.js',
+      format: 'cjs',
+    },
+    {
+      file: 'build/index.mjs',
+      format: 'esm',
+    },
+  ],
   plugins: [
     resolve({ extensions }),
     babel({

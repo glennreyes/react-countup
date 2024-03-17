@@ -18,16 +18,20 @@
     "url": "https://github.com/glennreyes/react-countup/issues"
   },
   "homepage": "https://react-countup.now.sh",
-  "main": "build",
+  "main": "build/index.js",
+  "exports": {
+    "import": "./build/index.mjs",
+    "require": "./build/index.js",
+    "types": "./build/index.d.ts"
+  },
   "files": [
-    "build/index.js",
-    "build/index.d.ts"
+    "build"
   ],
   "typings": "build/index.d.ts",
   "scripts": {
     "format": "prettier --write \"*.md\" \"src/**/*.ts\"  \"src/**/*.tsx\"",
-    "build": "rollup --bundleConfigAsCjs -c && tsc --emitDeclarationOnly --noEmit false --project src/tsconfig.json --outDir build",
-    "prepublishOnly": "yarn build",
+    "build": "rm -rf build && rollup --bundleConfigAsCjs -c && tsc --emitDeclarationOnly --noEmit false --project src/tsconfig.json --outDir build",
+    "prepack": "yarn build",
     "test": "jest"
   },
   "peerDependencies": {
