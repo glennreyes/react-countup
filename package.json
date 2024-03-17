@@ -31,7 +31,7 @@
   "scripts": {
     "format": "prettier --write \"*.md\" \"src/**/*.ts\"  \"src/**/*.tsx\"",
     "build": "rm -rf build && rollup --bundleConfigAsCjs -c && tsc --emitDeclarationOnly --noEmit false --project src/tsconfig.json --outDir build",
-    "prepublishOnly": "yarn build",
+    "prepack": "yarn build",
     "test": "jest"
   },
   "peerDependencies": {
