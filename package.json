@@ -18,14 +18,10 @@
     "url": "https://github.com/glennreyes/react-countup/issues"
   },
   "homepage": "https://react-countup.now.sh",
-  "main": "build/index.js",
-  "exports": {
-    "import": "./build/index.mjs",
-    "require": "./build/index.js",
-    "types": "./build/index.d.ts"
-  },
+  "main": "build",
   "files": [
-    "build"
+    "build/index.js",
+    "build/index.d.ts"
   ],
   "typings": "build/index.d.ts",
   "scripts": {
