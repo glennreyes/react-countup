@@ -56,6 +56,7 @@ export interface CountUpInstanceProps extends CountUpOptions {
 }
 
 export interface CommonProps extends CountUpInstanceProps {
+  startOnMount?: boolean;
   delay?: number | null;
 }
 
