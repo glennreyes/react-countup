@@ -11,7 +11,6 @@ import { useEventCallback } from './helpers/useEventCallback';
 import { CountUp as CountUpJs } from 'countup.js';
 
 export interface UseCountUpProps extends CommonProps, CallbackProps {
-  startOnMount?: boolean;
   ref: string | React.RefObject<HTMLElement>;
   enableReinitialize?: boolean;
 }
