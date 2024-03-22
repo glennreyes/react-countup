@@ -10,10 +10,6 @@ export default {
       file: 'build/index.js',
       format: 'cjs',
     },
-    {
-      file: 'build/index.mjs',
-      format: 'esm',
-    },
   ],
   plugins: [
     resolve({ extensions }),
